@@ -4,8 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Engine;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-class EngineRepository
+class ActualityRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $doctrine)
     {

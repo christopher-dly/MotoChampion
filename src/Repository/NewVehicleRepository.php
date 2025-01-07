@@ -4,8 +4,9 @@ namespace App\Repository;
 
 use App\Entity\NewVehicle;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-class NewVehicleRepository
+class ActualityRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $doctrine)
     {
