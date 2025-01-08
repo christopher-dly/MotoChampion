@@ -6,7 +6,7 @@ use App\Entity\Transmission;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-class ActualityRepository extends ServiceEntityRepository
+class TransmissionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $doctrine)
     {

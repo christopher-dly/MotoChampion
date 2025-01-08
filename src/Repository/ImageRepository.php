@@ -6,7 +6,7 @@ use App\Entity\Image;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-class ActualityRepository extends ServiceEntityRepository
+class ImageRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $doctrine)
     {

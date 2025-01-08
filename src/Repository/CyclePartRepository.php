@@ -6,7 +6,7 @@ use App\Entity\CyclePart;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-class ActualityRepository extends ServiceEntityRepository
+class CyclePartRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $doctrine)
     {

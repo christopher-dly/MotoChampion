@@ -6,7 +6,7 @@ use App\Entity\Dimension;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-class ActualityRepository extends ServiceEntityRepository
+class DimensionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $doctrine)
     {
