@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\InformationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: InformationRepository::class)]
 class Information
@@ -39,6 +40,39 @@ class Information
 
     #[ORM\Column]
     private ?string $license = null;
+    
+    #[ORM\OneToMany(
+        targetEntity: "App\Entity\TechnicalSheet",
+        mappedBy: "information",
+        cascade: ["persist", "remove"]
+    )]
+    private ?array $technicalSheets = null;
+
+    public function __construct()
+    {
+        $this->technicalSheets = new ArrayCollection();
+    }
+
+    /**
+     * Get the value of technicalSheets
+     */ 
+    public function getTechnicalSheets()
+    {
+        return $this->technicalSheets;
+    }
+
+    /**
+     * Add actuality
+     *
+     * @return self
+     */ 
+    public function addTechnicalSheet(TechnicalSheet $technicalSheet)
+    {
+        $this->technicalSheets[] = $technicalSheet;
+        $technicalSheet->setInformation($this);
+
+        return $this;
+    }
 
     /**
      * Get the value of id

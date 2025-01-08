@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ImageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
@@ -48,6 +49,39 @@ class Image
 
     #[ORM\Column]
     private ?string $ImgAction = null;
+
+    #[ORM\OneToMany(
+        targetEntity: "App\Entity\TechnicalSheet",
+        mappedBy: "image",
+        cascade: ["persist", "remove"]
+    )]
+    private ?array $technicalSheets = null;
+
+    public function __construct()
+    {
+        $this->technicalSheets = new ArrayCollection();
+    }
+
+    /**
+     * Get the value of technicalSheets
+     */ 
+    public function getTechnicalSheets()
+    {
+        return $this->technicalSheets;
+    }
+
+    /**
+     * Add actuality
+     *
+     * @return self
+     */ 
+    public function addTechnicalSheet(TechnicalSheet $technicalSheet)
+    {
+        $this->technicalSheets[] = $technicalSheet;
+        $technicalSheet->setImage($this);
+
+        return $this;
+    }
 
     /**
      * Get the value of id

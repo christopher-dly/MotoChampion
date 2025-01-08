@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
@@ -21,6 +22,69 @@ class User
 
     #[ORM\Column]
     private ?string $email = null;
+
+    #[ORM\OneToMany(
+        targetEntity: "App\Entity\Actuality",
+        mappedBy: "user",
+        cascade: ["persist", "remove"]
+    )]
+    private ?array $actualities = null;
+
+    #[ORM\OneToMany(
+        targetEntity: "App\Entity\Message",
+        mappedBy: "user",
+        cascade: ["persist", "remove"]
+    )]
+    private ?array $messages = null;
+
+    public function __construct()
+    {
+        $this->actualities = new ArrayCollection();
+        $this->messages = new ArrayCollection();
+    }
+
+    /**
+     * Get the value of actualities
+     */ 
+    public function getActualities()
+    {
+        return $this->actualities;
+    }
+    
+    /**
+     * Add actuality
+     *
+     * @return self
+     */ 
+    public function addActuality(Actuality $actuality)
+    {
+        $this->actualities[] = $actuality;
+        $actuality->setUser($this);
+
+        return $this;
+    }
+
+     /**
+     * Get the value of messages
+     */ 
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+    /**
+     * add message
+     * 
+     * @return self
+     */
+    public function addMessage(Message $message)
+    {
+        $this->messages[] = $message;
+        $message->setUser($this);
+
+        return $this;
+    }
+    
 
     /**
      * Get the value of id

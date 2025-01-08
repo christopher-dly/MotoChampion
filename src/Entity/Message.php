@@ -25,6 +25,23 @@ class Message
     #[ORM\Column]
     private ?string $date = null;
 
+    #[ORM\ManyToOne(
+        targetEntity: User::class,
+        inversedBy: "messages",
+    )]
+    private $user = null;
+    
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
     /**
      * Get the value of id
      */ 

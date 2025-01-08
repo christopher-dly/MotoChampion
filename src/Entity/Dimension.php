@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\DimensionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: DimensionRepository::class)]
 class Dimension
@@ -27,6 +28,39 @@ class Dimension
 
     #[ORM\Column]
     private ?string $weight = null;
+
+    #[ORM\OneToMany(
+        targetEntity: "App\Entity\TechnicalSheet",
+        mappedBy: "dimension",
+        cascade: ["persist", "remove"]
+    )]
+    private ?array $technicalSheets = null;
+
+    public function __construct()
+    {
+        $this->technicalSheets = new ArrayCollection();
+    }
+
+    /**
+     * Get the value of technicalSheets
+     */ 
+    public function getTechnicalSheets()
+    {
+        return $this->technicalSheets;
+    }
+
+    /**
+     * Add actuality
+     *
+     * @return self
+     */ 
+    public function addTechnicalSheet(TechnicalSheet $technicalSheet)
+    {
+        $this->technicalSheets[] = $technicalSheet;
+        $technicalSheet->setDimension($this);
+
+        return $this;
+    }
 
     /**
      * Get the value of id
