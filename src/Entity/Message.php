@@ -20,9 +20,12 @@ class Message
     private ?string $phoneNumber = null;
 
     #[ORM\Column]
-    private ?string $message = null;
+    private ?string $email = null;
 
     #[ORM\Column]
+    private ?string $message = null;
+
+    #[ORM\Column(type: 'datetime_immutable')]
     private ?string $date = null;
 
     #[ORM\ManyToOne(
@@ -30,6 +33,11 @@ class Message
         inversedBy: "messages",
     )]
     private $user = null;
+
+    public function __construct()
+    {
+        $this->date = new \DateTimeImmutable();
+    }
     
     public function getUser(): ?User
     {
@@ -126,6 +134,26 @@ class Message
     public function setDate($date)
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of email
+     */ 
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set the value of email
+     *
+     * @return  self
+     */ 
+    public function setEmail($email)
+    {
+        $this->email = $email;
 
         return $this;
     }

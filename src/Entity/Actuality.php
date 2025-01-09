@@ -25,14 +25,19 @@ class Actuality
     #[ORM\Column]
     private ?string $image = null;
 
-    #[ORM\Column]
-    private ?string $date = null;
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $date = null;
 
     #[ORM\ManyToOne(
         targetEntity: User::class,
         inversedBy: "actualities",
     )]
     private $user = null;
+
+    public function __construct()
+    {
+        $this->date = new \DateTimeImmutable();
+    }
     
     public function getUser(): ?User
     {
