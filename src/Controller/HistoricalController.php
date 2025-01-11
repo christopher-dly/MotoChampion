@@ -5,11 +5,11 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomeController extends AbstractController
+class HistoricalController extends AbstractController
 {
-    #[Route('/', name: 'home')]
+    #[Route('/Historique', name: 'Historical')]
     public function index()
     {
-        return $this->render('pages/actuality.html.twig');
+        return $this->render('pages/historical.html.twig');
     }
 }

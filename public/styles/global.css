@@ -1,0 +1,19 @@
+@import url(header.css);
+@import url(footer.css);
+
+html,body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Aligne les éléments en colonne */
+}
+
+main {
+    flex-grow: 1; /* Prend tout l'espace disponible restant */
+}
