@@ -13,12 +13,11 @@ class NewVehicle
     #[ORM\Column]
     private ?int $id;
 
-    #[ORM\OneToOne(
-    targetEntity: "App\Entity\TechnicalSheet",
-    mappedBy: "newVehicle",
-    cascade: ["persist", "remove"]
+    #[ORM\ManyToOne(
+    targetEntity: TechnicalSheet::class,
+    inversedBy: "newVehicles",
     )]
-    private $ficheTechnique;
+    private $technicalSheet;
 
     /**
      * Get the value of id
@@ -33,7 +32,7 @@ class NewVehicle
      */ 
     public function getFicheTechnique()
     {
-        return $this->ficheTechnique;
+        return $this->technicalSheet;
     }
 
     /**
@@ -41,9 +40,9 @@ class NewVehicle
      *
      * @return  self
      */ 
-    public function setFicheTechnique($ficheTechnique)
+    public function setFicheTechnique($technicalSheet)
     {
-        $this->ficheTechnique = $ficheTechnique;
+        $this->technicalSheet = $technicalSheet;
 
         return $this;
     }

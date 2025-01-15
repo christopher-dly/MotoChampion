@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\TechnicalSheetRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: TechnicalSheetRepository::class)]
 class TechnicalSheet
@@ -49,14 +50,17 @@ class TechnicalSheet
     )]
     private $transmission = null;
 
-    #[ORM\OneToOne(
+    #[ORM\OneToMany(
         targetEntity: "App\Entity\NewVehicle",
         mappedBy: "technicalSheet",
         cascade: ["persist", "remove"]
     )]
     private $newVehicle;
 
-    
+    public function __construct()
+    {
+        $this->newVehicle = new ArrayCollection();
+    }
     /**
      * Get the value of id
      */ 
