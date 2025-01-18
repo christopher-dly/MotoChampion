@@ -10,49 +10,49 @@ class UsedVehicle
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length:255)]
     private ?string $brand = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length:255)]
     private ?string $model = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length:255)]
     private ?string $category = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length:255)]
     private ?string $cylinders = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length:255)]
     private ?string $price = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length:255)]
     private ?string $warrantyTime = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length:255)]
     private ?string $description = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length:255)]
     private ?bool $availableForTrial = false;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length:255)]
     private ?string $color = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length:255)]
     private ?string $image = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length:255)]
     private ?string $year = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length:255)]
     private ?string $kilometers = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length:255)]
     private ?string $miles = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length:255)]
     private ?string $taxPower = null;
 
     /**

@@ -5,63 +5,64 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EngineRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: EngineRepository::class)]
 class Engine
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $id;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
     private ?string $type = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?string $cylinders = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
     private ?string $bore_x_stroke = null;
     
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
     private ?string $volumetricRatio = null;
     
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
     private ?string $announcedPower = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
     private ?string $coupleAnnounced = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
     private ?string $powerSupply = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
     private ?string $starter = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
     private ?string $consumption = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
     private ?string $co2Emissions = null;
 
     #[ORM\OneToMany(
-        targetEntity: "App\Entity\TechnicalSheet",
+        targetEntity: "App\Entity\NewVehicle",
         mappedBy: "engine",
         cascade: ["persist", "remove"]
     )]
-    private ?array $technicalSheets = null;
+    private ?Collection $newVehicles = null;
 
     public function __construct()
     {
-        $this->technicalSheets = new ArrayCollection();
+        $this->newVehicles = new ArrayCollection();
     }
 
     /**
-     * Get the value of technicalSheets
+     * Get the value of NewVehicles
      */ 
-    public function getTechnicalSheets()
+    public function getNewVehicles()
     {
-        return $this->technicalSheets;
+        return $this->newVehicles;
     }
 
     /**
@@ -69,10 +70,10 @@ class Engine
      *
      * @return self
      */ 
-    public function addTechnicalSheet(TechnicalSheet $technicalSheet)
+    public function addNewVehicle(NewVehicle $newVehicle)
     {
-        $this->technicalSheets[] = $technicalSheet;
-        $technicalSheet->setEngine($this);
+        $this->newVehicles[] = $newVehicle;
+        $newVehicle->setEngine($this);
 
         return $this;
     }
@@ -128,7 +129,7 @@ class Engine
     /**
      * Get the value of bore_x_stroke
      */ 
-    public function getBore_x_stroke()
+    public function getBoreXstroke()
     {
         return $this->bore_x_stroke;
     }
@@ -138,7 +139,7 @@ class Engine
      *
      * @return  self
      */ 
-    public function setBore_x_stroke($bore_x_stroke)
+    public function setBoreXstroke($bore_x_stroke)
     {
         $this->bore_x_stroke = $bore_x_stroke;
 

@@ -12,4 +12,10 @@ class ActualityRepository extends ServiceEntityRepository
     {
         parent::__construct($doctrine, Actuality::class);
     }
+
+    public function saveNewActuality(Actuality $actuality)
+    {
+        $this->getEntityManager()->persist($actuality);
+        $this->getEntityManager()->flush();
+    }
 }

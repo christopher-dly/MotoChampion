@@ -5,60 +5,67 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CyclepartRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: CyclepartRepository::class)]
 class CyclePart
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
     private ?string $casterAngle = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
     private ?string $caster = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
     private ?string $wheelbase = null;
 
-    #[ORM\Column]
-    private ?string $FrontSuspension = null;
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    private ?string $rim = null;
 
-    #[ORM\Column]
-    private ?string $RearSuspension = null;
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    private ?string $frame = null;
 
-    #[ORM\Column]
-    private ?string $Frontbrake = null;
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    private ?string $frontSuspension = null;
 
-    #[ORM\Column]
-    private ?string $Rearbrake = null;
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    private ?string $rearSuspension = null;
 
-    #[ORM\Column]
-    private ?string $FrontWheel = null;
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    private ?string $frontbrake = null;
+
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    private ?string $rearbrake = null;
+
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    private ?string $frontWheel = null;
     
-    #[ORM\Column]
-    private ?string $RearWheel = null;
+    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    private ?string $rearWheel = null;
 
     #[ORM\OneToMany(
-        targetEntity: "App\Entity\TechnicalSheet",
+        targetEntity: "App\Entity\NewVehicle",
         mappedBy: "cyclePart",
         cascade: ["persist", "remove"]
     )]
-    private ?array $technicalSheets = null;
+    private ?Collection $NewVehicles = null;
 
     public function __construct()
     {
-        $this->technicalSheets = new ArrayCollection();
+        $this->NewVehicles = new ArrayCollection();
     }
 
     /**
      * Get the value of technicalSheets
      */ 
-    public function getTechnicalSheets()
+    public function getNewVehicles()
     {
-        return $this->technicalSheets;
+        return $this->NewVehicles;
     }
 
     /**
@@ -66,10 +73,10 @@ class CyclePart
      *
      * @return self
      */ 
-    public function addTechnicalSheet(TechnicalSheet $technicalSheet)
+    public function addNewVehicle(NewVehicle $newVehicle)
     {
-        $this->technicalSheets[] = $technicalSheet;
-        $technicalSheet->setCyclePart($this);
+        $this->NewVehicles[] = $newVehicle;
+        $newVehicle->setCyclePart($this);
 
         return $this;
     }
@@ -147,7 +154,7 @@ class CyclePart
      */ 
     public function getFrontSuspension()
     {
-        return $this->FrontSuspension;
+        return $this->frontSuspension;
     }
 
     /**
@@ -155,9 +162,9 @@ class CyclePart
      *
      * @return  self
      */ 
-    public function setFrontSuspension($FrontSuspension)
+    public function setFrontSuspension($frontSuspension)
     {
-        $this->FrontSuspension = $FrontSuspension;
+        $this->frontSuspension = $frontSuspension;
 
         return $this;
     }
@@ -167,7 +174,7 @@ class CyclePart
      */ 
     public function getRearSuspension()
     {
-        return $this->RearSuspension;
+        return $this->rearSuspension;
     }
 
     /**
@@ -175,9 +182,9 @@ class CyclePart
      *
      * @return  self
      */ 
-    public function setRearSuspension($RearSuspension)
+    public function setRearSuspension($rearSuspension)
     {
-        $this->RearSuspension = $RearSuspension;
+        $this->rearSuspension = $rearSuspension;
 
         return $this;
     }
@@ -187,7 +194,7 @@ class CyclePart
      */ 
     public function getFrontbrake()
     {
-        return $this->Frontbrake;
+        return $this->frontbrake;
     }
 
     /**
@@ -195,9 +202,9 @@ class CyclePart
      *
      * @return  self
      */ 
-    public function setFrontbrake($Frontbrake)
+    public function setFrontbrake($frontbrake)
     {
-        $this->Frontbrake = $Frontbrake;
+        $this->frontbrake = $frontbrake;
 
         return $this;
     }
@@ -207,7 +214,7 @@ class CyclePart
      */ 
     public function getRearbrake()
     {
-        return $this->Rearbrake;
+        return $this->rearbrake;
     }
 
     /**
@@ -215,9 +222,9 @@ class CyclePart
      *
      * @return  self
      */ 
-    public function setRearbrake($Rearbrake)
+    public function setRearbrake($rearbrake)
     {
-        $this->Rearbrake = $Rearbrake;
+        $this->rearbrake = $rearbrake;
 
         return $this;
     }
@@ -227,7 +234,7 @@ class CyclePart
      */ 
     public function getFrontWheel()
     {
-        return $this->FrontWheel;
+        return $this->frontWheel;
     }
 
     /**
@@ -235,9 +242,9 @@ class CyclePart
      *
      * @return  self
      */ 
-    public function setFrontWheel($FrontWheel)
+    public function setFrontWheel($frontWheel)
     {
-        $this->FrontWheel = $FrontWheel;
+        $this->frontWheel = $frontWheel;
 
         return $this;
     }
@@ -247,7 +254,7 @@ class CyclePart
      */ 
     public function getRearWheel()
     {
-        return $this->RearWheel;
+        return $this->rearWheel;
     }
 
     /**
@@ -255,9 +262,49 @@ class CyclePart
      *
      * @return  self
      */ 
-    public function setRearWheel($RearWheel)
+    public function setRearWheel($rearWheel)
     {
-        $this->RearWheel = $RearWheel;
+        $this->rearWheel = $rearWheel;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of rim
+     */ 
+    public function getRim()
+    {
+        return $this->rim;
+    }
+
+    /**
+     * Set the value of rim
+     *
+     * @return  self
+     */ 
+    public function setRim($rim)
+    {
+        $this->rim = $rim;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of frame
+     */ 
+    public function getFrame()
+    {
+        return $this->frame;
+    }
+
+    /**
+     * Set the value of frame
+     *
+     * @return  self
+     */ 
+    public function setFrame($frame)
+    {
+        $this->frame = $frame;
 
         return $this;
     }

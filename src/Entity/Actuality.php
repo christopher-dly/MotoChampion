@@ -10,19 +10,19 @@ class Actuality
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id;
 
-    #[ORM\Column]
+    #[ORM\Column(type:'text', length: 100)]
     private ?string $name = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type:'text', length: 100)]
     private ?string $title = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length:5000)]
     private ?string $content = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type:'string', nullable: true)]
     private ?string $image = null;
 
     #[ORM\Column(type: 'datetime_immutable')]

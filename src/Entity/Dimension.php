@@ -5,48 +5,58 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\DimensionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: DimensionRepository::class)]
 class Dimension
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $id;
 
-    #[ORM\Column]
-    private ?string $WxlxH = null;
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $length = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $width = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $height = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?string $saddleHeight = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?string $groundClearance = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?string $gas = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?string $oil = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?string $weight = null;
 
     #[ORM\OneToMany(
-        targetEntity: "App\Entity\TechnicalSheet",
+        targetEntity: "App\Entity\NewVehicle",
         mappedBy: "dimension",
         cascade: ["persist", "remove"]
     )]
-    private ?array $technicalSheets = null;
+    private ?Collection $newVehicles = null;
 
     public function __construct()
     {
-        $this->technicalSheets = new ArrayCollection();
+        $this->newVehicles = new ArrayCollection();
     }
 
     /**
-     * Get the value of technicalSheets
+     * Get the value of NewVehicles
      */ 
-    public function getTechnicalSheets()
+    public function getNewVehicles()
     {
-        return $this->technicalSheets;
+        return $this->newVehicles;
     }
 
     /**
@@ -54,10 +64,10 @@ class Dimension
      *
      * @return self
      */ 
-    public function addTechnicalSheet(TechnicalSheet $technicalSheet)
+    public function addNewVehicle(NewVehicle $newVehicle)
     {
-        $this->technicalSheets[] = $technicalSheet;
-        $technicalSheet->setDimension($this);
+        $this->newVehicles[] = $newVehicle;
+        $newVehicle->setDimension($this);
 
         return $this;
     }
@@ -68,28 +78,6 @@ class Dimension
     public function getId()
     {
         return $this->id;
-    }
-
-
-
-    /**
-     * Get the value of WxlxH
-     */ 
-    public function getWxlxH()
-    {
-        return $this->WxlxH;
-    }
-
-    /**
-     * Set the value of WxlxH
-     *
-     * @return  self
-     */ 
-    public function setWxlxH($WxlxH)
-    {
-        $this->WxlxH = $WxlxH;
-
-        return $this;
     }
 
     /**
@@ -168,6 +156,86 @@ class Dimension
     public function setWeight($weight)
     {
         $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of oil
+     */ 
+    public function getOil()
+    {
+        return $this->oil;
+    }
+
+    /**
+     * Set the value of oil
+     *
+     * @return  self
+     */ 
+    public function setOil($oil)
+    {
+        $this->oil = $oil;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of length
+     */ 
+    public function getLength()
+    {
+        return $this->length;
+    }
+
+    /**
+     * Set the value of length
+     *
+     * @return  self
+     */ 
+    public function setLength($length)
+    {
+        $this->length = $length;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of width
+     */ 
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * Set the value of width
+     *
+     * @return  self
+     */ 
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of height
+     */ 
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * Set the value of height
+     *
+     * @return  self
+     */ 
+    public function setHeight($height)
+    {
+        $this->height = $height;
 
         return $this;
     }

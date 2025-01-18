@@ -5,60 +5,61 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\InformationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: InformationRepository::class)]
 class Information
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255)]
     private ?string $brand = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255)]
     private ?string $model = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255)]
     private ?string $category = null;
 
-    #[ORM\Column]
-    private ?string $cylinders = null;
+    #[ORM\Column(type: 'integer')]
+    private ?int $cylinders = null;
 
-    #[ORM\Column]
-    private ?string $price = null;
+    #[ORM\Column(type: 'integer')]
+    private ?int $price = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 255)]
     private ?string $warrantyTime = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'text', length: 5000)]
     private ?string $description = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'boolean')]
     private ?bool $availableForTrial = false;
 
-    #[ORM\Column]
-    private ?string $license = null;
+    #[ORM\Column(type: 'json')]
+    private ?array $license = null;
     
     #[ORM\OneToMany(
-        targetEntity: "App\Entity\TechnicalSheet",
+        targetEntity: "App\Entity\NewVehicle",
         mappedBy: "information",
         cascade: ["persist", "remove"]
     )]
-    private ?array $technicalSheets = null;
+    private ?Collection $newVehicles = null;
 
     public function __construct()
     {
-        $this->technicalSheets = new ArrayCollection();
+        $this->newVehicles = new ArrayCollection();
     }
 
     /**
-     * Get the value of technicalSheets
+     * Get the value of NewVehicles
      */ 
-    public function getTechnicalSheets()
+    public function getNewVehicles()
     {
-        return $this->technicalSheets;
+        return $this->newVehicles;
     }
 
     /**
@@ -66,10 +67,10 @@ class Information
      *
      * @return self
      */ 
-    public function addTechnicalSheet(TechnicalSheet $technicalSheet)
+    public function addNewVehicle(NewVehicle $newVehicle)
     {
-        $this->technicalSheets[] = $technicalSheet;
-        $technicalSheet->setInformation($this);
+        $this->newVehicles[] = $newVehicle;
+        $newVehicle->setInformation($this);
 
         return $this;
     }
@@ -85,7 +86,7 @@ class Information
     /**
      * Get the value of mark
      */ 
-    public function getMark()
+    public function getBrand()
     {
         return $this->brand;
     }
@@ -95,9 +96,9 @@ class Information
      *
      * @return  self
      */ 
-    public function setMark($mark)
+    public function setBrand($brand)
     {
-        $this->brand = $mark;
+        $this->brand = $brand;
 
         return $this;
     }

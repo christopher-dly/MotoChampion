@@ -1,0 +1,66 @@
+{% extends "layout.html.twig" %}
+
+{% block main %}
+<h1>nouveaux VN</h1>
+
+	{{ form_start(NewVehicleForm) }}
+	<div class='container'>
+		<p class='inputDescription'>Nom :</p>
+		{{ form_widget(NewVehicleForm.name, {'attr': {'class': 'file'}})}}
+		{{ form_errors(NewVehicleForm.name)}}
+	</div>
+    
+	<div class='container'>
+		<p class='inputDescription'>Information :</p>
+		{{ form_widget(NewVehicleForm.Information, {'attr': {'class': 'input'}})}}
+		{{ form_errors(NewVehicleForm.Information)}}
+	</div>
+
+	<div class='container'>
+		<p class='inputDescription'>Moteur :</p>
+		{{ form_widget(NewVehicleForm.Engine, {'attr': {'class': 'input'}})}}
+		{{ form_errors(NewVehicleForm.Engine)}}
+	</div>
+
+	<div class='container'>
+		<p class='inputDescription'>Transmission :</p>
+		{{ form_widget(NewVehicleForm.Transmission, {'attr': {'class': 'input'}})}}
+		{{ form_errors(NewVehicleForm.Transmission)}}
+	</div>
+
+	<div class='container'>
+		<p class='inputDescription'>Dimenssion :</p>
+		{{ form_widget(NewVehicleForm.Dimension.length, {'attr': {'class': 'input'}})}}
+		{{ form_errors(NewVehicleForm.Dimension.length)}}
+        
+		{{ form_widget(NewVehicleForm.Dimension.width, {'attr': {'class': 'input'}})}}
+		{{ form_errors(NewVehicleForm.Dimension.width)}}
+
+		{{ form_widget(NewVehicleForm.Dimension.height, {'attr': {'class': 'input'}})}}
+		{{ form_errors(NewVehicleForm.Dimension.height)}}
+
+		{{ form_widget(NewVehicleForm.Dimension.saddleHeight, {'attr': {'class': 'input'}})}}
+		{{ form_errors(NewVehicleForm.Dimension.saddleHeight)}}
+        
+		{{ form_widget(NewVehicleForm.Dimension.groundClearance, {'attr': {'class': 'input'}})}}
+		{{ form_errors(NewVehicleForm.Dimension.groundClearance)}}
+
+		{{ form_widget(NewVehicleForm.Dimension.gas, {'attr': {'class': 'input'}})}}
+		{{ form_errors(NewVehicleForm.Dimension.gas)}}
+
+		{{ form_widget(NewVehicleForm.Dimension.oil, {'attr': {'class': 'input'}})}}
+		{{ form_errors(NewVehicleForm.Dimension.oil)}}
+
+		{{ form_widget(NewVehicleForm.Dimension.weight, {'attr': {'class': 'input'}})}}
+		{{ form_errors(NewVehicleForm.Dimension.weight)}}
+	</div>
+
+	<div class='container'>
+		<p class='inputDescription'>Part Cycle :</p>
+		{{ form_widget(NewVehicleForm.CyclePart, {'attr': {'class': 'input'}})}}
+		{{ form_errors(NewVehicleForm.CyclePart)}}
+	</div>
+
+	{{ form_widget(NewVehicleForm.submit, {attr: {class: 'button'}}) }}
+	{{ form_end(NewVehicleForm) }}
+{% endblock %}

@@ -11,22 +11,22 @@ class User
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id;
 
-    #[ORM\Column]
+    #[ORM\Column(type:'text', length:100)]
     private ?string $username = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type:'text', length:100)]
     private ?string $password = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type:'text', length:100)]
     private ?string $email = null;
 
     #[ORM\OneToMany(
         targetEntity: "App\Entity\Actuality",
         mappedBy: "user",
-        cascade: ["persist", "remove"]
+        cascade: ["persist"]
     )]
     private ?array $actualities = null;
 
