@@ -4,11 +4,13 @@ namespace App\Form;
 
 use App\Entity\NewVehicle;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class NewVehicleForm extends AbstractType
 {
@@ -26,11 +28,23 @@ class NewVehicleForm extends AbstractType
                     ]),
                 ]
             ])
+            // ->add('image', FileType::class, [
+            //     'label' => 'Image',
+            //     'required' => false,
+            //     'mapped' => true,
+            //     'constraints' => [
+            //         new File([
+            //             'mimeTypes' => ['image/jpeg', 'image/png', 'image/gif'],
+            //             'mimeTypesMessage' => 'Veuillez uploader une image valide (JPEG, PNG, GIF)',
+            //         ])
+            //     ],
+            // ])
             ->add('Information', InformationForm::class)
             ->add('Engine', EngineForm::class)
             ->add('Transmission', TransmissionForm::class)
             ->add('Dimension', DimensionForm::class)
             ->add('CyclePart', CyclePartForm::class)
+            ->add('VehicleImage', VehicleImageForm::class)
             ->add('submit', SubmitType::class);
     }
     public function configureOptions(OptionsResolver $resolver)

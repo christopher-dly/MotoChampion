@@ -46,18 +46,24 @@ class InformationForm extends AbstractType
                 ],
                 'label' => 'Modèle',
             ])
-            ->add('category', TextType::class, [
+            ->add('category', ChoiceType::class, [
                 'constraints' => [
                     new Assert\NotBlank([
-                        'message' => 'Le champ "Catégorie" ne peut pas être vide.',
-                    ]),
-                    new Assert\Length([
-                        'min' => 2,
-                        'max' => 255,
-                        'minMessage' => 'Le champ "Catégorie" doit contenir au moins 2 caractères.',
-                        'maxMessage' => 'Le champ "Catégorie" doit contenir au maximum 255 caractères.',
+                        'message' => 'Veuillez sélectionner la catégorie.',
                     ]),
                 ],
+                'choices' => [
+                    'Trail' => 'Trail',
+                    'Sport / GT' => 'Sport / GT',
+                    'Roadster' => 'Roadster',
+                    'Tout-terrain' => 'Tout-terrain',
+                    'Supermoto' => 'Supermoto',
+                    'Scooter' => 'Scooter',
+                    'Moto 125' => 'Moto 125',
+                    
+                ],
+                'expanded' => true,
+                'multiple' => false,
                 'label' => 'Catégorie',
             ])
             ->add('cylinders', NumberType::class, [

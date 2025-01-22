@@ -15,6 +15,9 @@ class NewVehicle
 
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $name;
+    
+    #[ORM\Column(type: 'string', nullable:true)]
+    private ?string $image;
 
     #[ORM\ManyToOne(
         targetEntity: CyclePart::class,
@@ -50,6 +53,13 @@ class NewVehicle
         cascade: ["persist", "remove"]
     )]
     private $transmission = null;
+
+    #[ORM\ManyToOne(
+        targetEntity: vehicleImage::class,
+        inversedBy: "NewVehicle",
+        cascade: ["persist", "remove"]
+    )]
+    private $vehicleImage = null;
 
     /**
      * Get the value of id
@@ -175,6 +185,46 @@ class NewVehicle
     public function setTransmission($transmission)
     {
         $this->transmission = $transmission;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of image
+     */ 
+    public function getVehicleImage()
+    {
+        return $this->vehicleImage;
+    }
+
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
+    public function setVehicleImage($vehicleImage)
+    {
+        $this->vehicleImage = $vehicleImage;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of image
+     */ 
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
+    public function setImage($image)
+    {
+        $this->image = $image;
 
         return $this;
     }

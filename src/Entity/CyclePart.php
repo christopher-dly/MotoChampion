@@ -15,14 +15,14 @@ class CyclePart
     #[ORM\Column(type: 'integer')]
     private ?int $id;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
-    private ?string $casterAngle = null;
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $casterAngle = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
-    private ?string $caster = null;
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $caster = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
-    private ?string $wheelbase = null;
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $wheelbase = null;
 
     #[ORM\Column(type: 'text', length: 255, nullable: true)]
     private ?string $rim = null;

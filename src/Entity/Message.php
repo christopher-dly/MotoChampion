@@ -23,7 +23,7 @@ class Message
     private ?string $email = null;
 
     #[ORM\Column]
-    private ?string $message = null;
+    private ?string $message;
 
     #[ORM\Column(type: 'datetime_immutable')]
     private ?string $date = null;
