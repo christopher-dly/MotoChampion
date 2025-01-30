@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\InformationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: InformationRepository::class)]
 class Information
@@ -13,27 +14,39 @@ class Information
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id;
+    private ?int $id = null;
 
-    #[ORM\Column(type: 'text', length: 255)]
+    #[ORM\Column(type: 'string', length: 50)]
+    #[Assert\NotBlank(message: "La marque est obligatoire.")]
+    #[Assert\Length(max: 50, maxMessage: "La marque ne doit pas dépasser 50 caractères.")]
     private ?string $brand = null;
 
-    #[ORM\Column(type: 'text', length: 255)]
+    #[ORM\Column(type: 'string', length: 50)]
+    #[Assert\NotBlank(message: "Le modèle est obligatoire.")]
+    #[Assert\Length(max: 50, maxMessage: "Le modèle ne doit pas dépasser 50 caractères.")]
     private ?string $model = null;
 
-    #[ORM\Column(type: 'text', length: 255)]
+    #[ORM\Column(type: 'string', length: 50)]
+    #[Assert\NotBlank(message: "La catégorie est obligatoire.")]
+    #[Assert\Length(max: 50, maxMessage: "La catégorie ne doit pas dépasser 50 caractères.")]
     private ?string $category = null;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(message: "Le nombre de cylindres est obligatoire.")]
     private ?int $cylinders = null;
 
+    #[ORM\Column(type: 'float')]
+    #[Assert\NotBlank(message: "Le prix est obligatoire.")]
+    #[Assert\GreaterThanOrEqual(0, message: "Le prix ne peut pas être négatif.")]
+    private ?float $price = null;
+
     #[ORM\Column(type: 'integer')]
-    private ?int $price = null;
+    #[Assert\NotBlank(message: "Le temps de garantie est obligatoire.")]
+    #[Assert\GreaterThanOrEqual(0, message: "Le temps de garantie ne peut pas être négatif.")]
+    private ?int $warrantyTime = 5;
 
-    #[ORM\Column(type: 'text', length: 255)]
-    private ?string $warrantyTime = null;
-
-    #[ORM\Column(type: 'text', length: 5000)]
+    #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank(message: "La description est obligatoire.")]
     private ?string $description = null;
 
     #[ORM\Column(type: 'boolean')]
@@ -41,225 +54,160 @@ class Information
 
     #[ORM\Column(type: 'json')]
     private ?array $license = null;
-    
+
     #[ORM\OneToMany(
         targetEntity: "App\Entity\NewVehicle",
         mappedBy: "information",
         cascade: ["persist", "remove"]
     )]
-    private ?Collection $newVehicles = null;
+    private Collection $newVehicles;
 
     public function __construct()
     {
         $this->newVehicles = new ArrayCollection();
     }
 
-    /**
-     * Get the value of NewVehicles
-     */ 
-    public function getNewVehicles()
-    {
-        return $this->newVehicles;
-    }
-
-    /**
-     * Add actuality
-     *
-     * @return self
-     */ 
-    public function addNewVehicle(NewVehicle $newVehicle)
-    {
-        $this->newVehicles[] = $newVehicle;
-        $newVehicle->setInformation($this);
-
-        return $this;
-    }
-
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Get the value of mark
-     */ 
-    public function getBrand()
+    public function getBrand(): ?string
     {
         return $this->brand;
     }
 
-    /**
-     * Set the value of mark
-     *
-     * @return  self
-     */ 
-    public function setBrand($brand)
+    public function setBrand(?string $brand): self
     {
         $this->brand = $brand;
 
         return $this;
     }
 
-    /**
-     * Get the value of model
-     */ 
-    public function getModel()
+    public function getModel(): ?string
     {
         return $this->model;
     }
 
-    /**
-     * Set the value of model
-     *
-     * @return  self
-     */ 
-    public function setModel($model)
+    public function setModel(?string $model): self
     {
         $this->model = $model;
 
         return $this;
     }
 
-    /**
-     * Get the value of category
-     */ 
-    public function getCategory()
+    public function getCategory(): ?string
     {
         return $this->category;
     }
 
-    /**
-     * Set the value of category
-     *
-     * @return  self
-     */ 
-    public function setCategory($category)
+    public function setCategory(?string $category): self
     {
         $this->category = $category;
 
         return $this;
     }
 
-    /**
-     * Get the value of cylinders
-     */ 
-    public function getCylinders()
+    public function getCylinders(): ?int
     {
         return $this->cylinders;
     }
 
-    /**
-     * Set the value of cylinders
-     *
-     * @return  self
-     */ 
-    public function setCylinders($cylinders)
+    public function setCylinders(?int $cylinders): self
     {
         $this->cylinders = $cylinders;
 
         return $this;
     }
 
-    /**
-     * Get the value of price
-     */ 
-    public function getPrice()
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    /**
-     * Set the value of price
-     *
-     * @return  self
-     */ 
-    public function setPrice($price)
+    public function setPrice(?float $price): self
     {
         $this->price = $price;
 
         return $this;
     }
 
-    /**
-     * Get the value of warrantyTime
-     */ 
-    public function getWarrantyTime()
+    public function getWarrantyTime(): ?int
     {
         return $this->warrantyTime;
     }
 
-    /**
-     * Set the value of warrantyTime
-     *
-     * @return  self
-     */ 
-    public function setWarrantyTime($warrantyTime)
+    public function setWarrantyTime(?int $warrantyTime): self
     {
         $this->warrantyTime = $warrantyTime;
 
         return $this;
     }
 
-    /**
-     * Get the value of description
-     */ 
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * Set the value of description
-     *
-     * @return  self
-     */ 
-    public function setDescription($description)
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * Get the value of availableForTrial
-     */ 
-    public function getAvailableForTrial()
+    public function getAvailableForTrial(): ?bool
     {
         return $this->availableForTrial;
     }
 
-    /**
-     * Set the value of availableForTrial
-     *
-     * @return  self
-     */ 
-    public function setAvailableForTrial($availableForTrial)
+    public function setAvailableForTrial(?bool $availableForTrial): self
     {
         $this->availableForTrial = $availableForTrial;
 
         return $this;
     }
 
-    /**
-     * Get the value of license
-     */ 
-    public function getLicense()
+    public function getLicense(): ?array
     {
         return $this->license;
     }
 
-    /**
-     * Set the value of license
-     *
-     * @return  self
-     */ 
-    public function setLicense($license)
+    public function setLicense(?array $license): self
     {
         $this->license = $license;
 
         return $this;
+    }
+
+    public function getNewVehicles(): Collection
+    {
+        return $this->newVehicles;
+    }
+
+    public function addNewVehicle(NewVehicle $newVehicle): self
+    {
+        if (!$this->newVehicles->contains($newVehicle)) {
+            $this->newVehicles[] = $newVehicle;
+            $newVehicle->setInformation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNewVehicle(NewVehicle $newVehicle): self
+    {
+        if ($this->newVehicles->removeElement($newVehicle)) {
+            if ($newVehicle->getInformation() === $this) {
+                $newVehicle->setInformation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->brand . ' ' . $this->model;
     }
 }

@@ -60,7 +60,6 @@ class InformationForm extends AbstractType
                     'Supermoto' => 'Supermoto',
                     'Scooter' => 'Scooter',
                     'Moto 125' => 'Moto 125',
-                    
                 ],
                 'expanded' => true,
                 'multiple' => false,
@@ -77,7 +76,8 @@ class InformationForm extends AbstractType
                 ],
                 'label' => 'Cylindrée',
             ])
-            ->add('price', NumberType::class, [
+            ->add('price', TextType::class, [
+                'attr' => ['pattern' => '[0-9]+([.,][0-9]+)?'],
                 'constraints' => [
                     new Assert\NotBlank([
                         'message' => 'Le champ "Prix" ne peut pas être vide.',

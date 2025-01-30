@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MessageRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
 class Message
@@ -11,150 +12,113 @@ class Message
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id;
+    private ?int $id = null;
 
-    #[ORM\Column]
-    private ?string $messageSender = null;
-
-    #[ORM\Column]
-    private ?string $phoneNumber = null;
-
-    #[ORM\Column]
+    #[ORM\Column(type:'string', length:100)]
+    #[Assert\NotBlank(message: "L'email est obligatoire.")]
+    #[Assert\Length(max: 100, maxMessage: "L'email ne peut pas dépasser 100 caractères.")]
+    #[Assert\Email(message: "L'email '{{ value }}' n'est pas valide.")]
     private ?string $email = null;
 
-    #[ORM\Column]
-    private ?string $message;
+    #[ORM\Column(type:'string', length:50)]
+    #[Assert\NotBlank(message: "Le nom de l'expéditeur est obligatoire.")]
+    #[Assert\Length(max: 50, maxMessage: "Le nom de l'expéditeur ne peut pas dépasser 50 caractères.")]
+    private ?string $messageSender = null;
+
+    #[ORM\Column(type:'string', length:20)]
+    #[Assert\NotBlank(message: "Le numéro de l'expéditeur est obligatoire.")]
+    #[Assert\Length(max: 20, maxMessage: "Le numéro de l'expéditeur ne peut pas dépasser 20 caractères.")]
+    #[Assert\Regex(
+        pattern: "/^\+?[0-9\s\-]{7,20}$/",
+        message: "Le numéro de téléphone doit être valide."
+    )]
+    private ?string $phoneNumber = null;
+
+    #[ORM\Column(type:'string', length:255)]
+    #[Assert\NotBlank(message: "L'objet du message est obligatoire.")]
+    #[Assert\Length(max: 255, maxMessage: "L'objet du message ne peut pas dépasser 255 caractères.")]
+    private ?string $subject = null;
+
+    #[ORM\Column(type:'text')]
+    #[Assert\NotBlank(message: "Le message est obligatoire.")]
+    private ?string $message = null;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private ?string $date = null;
-
-    #[ORM\ManyToOne(
-        targetEntity: User::class,
-        inversedBy: "messages",
-    )]
-    private $user = null;
+    private ?\DateTimeImmutable $date = null;
 
     public function __construct()
     {
         $this->date = new \DateTimeImmutable();
     }
-    
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
 
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Get the value of messageSender
-     */ 
-    public function getMessageSender()
-    {
-        return $this->messageSender;
-    }
-
-    /**
-     * Set the value of messageSender
-     *
-     * @return  self
-     */ 
-    public function setMessageSender($messageSender)
-    {
-        $this->messageSender = $messageSender;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of phoneNumber
-     */ 
-    public function getPhoneNumber()
-    {
-        return $this->phoneNumber;
-    }
-
-    /**
-     * Set the value of phoneNumber
-     *
-     * @return  self
-     */ 
-    public function setPhoneNumber($phoneNumber)
-    {
-        $this->phoneNumber = $phoneNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of message
-     */ 
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    /**
-     * Set the value of message
-     *
-     * @return  self
-     */ 
-    public function setMessage($message)
-    {
-        $this->message = $message;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of date
-     */ 
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * Set the value of date
-     *
-     * @return  self
-     */ 
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of email
-     */ 
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * Set the value of email
-     *
-     * @return  self
-     */ 
-    public function setEmail($email)
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+        return $this;
+    }
 
+    public function getMessageSender(): ?string
+    {
+        return $this->messageSender;
+    }
+
+    public function setMessageSender(string $messageSender): self
+    {
+        $this->messageSender = $messageSender;
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(string $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
+        return $this;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(string $message): self
+    {
+        $this->message = $message;
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeImmutable
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeImmutable $date): self
+    {
+        $this->date = $date;
+        return $this;
+    }
+
+    public function getSubject(): ?string
+    {
+        return $this->subject;
+    }
+
+    public function setSubject(string $subject): self
+    {
+        $this->subject = $subject;
         return $this;
     }
 }

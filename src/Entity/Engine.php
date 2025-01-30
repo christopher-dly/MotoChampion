@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EngineRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EngineRepository::class)]
 class Engine
@@ -13,36 +14,46 @@ class Engine
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $id;
+    private ?int $id = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: "Le champ pour 'type' ne peut pas dépasser 255 caractères.")]
     private ?string $type = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?string $cylinders = null;
+    #[Assert\Positive(message: "Le nombre de cylindres doit être un entier positif.")]
+    private ?int $cylinders = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 50, nullable: true)]
+    #[Assert\Length(max: 50, maxMessage: "Le champ pour 'course x alésage' ne peut pas dépasser 50 caractères.")]
     private ?string $bore_x_stroke = null;
-    
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+
+    #[ORM\Column(type: 'string', length: 50, nullable: true)]
+    #[Assert\Length(max: 50, maxMessage: "Le champ pour 'ratio volumétrique' ne peut pas dépasser 50 caractères.")]
     private ?string $volumetricRatio = null;
-    
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+
+    #[ORM\Column(type: 'string', length: 150, nullable: true)]
+    #[Assert\Length(max: 150, maxMessage: "Le champ pour 'puissance annoncée' ne peut pas dépasser 150 caractères.")]
     private ?string $announcedPower = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 150, nullable: true)]
+    #[Assert\Length(max: 150, maxMessage: "Le champ pour 'couple annoncé' ne peut pas dépasser 150 caractères.")]
     private ?string $coupleAnnounced = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Assert\Length(max: 100, maxMessage: "Le champ pour 'alimentation' ne peut pas dépasser 100 caractères.")]
     private ?string $powerSupply = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Assert\Length(max: 100, maxMessage: "Le champ pour 'démarreur' ne peut pas dépasser 100 caractères.")]
     private ?string $starter = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Assert\Length(max: 100, maxMessage: "Le champ pour 'consommation' ne peut pas dépasser 100 caractères.")]
     private ?string $consumption = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Assert\Length(max: 100, maxMessage: "Le champ pour 'émissions de CO2' ne peut pas dépasser 100 caractères.")]
     private ?string $co2Emissions = null;
 
     #[ORM\OneToMany(
@@ -50,238 +61,161 @@ class Engine
         mappedBy: "engine",
         cascade: ["persist", "remove"]
     )]
-    private ?Collection $newVehicles = null;
+    private Collection $newVehicles;
 
     public function __construct()
     {
         $this->newVehicles = new ArrayCollection();
     }
 
-    /**
-     * Get the value of NewVehicles
-     */ 
-    public function getNewVehicles()
-    {
-        return $this->newVehicles;
-    }
-
-    /**
-     * Add actuality
-     *
-     * @return self
-     */ 
-    public function addNewVehicle(NewVehicle $newVehicle)
-    {
-        $this->newVehicles[] = $newVehicle;
-        $newVehicle->setEngine($this);
-
-        return $this;
-    }
-
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Get the value of type
-     */ 
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * Set the value of type
-     *
-     * @return  self
-     */ 
-    public function setType($type)
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    /**
-     * Get the value of cylinders
-     */ 
-    public function getCylinders()
+    public function getCylinders(): ?int
     {
         return $this->cylinders;
     }
 
-    /**
-     * Set the value of cylinders
-     *
-     * @return  self
-     */ 
-    public function setCylinders($cylinders)
+    public function setCylinders(?int $cylinders): self
     {
         $this->cylinders = $cylinders;
 
         return $this;
     }
 
-    /**
-     * Get the value of bore_x_stroke
-     */ 
-    public function getBoreXstroke()
+    public function getBoreXstroke(): ?string
     {
         return $this->bore_x_stroke;
     }
 
-    /**
-     * Set the value of bore_x_stroke
-     *
-     * @return  self
-     */ 
-    public function setBoreXstroke($bore_x_stroke)
+    public function setBoreXstroke(?string $bore_x_stroke): self
     {
         $this->bore_x_stroke = $bore_x_stroke;
 
         return $this;
     }
 
-    /**
-     * Get the value of volumetricRatio
-     */ 
-    public function getVolumetricRatio()
+    public function getVolumetricRatio(): ?string
     {
         return $this->volumetricRatio;
     }
 
-    /**
-     * Set the value of volumetricRatio
-     *
-     * @return  self
-     */ 
-    public function setVolumetricRatio($volumetricRatio)
+    public function setVolumetricRatio(?string $volumetricRatio): self
     {
         $this->volumetricRatio = $volumetricRatio;
 
         return $this;
     }
 
-    /**
-     * Get the value of announcedPower
-     */ 
-    public function getAnnouncedPower()
+    public function getAnnouncedPower(): ?string
     {
         return $this->announcedPower;
     }
 
-    /**
-     * Set the value of announcedPower
-     *
-     * @return  self
-     */ 
-    public function setAnnouncedPower($announcedPower)
+    public function setAnnouncedPower(?string $announcedPower): self
     {
         $this->announcedPower = $announcedPower;
 
         return $this;
     }
 
-    /**
-     * Get the value of coupleAnnounced
-     */ 
-    public function getCoupleAnnounced()
+    public function getCoupleAnnounced(): ?string
     {
         return $this->coupleAnnounced;
     }
 
-    /**
-     * Set the value of coupleAnnounced
-     *
-     * @return  self
-     */ 
-    public function setCoupleAnnounced($coupleAnnounced)
+    public function setCoupleAnnounced(?string $coupleAnnounced): self
     {
         $this->coupleAnnounced = $coupleAnnounced;
 
         return $this;
     }
 
-    /**
-     * Get the value of powerSupply
-     */ 
-    public function getPowerSupply()
+    public function getPowerSupply(): ?string
     {
         return $this->powerSupply;
     }
 
-    /**
-     * Set the value of powerSupply
-     *
-     * @return  self
-     */ 
-    public function setPowerSupply($powerSupply)
+    public function setPowerSupply(?string $powerSupply): self
     {
         $this->powerSupply = $powerSupply;
 
         return $this;
     }
 
-    /**
-     * Get the value of starter
-     */ 
-    public function getStarter()
+    public function getStarter(): ?string
     {
         return $this->starter;
     }
 
-    /**
-     * Set the value of starter
-     *
-     * @return  self
-     */ 
-    public function setStarter($starter)
+    public function setStarter(?string $starter): self
     {
         $this->starter = $starter;
 
         return $this;
     }
 
-    /**
-     * Get the value of consumption
-     */ 
-    public function getConsumption()
+    public function getConsumption(): ?string
     {
         return $this->consumption;
     }
 
-    /**
-     * Set the value of consumption
-     *
-     * @return  self
-     */ 
-    public function setConsumption($consumption)
+    public function setConsumption(?string $consumption): self
     {
         $this->consumption = $consumption;
 
         return $this;
     }
 
-    /**
-     * Get the value of co2Emissions
-     */ 
-    public function getCo2Emissions()
+    public function getCo2Emissions(): ?string
     {
         return $this->co2Emissions;
     }
 
-    /**
-     * Set the value of co2Emissions
-     *
-     * @return  self
-     */ 
-    public function setCo2Emissions($co2Emissions)
+    public function setCo2Emissions(?string $co2Emissions): self
     {
         $this->co2Emissions = $co2Emissions;
+
+        return $this;
+    }
+
+    public function getNewVehicles(): Collection
+    {
+        return $this->newVehicles;
+    }
+
+    public function addNewVehicle(NewVehicle $newVehicle): self
+    {
+        if (!$this->newVehicles->contains($newVehicle)) {
+            $this->newVehicles[] = $newVehicle;
+            $newVehicle->setEngine($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNewVehicle(NewVehicle $newVehicle): self
+    {
+        if ($this->newVehicles->contains($newVehicle)) {
+            $this->newVehicles->removeElement($newVehicle);
+            if ($newVehicle->getEngine() === $this) {
+                $newVehicle->setEngine(null);
+            }
+        }
 
         return $this;
     }

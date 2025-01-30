@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\NewVehicleRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: NewVehicleRepository::class)]
 class NewVehicle
@@ -11,97 +12,79 @@ class NewVehicle
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id;
+    private ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private ?string $name;
+    #[ORM\Column(type: 'string', length: 50, nullable: false)]
+    #[Assert\NotBlank(message: "Le nom du véhicule est obligatoire.")]
+    #[Assert\Length(max: 50, maxMessage: "Le nom ne doit pas dépasser 50 caractères.")]
+    private ?string $name = null;
     
-    #[ORM\Column(type: 'string', nullable:true)]
-    private ?string $image;
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: "Le chemin de l'image ne doit pas dépasser 255 caractères.")]
+    private ?string $image = null;
 
     #[ORM\ManyToOne(
         targetEntity: CyclePart::class,
-        inversedBy: "NewVehicle",
+        inversedBy: "newVehicles",
         cascade: ["persist", "remove"]
     )]
-    private $cyclePart = null;
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    private ?CyclePart $cyclePart = null;
     
     #[ORM\ManyToOne(
         targetEntity: Dimension::class,
-        inversedBy: "NewVehicle",
+        inversedBy: "newVehicles",
         cascade: ["persist", "remove"]
-    )]
-    private $dimension = null;
+        )]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    private ?Dimension $dimension = null;
 
     #[ORM\ManyToOne(
         targetEntity: Engine::class,
-        inversedBy: "NewVehicle",
+        inversedBy: "newVehicles",
         cascade: ["persist", "remove"]
     )]
-    private $engine = null;
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    private ?Engine $engine = null;
 
     #[ORM\ManyToOne(
         targetEntity: Information::class,
-        inversedBy: "NewVehicle",
+        inversedBy: "newVehicles",
         cascade: ["persist", "remove"]
     )]
-    private $information = null;
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    private ?Information $information = null;
 
     #[ORM\ManyToOne(
         targetEntity: Transmission::class,
-        inversedBy: "NewVehicle",
+        inversedBy: "newVehicles",
         cascade: ["persist", "remove"]
     )]
-    private $transmission = null;
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    private ?Transmission $transmission = null;
 
-    #[ORM\ManyToOne(
-        targetEntity: vehicleImage::class,
-        inversedBy: "NewVehicle",
-        cascade: ["persist", "remove"]
-    )]
-    private $vehicleImage = null;
-
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
-
-    /**
-     * Get the value of name
-     */ 
-    public function getName()
+    
+    public function getName(): ?string
     {
         return $this->name;
     }
-
-    /**
-     * Set the value of name
-     *
-     * @return  self
-     */ 
-    public function setName($name)
+    
+    public function setName(?string $name): self
     {
         $this->name = $name;
-
+    
         return $this;
-    }
+    }    
 
-    /**
-     * Get the value of cyclePart
-     */ 
     public function getCyclePart()
     {
         return $this->cyclePart;
     }
 
-    /**
-     * Set the value of cyclePart
-     *
-     * @return  self
-     */ 
     public function setCyclePart($cyclePart)
     {
         $this->cyclePart = $cyclePart;
@@ -109,19 +92,11 @@ class NewVehicle
         return $this;
     }
 
-    /**
-     * Get the value of dimension
-     */ 
     public function getDimension()
     {
         return $this->dimension;
     }
 
-    /**
-     * Set the value of dimension
-     *
-     * @return  self
-     */ 
     public function setDimension($dimension)
     {
         $this->dimension = $dimension;
@@ -129,19 +104,11 @@ class NewVehicle
         return $this;
     }
 
-    /**
-     * Get the value of engine
-     */ 
     public function getEngine()
     {
         return $this->engine;
     }
 
-    /**
-     * Set the value of engine
-     *
-     * @return  self
-     */ 
     public function setEngine($engine)
     {
         $this->engine = $engine;
@@ -149,19 +116,11 @@ class NewVehicle
         return $this;
     }
 
-    /**
-     * Get the value of information
-     */ 
     public function getInformation()
     {
         return $this->information;
     }
 
-    /**
-     * Set the value of information
-     *
-     * @return  self
-     */ 
     public function setInformation($information)
     {
         $this->information = $information;
@@ -169,19 +128,11 @@ class NewVehicle
         return $this;
     }
 
-    /**
-     * Get the value of transmission
-     */ 
     public function getTransmission()
     {
         return $this->transmission;
     }
 
-    /**
-     * Set the value of transmission
-     *
-     * @return  self
-     */ 
     public function setTransmission($transmission)
     {
         $this->transmission = $transmission;
@@ -189,39 +140,11 @@ class NewVehicle
         return $this;
     }
 
-    /**
-     * Get the value of image
-     */ 
-    public function getVehicleImage()
-    {
-        return $this->vehicleImage;
-    }
-
-    /**
-     * Set the value of image
-     *
-     * @return  self
-     */ 
-    public function setVehicleImage($vehicleImage)
-    {
-        $this->vehicleImage = $vehicleImage;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of image
-     */ 
     public function getImage()
     {
         return $this->image;
     }
 
-    /**
-     * Set the value of image
-     *
-     * @return  self
-     */ 
     public function setImage($image)
     {
         $this->image = $image;

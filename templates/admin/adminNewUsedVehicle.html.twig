@@ -1,0 +1,80 @@
+{% extends "layout.html.twig" %}
+
+{% block main %}
+<h4 class='h4'>Enregistrer un nouveaux véhicules d'occasion</h4>
+{{ form_start(NewUsedVehicleForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
+    <div class='container'>
+        <div class='inputContainer'>
+            <p class='inputDescrption'>Marque</p>
+            {{ form_widget(NewUsedVehicleForm.brand, {'attr': {'class': 'inputNewUsedVehicle'}})}}
+			{{ form_errors(NewUsedVehicleForm.brand)}}
+        </div>
+        <div class='inputContainer'>
+            <p class='inputDescrption'>Modèle :</p>
+            {{ form_widget(NewUsedVehicleForm.model, {'attr': {'class': 'inputNewUsedVehicle'}})}}
+			{{ form_errors(NewUsedVehicleForm.model)}}
+        </div>
+        <div class='inputContainer'>
+            <p class='inputDescrption'>Catégorie :</p>
+            {{ form_widget(NewUsedVehicleForm.category, {'attr': {'class': 'inputNewUsedVehicle'}})}}
+			{{ form_errors(NewUsedVehicleForm.category)}}
+        </div>
+        <div class='inputContainer'>
+            <p class='inputDescrption'>Cylindrées :</p>
+            {{ form_widget(NewUsedVehicleForm.cylinders, {'attr': {'class': 'inputNewUsedVehicle'}})}}
+			{{ form_errors(NewUsedVehicleForm.cylinders)}}
+        </div>
+        <div class='inputContainer'>
+            <p class='inputDescrption'>Prix :</p>
+            {{ form_widget(NewUsedVehicleForm.price, {'attr': {'class': 'inputNewUsedVehicle'}})}}
+			{{ form_errors(NewUsedVehicleForm.price)}}
+        </div>
+        <div class='inputContainer'>
+            <p class='inputDescrption'>Temps de garantie :</p>
+            {{ form_widget(NewUsedVehicleForm.warrantyTime, {'attr': {'class': 'inputNewUsedVehicle'}})}}
+			{{ form_errors(NewUsedVehicleForm.warrantyTime)}}
+        </div>
+        <div class='inputContainer'>
+            <p class='inputDescrption'>Description :</p>
+            {{ form_widget(NewUsedVehicleForm.description, {'attr': {'class': 'inputNewUsedVehicle'}})}}
+			{{ form_errors(NewUsedVehicleForm.description)}}
+        </div>
+        <div class='inputContainer'>
+            <p class='inputDescrption'>Disponible à l'éssaie :</p>
+            {{ form_widget(NewUsedVehicleForm.availableForTrial, {'attr': {'class': 'inputNewUsedVehicle'}})}}
+			{{ form_errors(NewUsedVehicleForm.availableForTrial)}}
+        </div>
+        <div class='inputContainer'>
+            <p class='inputDescrption'>Couleur :</p>
+            {{ form_widget(NewUsedVehicleForm.color, {'attr': {'class': 'inputNewUsedVehicle'}})}}
+			{{ form_errors(NewUsedVehicleForm.color)}}
+        </div>
+        <div class='inputContainer'>
+            <p class='inputDescrption'>Année d'immatriculation :</p>
+            {{ form_widget(NewUsedVehicleForm.year, {'attr': {'class': 'inputNewUsedVehicle'}})}}
+			{{ form_errors(NewUsedVehicleForm.year)}}
+        </div>
+        <div class='inputContainer'>
+            <p class='inputDescrption'>Kilométrage :</p>
+            {{ form_widget(NewUsedVehicleForm.kilometers, {'attr': {'class': 'inputNewUsedVehicle'}})}}
+			{{ form_errors(NewUsedVehicleForm.kilometers)}}
+        </div>
+        <div class='inputContainer'>
+            <p class='inputDescrption'>Crit'air :</p>
+            {{ form_widget(NewUsedVehicleForm.energyTax, {'attr': {'class': 'inputNewUsedVehicle'}})}}
+			{{ form_errors(NewUsedVehicleForm.energyTax)}}
+        </div>
+        <div class='inputContainer'>
+            <p class='inputDescrption'>Puissance fiscale :</p>
+            {{ form_widget(NewUsedVehicleForm.taxPower, {'attr': {'class': 'inputNewUsedVehicle'}})}}
+			{{ form_errors(NewUsedVehicleForm.taxPower)}}
+        </div>
+        <div class='inputContainer'>
+            <p class='inputDescrption'>Image de présentation du véhicule :</p>
+            {{ form_widget(NewUsedVehicleForm.imageUsedVehicle, {'attr': {'class': 'inputNewUsedVehicle'}})}}
+			{{ form_errors(NewUsedVehicleForm.imageUsedVehicle)}}
+        </div>
+        {{ form_widget(NewUsedVehicleForm.submit, {attr: {class: 'button'}}) }}
+        {{ form_end(NewUsedVehicleForm) }}
+    </div>
+{% endblock %}

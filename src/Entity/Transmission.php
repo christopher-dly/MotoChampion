@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\TransmissionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TransmissionRepository::class)]
 class Transmission
@@ -15,19 +16,24 @@ class Transmission
     #[ORM\Column(type: 'integer')]
     private ?int $id;
 
-    #[ORM\Column(type:'text', length:255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: "Le champ pour 'transmission primaire' ne peut pas dépasser 255 caractères.")]
     private ?string $primaryTransmission = null;
 
-    #[ORM\Column(type:'text', length:255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: "Le champ pour 'transmission secondaire' ne peut pas dépasser 255 caractères.")]
     private ?string $secondaryTransmission = null;
 
-    #[ORM\Column(type:'text', length:255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: "Le champ pour 'embrayage' ne peut pas dépasser 255 caractères.")]
     private ?string $clutch = null;
 
-    #[ORM\Column(type:'text', length:255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: "Le champ pour 'commande' ne peut pas dépasser 255 caractères.")]
     private ?string $command = null;
 
-    #[ORM\Column(type:'text', length:255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: "Le champ pour 'boite de vitesse' ne peut pas dépasser 255 caractères.")]
     private ?string $gearbox = null;
 
     #[ORM\OneToMany(
@@ -35,141 +41,103 @@ class Transmission
         mappedBy: "transmission",
         cascade: ["persist", "remove"]
     )]
-    private ?Collection $newVehicles = null;
+    private Collection $newVehicles;
 
     public function __construct()
     {
         $this->newVehicles = new ArrayCollection();
     }
 
-    /**
-     * Get the value of NewVehicles
-     */ 
-    public function getNewVehicles()
-    {
-        return $this->newVehicles;
-    }
-
-    /**
-     * Add actuality
-     *
-     * @return self
-     */ 
-    public function addNewVehicle(NewVehicle $newVehicle)
-    {
-        $this->newVehicles[] = $newVehicle;
-        $newVehicle->setTransmission($this);
-
-        return $this;
-    }
-
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Get the value of gearbox
-     */ 
-    public function getGearbox()
-    {
-        return $this->gearbox;
-    }
-
-    /**
-     * Set the value of gearbox
-     *
-     * @return  self
-     */ 
-    public function setGearbox($gearbox)
-    {
-        $this->gearbox = $gearbox;
-
-        return $this;
-    }
-
-
-    /**
-     * Get the value of clutch
-     */ 
-    public function getClutch()
-    {
-        return $this->clutch;
-    }
-
-    /**
-     * Set the value of clutch
-     *
-     * @return  self
-     */ 
-    public function setClutch($clutch)
-    {
-        $this->clutch = $clutch;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of command
-     */ 
-    public function getCommand()
-    {
-        return $this->command;
-    }
-
-    /**
-     * Set the value of command
-     *
-     * @return  self
-     */ 
-    public function setCommand($command)
-    {
-        $this->command = $command;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of primaryTransmission
-     */ 
-    public function getPrimaryTransmission()
+    public function getPrimaryTransmission(): ?string
     {
         return $this->primaryTransmission;
     }
 
-    /**
-     * Set the value of primaryTransmission
-     *
-     * @return  self
-     */ 
-    public function setPrimaryTransmission($primaryTransmission)
+    public function setPrimaryTransmission(?string $primaryTransmission): self
     {
         $this->primaryTransmission = $primaryTransmission;
 
         return $this;
     }
 
-    /**
-     * Get the value of secondaryTransmission
-     */ 
-    public function getSecondaryTransmission()
+    public function getSecondaryTransmission(): ?string
     {
         return $this->secondaryTransmission;
     }
 
-    /**
-     * Set the value of secondaryTransmission
-     *
-     * @return  self
-     */ 
-    public function setSecondaryTransmission($secondaryTransmission)
+    public function setSecondaryTransmission(?string $secondaryTransmission): self
     {
         $this->secondaryTransmission = $secondaryTransmission;
 
         return $this;
     }
+
+    public function getClutch(): ?string
+    {
+        return $this->clutch;
+    }
+
+    public function setClutch(?string $clutch): self
+    {
+        $this->clutch = $clutch;
+
+        return $this;
+    }
+
+    public function getCommand(): ?string
+    {
+        return $this->command;
+    }
+
+    public function setCommand(?string $command): self
+    {
+        $this->command = $command;
+
+        return $this;
+    }
+
+    public function getGearbox(): ?string
+    {
+        return $this->gearbox;
+    }
+
+    public function setGearbox(?string $gearbox): self
+    {
+        $this->gearbox = $gearbox;
+
+        return $this;
+    }
+
+    public function getNewVehicles(): Collection
+    {
+        return $this->newVehicles;
+    }
+
+    public function addNewVehicle(NewVehicle $newVehicle): self
+    {
+        if (!$this->newVehicles->contains($newVehicle)) {
+            $this->newVehicles[] = $newVehicle;
+            $newVehicle->setTransmission($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNewVehicle(NewVehicle $newVehicle): self
+    {
+        if ($this->newVehicles->contains($newVehicle)) {
+            $this->newVehicles->removeElement($newVehicle);
+
+            if ($newVehicle->getTransmission() === $this) {
+                $newVehicle->setTransmission(null);
+            }
+        }
+
+        return $this;
+    }
 }
-   

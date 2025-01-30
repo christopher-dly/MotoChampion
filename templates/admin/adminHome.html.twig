@@ -1,0 +1,8 @@
+{% extends "layout.html.twig" %}
+
+{% block main %}
+<h4 class='h4'>Accueil admin</h4>
+<button><a class="navbar-link" href={{ path('AdminActuality')}}>Nouvelle actualité</a></button>
+<button><a class="navbar-link" href={{ path('AdminNewNewVehicle')}}>Nouveaux véhicules neuf</a></button>
+<button><a class="navbar-link" href={{ path('AdminUsedVehicle')}}>véhicules occasion</a></button>
+{% endblock %}

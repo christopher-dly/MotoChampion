@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class NewVehicleController extends AbstractController
 {
@@ -20,45 +21,47 @@ class NewVehicleController extends AbstractController
     }
 
     #[Route('/AdminNouveauVehiculeNeuf', name: 'AdminNewNewVehicle', methods: ['GET', 'POST'])]
-    public function adminNewVehicle(Request $request, EntityManagerInterface $entityManager): Response 
+    public function adminNewVehicle(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response 
     {
-        $newVehicle = new NewVehicle(); // L'entité principale
-    
-        // Formulaire global avec les sous-formulaires
+        $newVehicle = new NewVehicle();
+        
         $form = $this->createForm(NewVehicleForm::class, $newVehicle);
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
-            $imageFile = $form->get('image')->getData();
-            if ($imageFile) {
-                $newFilename = uniqid('vehicle_', true) . '.' . $imageFile->guessExtension();
-    
+            
+            $image = $form->get('image')->getData();
+
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
+
                 try {
-                    $imageFile->move(
-                        $this->getParameter('uploads_directory'),
+                    $image->move(
+                        $this->getParameter('kernel.project_dir').'/public/uploads',
                         $newFilename
                     );
-        
-                    // Sauvegarder le chemin en base de données
-                    $newVehicle->setImage($newFilename);
                 } catch (FileException $e) {
-                    $this->addFlash('error', 'Erreur lors de l\'upload du fichier.');
+                    $this->addFlash('error', 'An error occurred while uploading the image.');
+                    return $this->render('admin/adminNewNewVehicle.html.twig', [
+                        'NewVehicleForm' => $form->createView(),
+                    ]);
                 }
+                $newVehicle->setImage('/uploads/' . $newFilename);
             }
     
             $entityManager->persist($newVehicle);
             $entityManager->flush();
     
+            $this->addFlash('success', 'Véhicule ajouté avec succès !');
             return $this->redirectToRoute('Home');
-
-        } else {
-            $this->addFlash('error', 'Le formulaire n\'est pas valide.');
         }
     
-        // Ajout du retour de la vue pour éviter l'erreur
         return $this->render('admin/adminNewNewVehicle.html.twig', [
             'NewVehicleForm' => $form->createView(),
         ]);
     }
+    
     
 }

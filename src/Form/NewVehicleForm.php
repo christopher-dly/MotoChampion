@@ -28,23 +28,23 @@ class NewVehicleForm extends AbstractType
                     ]),
                 ]
             ])
-            // ->add('image', FileType::class, [
-            //     'label' => 'Image',
-            //     'required' => false,
-            //     'mapped' => true,
-            //     'constraints' => [
-            //         new File([
-            //             'mimeTypes' => ['image/jpeg', 'image/png', 'image/gif'],
-            //             'mimeTypesMessage' => 'Veuillez uploader une image valide (JPEG, PNG, GIF)',
-            //         ])
-            //     ],
-            // ])
+            ->add('image', FileType::class, [
+                'label' => 'image',
+                'required' => false,
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => ['image/jpeg', 'image/png', 'image/gif'],
+                        'mimeTypesMessage' => 'Veuillez uploader une image valide (JPEG, PNG, GIF)',
+                    ])
+                ],
+            ])
             ->add('Information', InformationForm::class)
             ->add('Engine', EngineForm::class)
             ->add('Transmission', TransmissionForm::class)
             ->add('Dimension', DimensionForm::class)
             ->add('CyclePart', CyclePartForm::class)
-            ->add('VehicleImage', VehicleImageForm::class)
             ->add('submit', SubmitType::class);
     }
     public function configureOptions(OptionsResolver $resolver)

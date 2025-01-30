@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UsedVehicleRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UsedVehicleRepository::class)]
 class UsedVehicle
@@ -11,337 +12,245 @@ class UsedVehicle
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id;
+    private ?int $id = null;
 
-    #[ORM\Column(type: 'text', length:255)]
+    #[ORM\Column(type: 'string', length: 100)]
+    private ?string $imageUsedVehicle = null;
+
+    #[ORM\Column(type: 'string', length: 50)]
+    #[Assert\NotBlank(message: "La marque est obligatoire.")]
+    #[Assert\Length(max: 50, maxMessage: "La marque ne doit pas dépasser 50 caractères.")]
     private ?string $brand = null;
 
-    #[ORM\Column(type: 'text', length:255)]
+    #[ORM\Column(type: 'string', length: 50)]
+    #[Assert\NotBlank(message: "Le modèle est obligatoire.")]
+    #[Assert\Length(max: 50, maxMessage: "Le modèle ne doit pas dépasser 50 caractères.")]
     private ?string $model = null;
 
-    #[ORM\Column(type: 'text', length:255)]
+    #[ORM\Column(type: 'string', length: 50)]
+    #[Assert\NotBlank(message: "La catégorie est obligatoire.")]
+    #[Assert\Length(max: 50, maxMessage: "La catégorie ne doit pas dépasser 50 caractères.")]
     private ?string $category = null;
 
-    #[ORM\Column(type: 'text', length:255)]
-    private ?string $cylinders = null;
+    #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(message: "Le nombre de cylindres est obligatoire.")]
+    #[Assert\GreaterThanOrEqual(0, message: "Le nombre de cylindres doit être un entier positif.")]
+    private ?int $cylinders = null;
 
-    #[ORM\Column(type: 'text', length:255)]
-    private ?string $price = null;
+    #[ORM\Column(type: 'float')]
+    #[Assert\NotBlank(message: "Le prix est obligatoire.")]
+    #[Assert\GreaterThanOrEqual(0, message: "Le prix ne peut pas être négatif.")]
+    private ?float $price = null;
 
-    #[ORM\Column(type: 'text', length:255)]
-    private ?string $warrantyTime = null;
+    #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(message: "Le temps de garantie est obligatoire.")]
+    #[Assert\GreaterThanOrEqual(0, message: "Le temps de garantie ne peut pas être négatif.")]
+    private ?int $warrantyTime = null;
 
-    #[ORM\Column(type: 'text', length:255)]
+    #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank(message: "La description est obligatoire.")]
     private ?string $description = null;
 
-    #[ORM\Column(type: 'text', length:255)]
+    #[ORM\Column(type: 'boolean')]
     private ?bool $availableForTrial = false;
 
-    #[ORM\Column(type: 'text', length:255)]
+    #[ORM\Column(type: 'string', length: 50)]
+    #[Assert\NotBlank(message: "La couleur est obligatoire.")]
+    #[Assert\Length(max: 50, maxMessage: "La couleur ne doit pas dépasser 50 caractères.")]
     private ?string $color = null;
 
-    #[ORM\Column(type: 'text', length:255)]
-    private ?string $image = null;
+    #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(message: "L'année est obligatoire.")]
+    #[Assert\GreaterThanOrEqual(0, message: "L'année ne peut pas être négative.")]
+    private ?int $year = null;
 
-    #[ORM\Column(type: 'text', length:255)]
-    private ?string $year = null;
+    #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(message: "Le nombre de kilomètres est obligatoire.")]
+    #[Assert\GreaterThanOrEqual(0, message: "Le nombre de kilomètres ne peut pas être négatif.")]
+    private ?int $kilometers = null;
 
-    #[ORM\Column(type: 'text', length:255)]
-    private ?string $kilometers = null;
+    #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(message: "Le taux d'énergie est obligatoire.")]
+    #[Assert\GreaterThanOrEqual(0, message: "Le taux d'énergie ne peut pas être négatif.")]
+    private ?int $energyTax = null;
 
-    #[ORM\Column(type: 'text', length:255)]
-    private ?string $miles = null;
+    #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(message: "Le taux de puissance est obligatoire.")]
+    #[Assert\GreaterThanOrEqual(0, message: "Le taux de puissance ne peut pas être négatif.")]
+    private ?int $taxPower = null;
 
-    #[ORM\Column(type: 'text', length:255)]
-    private ?string $taxPower = null;
+    // Getters and setters...
 
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Get the value of brand
-     */ 
-    public function getBrand()
+    public function getBrand(): ?string
     {
         return $this->brand;
     }
 
-    /**
-     * Set the value of brand
-     *
-     * @return  self
-     */ 
-    public function setBrand($brand)
+    public function setBrand(string $brand): self
     {
         $this->brand = $brand;
 
         return $this;
     }
 
-    /**
-     * Get the value of model
-     */ 
-    public function getModel()
+    public function getModel(): ?string
     {
         return $this->model;
     }
 
-    /**
-     * Set the value of model
-     *
-     * @return  self
-     */ 
-    public function setModel($model)
+    public function setModel(string $model): self
     {
         $this->model = $model;
 
         return $this;
     }
 
-    /**
-     * Get the value of category
-     */ 
-    public function getCategory()
+    public function getCategory(): ?string
     {
         return $this->category;
     }
 
-    /**
-     * Set the value of category
-     *
-     * @return  self
-     */ 
-    public function setCategory($category)
+    public function setCategory(string $category): self
     {
         $this->category = $category;
 
         return $this;
     }
 
-    /**
-     * Get the value of cylinders
-     */ 
-    public function getCylinders()
+    public function getCylinders(): ?int
     {
         return $this->cylinders;
     }
 
-    /**
-     * Set the value of cylinders
-     *
-     * @return  self
-     */ 
-    public function setCylinders($cylinders)
+    public function setCylinders(int $cylinders): self
     {
         $this->cylinders = $cylinders;
 
         return $this;
     }
 
-    /**
-     * Get the value of price
-     */ 
-    public function getPrice()
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    /**
-     * Set the value of price
-     *
-     * @return  self
-     */ 
-    public function setPrice($price)
+    public function setPrice(float $price): self
     {
         $this->price = $price;
 
         return $this;
     }
 
-    /**
-     * Get the value of warrantyTime
-     */ 
-    public function getWarrantyTime()
+    public function getWarrantyTime(): ?int
     {
         return $this->warrantyTime;
     }
 
-    /**
-     * Set the value of warrantyTime
-     *
-     * @return  self
-     */ 
-    public function setWarrantyTime($warrantyTime)
+    public function setWarrantyTime(int $warrantyTime): self
     {
         $this->warrantyTime = $warrantyTime;
 
         return $this;
     }
 
-    /**
-     * Get the value of description
-     */ 
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * Set the value of description
-     *
-     * @return  self
-     */ 
-    public function setDescription($description)
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * Get the value of availableForTrial
-     */ 
-    public function getAvailableForTrial()
+    public function isAvailableForTrial(): ?bool
     {
         return $this->availableForTrial;
     }
 
-    /**
-     * Set the value of availableForTrial
-     *
-     * @return  self
-     */ 
-    public function setAvailableForTrial($availableForTrial)
+    public function setAvailableForTrial(bool $availableForTrial): self
     {
         $this->availableForTrial = $availableForTrial;
 
         return $this;
     }
 
-    /**
-     * Get the value of color
-     */ 
-    public function getColor()
+    public function getColor(): ?string
     {
         return $this->color;
     }
 
-    /**
-     * Set the value of color
-     *
-     * @return  self
-     */ 
-    public function setColor($color)
+    public function setColor(string $color): self
     {
         $this->color = $color;
 
         return $this;
     }
 
-    /**
-     * Get the value of image
-     */ 
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Set the value of image
-     *
-     * @return  self
-     */ 
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of year
-     */ 
-    public function getYear()
+    public function getYear(): ?int
     {
         return $this->year;
     }
 
-    /**
-     * Set the value of year
-     *
-     * @return  self
-     */ 
-    public function setYear($year)
+    public function setYear(int $year): self
     {
         $this->year = $year;
 
         return $this;
     }
 
-    /**
-     * Get the value of kilometers
-     */ 
-    public function getKilometers()
+    public function getKilometers(): ?int
     {
         return $this->kilometers;
     }
 
-    /**
-     * Set the value of kilometers
-     *
-     * @return  self
-     */ 
-    public function setKilometers($kilometers)
+    public function setKilometers(int $kilometers): self
     {
         $this->kilometers = $kilometers;
 
         return $this;
     }
 
-    /**
-     * Get the value of miles
-     */             
-    public function getMiles()
+    public function getEnergyTax(): ?int
     {
-        return $this->miles;
+        return $this->energyTax;
     }
 
-    /**
-     * Set the value of miles
-     *
-     * @return  self
-     */ 
-    public function setMiles($miles)
+    public function setEnergyTax(int $energyTax): self
     {
-        $this->miles = $miles;
+        $this->energyTax = $energyTax;
 
         return $this;
     }
 
-    /**
-     * Get the value of taxPower
-     */ 
-    public function getTaxPower()
+    public function getTaxPower(): ?int
     {
         return $this->taxPower;
     }
 
-    /**
-     * Set the value of taxPower
-     *
-     * @return  self
-     */ 
-    public function setTaxPower($taxPower)
+    public function setTaxPower(int $taxPower): self
     {
         $this->taxPower = $taxPower;
 
         return $this;
     }
-}
 
- 
+    public function getImageUsedVehicle(): ?string
+    {
+        return $this->imageUsedVehicle;
+    }
+
+    public function setImageUsedVehicle(string $imageUsedVehicle): self
+    {
+        $this->imageUsedVehicle = $imageUsedVehicle;
+
+        return $this;
+    }
+}

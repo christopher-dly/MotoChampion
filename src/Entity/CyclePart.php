@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CyclepartRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CyclepartRepository::class)]
 class CyclePart
@@ -13,39 +14,47 @@ class CyclePart
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id;
+    private ?int $id = null;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $casterAngle = null;
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $casterAngle = null;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $caster = null;
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $caster = null;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $wheelbase = null;
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $wheelbase = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: "Le champ pour 'jantes' ne peut pas dépasser 255 caractères.")]
     private ?string $rim = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: "Le champ pour 'cadre' ne peut pas dépasser 255 caractères.")]
     private ?string $frame = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: "Le champ pour 'suspension avant' ne peut pas dépasser 255 caractères.")]
     private ?string $frontSuspension = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: "Le champ pour 'suspension arrière' ne peut pas dépasser 255 caractères.")]
     private ?string $rearSuspension = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
-    private ?string $frontbrake = null;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: "Le champ pour 'freins avant' ne peut pas dépasser 255 caractères.")]
+    private ?string $frontBrake = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
-    private ?string $rearbrake = null;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: "Le champ pour 'freins arrière' ne peut pas dépasser 255 caractères.")]
+    private ?string $rearBrake = null;
 
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: "Le champ pour 'roues avant' ne peut pas dépasser 255 caractères.")]
     private ?string $frontWheel = null;
-    
-    #[ORM\Column(type: 'text', length: 255, nullable: true)]
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: "Le champ pour 'roues arrière' ne peut pas dépasser 255 caractères.")]
     private ?string $rearWheel = null;
 
     #[ORM\OneToMany(
@@ -53,258 +62,174 @@ class CyclePart
         mappedBy: "cyclePart",
         cascade: ["persist", "remove"]
     )]
-    private ?Collection $NewVehicles = null;
+    private Collection $newVehicles;
 
     public function __construct()
     {
-        $this->NewVehicles = new ArrayCollection();
+        $this->newVehicles = new ArrayCollection();
     }
 
-    /**
-     * Get the value of technicalSheets
-     */ 
-    public function getNewVehicles()
-    {
-        return $this->NewVehicles;
-    }
-
-    /**
-     * Add actuality
-     *
-     * @return self
-     */ 
-    public function addNewVehicle(NewVehicle $newVehicle)
-    {
-        $this->NewVehicles[] = $newVehicle;
-        $newVehicle->setCyclePart($this);
-
-        return $this;
-    }
-
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Get the value of casterAngle
-     */ 
-    public function getCasterAngle()
+    public function getCasterAngle(): ?float
     {
         return $this->casterAngle;
     }
 
-    /**
-     * Set the value of casterAngle
-     *
-     * @return  self
-     */ 
-    public function setCasterAngle($casterAngle)
+    public function setCasterAngle(?float $casterAngle): self
     {
         $this->casterAngle = $casterAngle;
 
         return $this;
     }
 
-    /**
-     * Get the value of caster
-     */ 
-    public function getCaster()
+    public function getCaster(): ?float
     {
         return $this->caster;
     }
 
-    /**
-     * Set the value of caster
-     *
-     * @return  self
-     */ 
-    public function setCaster($caster)
+    public function setCaster(?float $caster): self
     {
         $this->caster = $caster;
 
         return $this;
     }
 
-    /**
-     * Get the value of wheelbase
-     */ 
-    public function getWheelbase()
+    public function getWheelbase(): ?float
     {
         return $this->wheelbase;
     }
 
-    /**
-     * Set the value of wheelbase
-     *
-     * @return  self
-     */ 
-    public function setWheelbase($wheelbase)
+    public function setWheelbase(?float $wheelbase): self
     {
         $this->wheelbase = $wheelbase;
 
         return $this;
     }
 
-    /**
-     * Get the value of FrontSuspension
-     */ 
-    public function getFrontSuspension()
-    {
-        return $this->frontSuspension;
-    }
-
-    /**
-     * Set the value of FrontSuspension
-     *
-     * @return  self
-     */ 
-    public function setFrontSuspension($frontSuspension)
-    {
-        $this->frontSuspension = $frontSuspension;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of RearSuspension
-     */ 
-    public function getRearSuspension()
-    {
-        return $this->rearSuspension;
-    }
-
-    /**
-     * Set the value of RearSuspension
-     *
-     * @return  self
-     */ 
-    public function setRearSuspension($rearSuspension)
-    {
-        $this->rearSuspension = $rearSuspension;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Frontbrake
-     */ 
-    public function getFrontbrake()
-    {
-        return $this->frontbrake;
-    }
-
-    /**
-     * Set the value of Frontbrake
-     *
-     * @return  self
-     */ 
-    public function setFrontbrake($frontbrake)
-    {
-        $this->frontbrake = $frontbrake;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Rearbrake
-     */ 
-    public function getRearbrake()
-    {
-        return $this->rearbrake;
-    }
-
-    /**
-     * Set the value of Rearbrake
-     *
-     * @return  self
-     */ 
-    public function setRearbrake($rearbrake)
-    {
-        $this->rearbrake = $rearbrake;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of FrontWheel
-     */ 
-    public function getFrontWheel()
-    {
-        return $this->frontWheel;
-    }
-
-    /**
-     * Set the value of FrontWheel
-     *
-     * @return  self
-     */ 
-    public function setFrontWheel($frontWheel)
-    {
-        $this->frontWheel = $frontWheel;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of RearWheel
-     */ 
-    public function getRearWheel()
-    {
-        return $this->rearWheel;
-    }
-
-    /**
-     * Set the value of RearWheel
-     *
-     * @return  self
-     */ 
-    public function setRearWheel($rearWheel)
-    {
-        $this->rearWheel = $rearWheel;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of rim
-     */ 
-    public function getRim()
+    public function getRim(): ?string
     {
         return $this->rim;
     }
 
-    /**
-     * Set the value of rim
-     *
-     * @return  self
-     */ 
-    public function setRim($rim)
+    public function setRim(?string $rim): self
     {
         $this->rim = $rim;
 
         return $this;
     }
 
-    /**
-     * Get the value of frame
-     */ 
-    public function getFrame()
+    public function getFrame(): ?string
     {
         return $this->frame;
     }
 
-    /**
-     * Set the value of frame
-     *
-     * @return  self
-     */ 
-    public function setFrame($frame)
+    public function setFrame(?string $frame): self
     {
         $this->frame = $frame;
+
+        return $this;
+    }
+
+    public function getFrontSuspension(): ?string
+    {
+        return $this->frontSuspension;
+    }
+
+    public function setFrontSuspension(?string $frontSuspension): self
+    {
+        $this->frontSuspension = $frontSuspension;
+
+        return $this;
+    }
+
+    public function getRearSuspension(): ?string
+    {
+        return $this->rearSuspension;
+    }
+
+    public function setRearSuspension(?string $rearSuspension): self
+    {
+        $this->rearSuspension = $rearSuspension;
+
+        return $this;
+    }
+
+    public function getFrontBrake(): ?string
+    {
+        return $this->frontBrake;
+    }
+
+    public function setFrontBrake(?string $frontBrake): self
+    {
+        $this->frontBrake = $frontBrake;
+
+        return $this;
+    }
+
+    public function getRearBrake(): ?string
+    {
+        return $this->rearBrake;
+    }
+
+    public function setRearBrake(?string $rearBrake): self
+    {
+        $this->rearBrake = $rearBrake;
+
+        return $this;
+    }
+
+    public function getFrontWheel(): ?string
+    {
+        return $this->frontWheel;
+    }
+
+    public function setFrontWheel(?string $frontWheel): self
+    {
+        $this->frontWheel = $frontWheel;
+
+        return $this;
+    }
+
+    public function getRearWheel(): ?string
+    {
+        return $this->rearWheel;
+    }
+
+    public function setRearWheel(?string $rearWheel): self
+    {
+        $this->rearWheel = $rearWheel;
+
+        return $this;
+    }
+
+    public function getNewVehicles(): Collection
+    {
+        return $this->newVehicles;
+    }
+
+    public function addNewVehicle(NewVehicle $newVehicle): self
+    {
+        if (!$this->newVehicles->contains($newVehicle)) {
+            $this->newVehicles->add($newVehicle);
+            $newVehicle->setCyclePart($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNewVehicle(NewVehicle $newVehicle): self
+    {
+        if ($this->newVehicles->contains($newVehicle)) {
+            $this->newVehicles->removeElement($newVehicle);
+            // Unset the owning side relationship
+            if ($newVehicle->getCyclePart() === $this) {
+                $newVehicle->setCyclePart(null);
+            }
+        }
 
         return $this;
     }

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ActualityRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ActualityRepository::class)]
 class Actuality
@@ -11,144 +12,87 @@ class Actuality
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id;
+    private ?int $id = null;
 
-    #[ORM\Column(type:'text', length: 100)]
+    #[ORM\Column(type: 'string', length: 100)]
+    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
+    #[Assert\Length(max: 100, maxMessage: "Le nom ne peut pas dépasser 100 caractères.")]
     private ?string $name = null;
 
-    #[ORM\Column(type:'text', length: 100)]
+    #[ORM\Column(type: 'string', length: 100)]
+    #[Assert\NotBlank(message: "Le titre est obligatoire.")]
+    #[Assert\Length(max: 100, maxMessage: "Le titre ne peut pas dépasser 100 caractères.")]
     private ?string $title = null;
 
-    #[ORM\Column(type: 'text', length:5000)]
+    #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank(message: "Le contenu est obligatoire.")]
     private ?string $content = null;
-
-    #[ORM\Column(type:'string', nullable: true)]
-    private ?string $image = null;
 
     #[ORM\Column(type: 'datetime_immutable')]
     private ?\DateTimeImmutable $date = null;
-
-    #[ORM\ManyToOne(
-        targetEntity: User::class,
-        inversedBy: "actualities",
-    )]
-    private $user = null;
 
     public function __construct()
     {
         $this->date = new \DateTimeImmutable();
     }
-    
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
 
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-    
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Get the value of name
-     */ 
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * Set the value of name
-     *
-     * @return  self
-     */ 
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
-
         return $this;
     }
 
-    /**
-     * Get the value of title
-     */ 
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * Set the value of title
-     *
-     * @return  self
-     */ 
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
-
         return $this;
     }
 
-    /**
-     * Get the value of content
-     */ 
-    public function getContent()
+    public function getContent(): ?string
     {
         return $this->content;
     }
 
-    /**
-     * Set the value of content
-     *
-     * @return  self
-     */ 
-    public function setContent($content)
+    public function setContent(string $content): self
     {
         $this->content = $content;
-
         return $this;
     }
 
-    /**
-     * Get the value of image
-     */ 
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Set the value of image
-     *
-     * @return  self
-     */ 
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function getDate()
+    public function getDate(): ?\DateTimeImmutable
     {
         return $this->date;
     }
 
-    public function setDate($date)
+    public function setDate(\DateTimeImmutable $date): self
     {
         $this->date = $date;
-
         return $this;
     }
-}
 
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'title' => $this->title,
+            'content' => $this->content,
+            'date' => $this->date?->format('Y-m-d H:i:s'),
+        ];
+    }
+}
