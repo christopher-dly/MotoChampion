@@ -1,6 +1,7 @@
 @import url(header.css);
 @import url(footer.css);
 @import url(adminNewVehicleForm.css);
+@import url(adminUsedVehicle.css);
 
 html,body {
     margin: 0;
@@ -18,3 +19,4 @@ body {
 main {
     flex-grow: 1; /* Prend tout l'espace disponible restant */
 }
+

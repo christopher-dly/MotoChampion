@@ -1,8 +1,46 @@
 {% extends "layout.html.twig" %}
 
 {% block main %}
-<h4 class='h4'>Véhicule d'occasion</h4>
 <button><a class="navbar-link" href={{ path('AdminNewUsedVehicle')}}>Nouveaux véhicules occasion</a></button>
+    <h1>Véhicule d'occasion :</h1>
+    <div class="containerUsedVehicle">
+        {% for usedVehicle in usedVehicles %}
+                <a href='{{ path('DetailAdminUsedVehicle', {id: usedVehicle.id}) }}' class="usedVehicleCard">
+                    <div class='titleUsedVehicleCard'>
+                        {{ usedVehicle.model }}
+                    </div>
+                    <div class='imageUsedVehicleCard'>
+                        <img src="{{ usedVehicle.imageUsedVehicle }}" alt="image du vehicule" width="300" height="200">
+                    </div>
+                    <div class='infosUsedVehicleCard'>
+                        <p class='brandUsedVehicleCard'>{{ usedVehicle.brand }}</p>
+                        <p class='kilometersUsedVehicleCard'>{{ usedVehicle.kilometers }} km</p>
+                        <p class='yearUsedVehicleCard'>{{ usedVehicle.year }}</p>
+                    </div>
+                    <div>
+                        <p class='priceUsedVehicleCard'>{{ usedVehicle.price }} €</p>
+                    </div>
+                    <div class='actionsUsedVehicleCard'>
+                        <form method="POST" action="{{ path('delete_used_vehicle', {id: usedVehicle.id}) }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ usedVehicle.id) }}">
+                            <button type="submit" class="btnDeleteUsedVehicle">
+                                <p>Supprimer l'annonce</p>
+                            </button>
+                        </form>
+                    </div>
+                </a>
+        {% else %}
+            <p>Aucune moto enregistrée.</p>
+        {% endfor %}
+    </div>
 
-
+    <script>
+        document.querySelectorAll('.btnDeleteUsedVehicle').forEach(button => {
+        button.addEventListener('click', function(event) {
+            if (!confirm("Es-tu sûr de vouloir supprimer ce véhicule ?")) {
+                event.preventDefault();
+            }
+        });
+    });
+    </script>
 {% endblock %}
