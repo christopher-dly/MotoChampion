@@ -12,4 +12,10 @@ class HomeController extends AbstractController
     {
         return $this->render('pages/index.html.twig');
     }
+
+    #[Route('/legalMention', name: 'legalMention')]
+    public function legalMention()
+    {
+        return $this->render('pages/legalMention.html.twig');
+    }
 }
