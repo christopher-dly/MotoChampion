@@ -1,0 +1,265 @@
+
+{% extends "layout.html.twig" %}
+
+{% block main %}
+<h1 class='adminEditNewVehicleTitlePage'>Modifier un véhicule neuf : {{ newVehicle.name }}</h1>
+
+<div class='adminEditNewVehicleGlobalContainer'>
+    <div class='adminEditNewVehiculeImageContainer'>
+        <img class='adminEditNewVehicleImage' src="{{ newVehicle.image }}" alt="image du véhicule" width="600" height="400">
+    </div>
+    <div class='adminEditNewVehicleFormContainer'>
+        {{ form_start(EditNewVehicleForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
+        <div class='adminEditNewVehicleFormSection'>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Nom du véhicule :</p>
+                {{ form_widget(EditNewVehicleForm.name, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.name)}}
+            </div>
+        </div>
+
+        <div class='adminEditNewVehicleFormSection'>
+		<h4 class='SectionFormDescription'>Informations :</h4>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Marque :</p>
+                {{ form_widget(EditNewVehicleForm.Information.brand, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Information.brand)}}
+            </div>		
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Modèle :</p>
+                {{ form_widget(EditNewVehicleForm.Information.model, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Information.model)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Catégorie :</p>
+                {{ form_widget(EditNewVehicleForm.Information.category, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Information.category)}}
+            </div>
+            <div class='adminNewNewVehicleInputContainer'>
+                <p class='adminNewNewVehicleInputDescription'>Cylindrées :</p>
+                {{ form_widget(EditNewVehicleForm.Information.cylinders, {'attr': {'class': 'adminNewNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Information.cylinders)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Prix :</p>
+                {{ form_widget(EditNewVehicleForm.Information.price, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Information.price)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Temps de grantie :</p>
+                {{ form_widget(EditNewVehicleForm.Information.warrantyTime, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Information.warrantyTime)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Description</p>
+                {{ form_widget(EditNewVehicleForm.Information.description, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Information.description)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Disponible pour essai :</p>
+                {{ form_widget(EditNewVehicleForm.Information.availableForTrial, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Information.availableForTrial)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Permis requis :</p>
+                {{ form_widget(EditNewVehicleForm.Information.license, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Information.license)}}
+            </div>		
+	    </div>
+
+        <div class='adminEditNewVehicleFormSection'>
+		<h4 class='SectionFormDescription'>Moteur :</h4>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Type :</p>
+                {{ form_widget(EditNewVehicleForm.Engine.type, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Engine.type)}}
+            </div>		
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Cylindrées :</p>
+                {{ form_widget(EditNewVehicleForm.Engine.cylinders, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Engine.cylinders)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Course X Alésage :</p>
+                {{ form_widget(EditNewVehicleForm.Engine.boreXstroke, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Engine.boreXstroke)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Rapport volumétrique :</p>
+                {{ form_widget(EditNewVehicleForm.Engine.volumetricRatio, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Engine.volumetricRatio)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Puissance annoncée :</p>
+                {{ form_widget(EditNewVehicleForm.Engine.announcedPower, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Engine.announcedPower)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Couple annoncée :</p>
+                {{ form_widget(EditNewVehicleForm.Engine.coupleAnnounced, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Engine.coupleAnnounced)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Alimentation :</p>
+                {{ form_widget(EditNewVehicleForm.Engine.powerSupply, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Engine.powerSupply)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Démarreur :</p>
+                {{ form_widget(EditNewVehicleForm.Engine.starter, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Engine.starter)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Consommation :</p>
+                {{ form_widget(EditNewVehicleForm.Engine.consumption, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Engine.consumption)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Emissions de CO2 :</p>
+                {{ form_widget(EditNewVehicleForm.Engine.co2Emissions, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Engine.co2Emissions)}}
+            </div>
+	    </div>
+
+        <div class='adminEditNewVehicleFormSection'>
+            <h4 class='SectionFormDescription'>Transmission :</h4>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Transmission Primaire :</p>
+                {{ form_widget(EditNewVehicleForm.Transmission.primaryTransmission, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Transmission.primaryTransmission)}}
+            </div>		
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Transmission Secondaire :</p>
+                {{ form_widget(EditNewVehicleForm.Transmission.secondaryTransmission, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Transmission.secondaryTransmission)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Embrayage :</p>
+                {{ form_widget(EditNewVehicleForm.Transmission.clutch, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Transmission.clutch)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Commande :</p>
+                {{ form_widget(EditNewVehicleForm.Transmission.command, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Transmission.command)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Boite de vitesse :</p>
+                {{ form_widget(EditNewVehicleForm.Transmission.gearbox, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Transmission.gearbox)}}
+            </div>		
+        </div>
+
+        <div class='adminEditNewVehicleFormSection'>
+            <h4 class='SectionFormDescription'>Dimensions :</h4>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Longueur :</p>
+                {{ form_widget(EditNewVehicleForm.Dimension.length, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Dimension.length)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Largeur :</p>
+                {{ form_widget(EditNewVehicleForm.Dimension.width, {'attr': {'class': 'adminNewNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Dimension.width)}}
+            </div>
+            <div class='adminEditNewVehicleInput'>
+                <p class='adminEditNewVehicleInputDescription'>Hauteur :</p>
+                {{ form_widget(EditNewVehicleForm.Dimension.height, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Dimension.height)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Hauteur de selle :</p>
+                {{ form_widget(EditNewVehicleForm.Dimension.saddleHeight, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Dimension.saddleHeight)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Garde au sol :</p>
+                {{ form_widget(EditNewVehicleForm.Dimension.groundClearance, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Dimension.groundClearance)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Essence :</p>
+                {{ form_widget(EditNewVehicleForm.Dimension.gas, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Dimension.gas)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Huile :</p>
+                {{ form_widget(EditNewVehicleForm.Dimension.oil, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Dimension.oil)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Poids :</p>
+                {{ form_widget(EditNewVehicleForm.Dimension.weight, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.Dimension.weight)}}
+            </div>
+        </div>
+
+        <div class='adminEditNewVehicleFormSection'>
+            <h4 class='SectionFormDescription'>Partie cycle :</h4>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Angle de chasse :</p>
+                {{ form_widget(EditNewVehicleForm.CyclePart.casterAngle, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.CyclePart.casterAngle)}}
+            </div>	
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Chasse :</p>
+                {{ form_widget(EditNewVehicleForm.CyclePart.caster, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.CyclePart.caster)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Empattement :</p>
+                {{ form_widget(EditNewVehicleForm.CyclePart.wheelbase, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.CyclePart.wheelbase)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Jantes :</p>
+                {{ form_widget(EditNewVehicleForm.CyclePart.rim, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.CyclePart.rim)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Cadre :</p>
+                {{ form_widget(EditNewVehicleForm.CyclePart.frame, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.CyclePart.frame)}}
+            </div>
+            <Edit class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Suspension avant :</p>
+                {{ form_widget(EditNewVehicleForm.CyclePart.frontSuspension, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.CyclePart.frontSuspension)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Suspension arrière :</p>
+                {{ form_widget(EditNewVehicleForm.CyclePart.rearSuspension, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.CyclePart.rearSuspension)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Freins avant :</p>
+                {{ form_widget(EditNewVehicleForm.CyclePart.frontBrake, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.CyclePart.frontBrake)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Freins arrière :</p>
+                {{ form_widget(EditNewVehicleForm.CyclePart.rearBrake, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.CyclePart.rearBrake)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Roues avant :</p>
+                {{ form_widget(EditNewVehicleForm.CyclePart.frontWheel, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.CyclePart.frontWheel)}}
+            </div>
+            <div class='adminEditNewVehicleInputContainer'>
+                <p class='adminEditNewVehicleInputDescription'>Roues arrière :</p>
+                {{ form_widget(EditNewVehicleForm.CyclePart.rearWheel, {'attr': {'class': 'adminEditNewVehicleInput'}})}}
+                {{ form_errors(EditNewVehicleForm.CyclePart.rearWheel)}}
+            </div>
+        </div>
+
+        {{ form_widget(EditNewVehicleForm.submit, {attr: {class: 'adminEditNewVehicleSubmitButton'}}) }}
+        {{ form_end(EditNewVehicleForm) }}
+        <div class='adminEditNewVehicleReturnButtonContainer'>
+            <button class='adminEditNewVehicleReturnButton'>
+                <a class='adminEditNewVehicleReturnButtonDescription' href="{{ path('AdminNewVehicle') }}">Retour à la liste</a>
+            </button>
+	    </div>
+    </div>
+</div>
+{% endblock %}

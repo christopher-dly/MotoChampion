@@ -1,0 +1,132 @@
+{% extends "layout.html.twig" %}
+
+{% block main %}
+<h1 class='newVehicleDetailTitlePage'>{{ newVehicle.name }}</h1>
+
+<div class="newVehicleDetailGlobalContainer">
+    <div class='newVehicleDetailCard'>
+        <div class="newVehicleDetailImageContainer">
+            <img class='newVehicleDetailImage' src="{{ newVehicle.image }}" alt="image du véhicule" width="700" height="500">
+        </div>
+        <div class="newVehicleDetailInfosContainer">
+            <nav class="newVehicleDetailNavbar">
+                <button class="newVehicleDetailNavbarButton" onclick='showSlide(0)'>Informations</button>
+                <button class="newVehicleDetailNavbarButton" onclick='showSlide(1)'>Moteur</button>
+                <button class="newVehicleDetailNavbarButton" onclick='showSlide(2)'>Transmission</button>
+                <button class="newVehicleDetailNavbarButton" onclick='showSlide(3)'>Dimensions</button>
+                <button class="newVehicleDetailNavbarButton" onclick='showSlide(4)'>Partie cycle</button>
+            </nav>
+            
+            <div class='newVehicleDetailCarousel'>
+                <div class='newVehicleDetailSlide newVehicleDetailSlideActive'>
+                    <div class="newVehicleDetailTitleContainer">
+                        <h2 class='newVehicleDetailTitleDescription'>Informations</h2>
+                    </div>
+                    <div class="newVehicleDetailDescriptionContainer">
+                        <p class='newVehicleDetailDescription'>Marque : {{ newVehicle.Information.brand }}</p>
+                        <p class='newVehicleDetailDescription'>Modèle : {{ newVehicle.Information.model }}</p>
+                        <p class='newVehicleDetailDescription'>Catégorie : {{ newVehicle.Information.category }}</p>
+                        <p class='newVehicleDetailDescription'>Cylindrée : {{ newVehicle.Information.cylinders }} cm3</p>
+                        <p class='newVehicleDetailDescription'>Prix : {{ newVehicle.Information.price }} €</p>
+                        <p class='newVehicleDetailDescription'>Temps de garantie : {{ newVehicle.Information.warrantyTime }} ans</p>
+                        <p class='newVehicleDetailDescription'>Description : {{ newVehicle.Information.description }}</p>
+                        <p class='newVehicleDetailDescription'>Permis requis : {{ newVehicle.Information.license|join(', ') }}</p>
+                    </div>
+                </div>
+                <div class='newVehicleDetailSlide'>
+                    <div class="newVehicleDetailTitleContainer">
+                        <h2 class='newVehicleDetailTitleDescription'>Moteur</h2>
+                    </div>
+                    <div class="newVehicleDetailDescriptionContainer">
+                        <p class='newVehicleDetailDescription'>Type : {{ newVehicle.Engine.type }}</p>
+                        <p class='newVehicleDetailDescription'>Cylindrée : {{ newVehicle.Engine.cylinders }}</p>
+                        <p class='newVehicleDetailDescription'>Alésage x Course : {{ newVehicle.Engine.boreXstroke }}</p>
+                        <p class='newVehicleDetailDescription'>Ratio volumétrique : {{ newVehicle.Engine.volumetricRatio }}</p>
+                        <p class='newVehicleDetailDescription'>Puissance annoncée : {{ newVehicle.Engine.announcedPower }}</p>
+                        <p class='newVehicleDetailDescription'>Couple annoncée : {{ newVehicle.Engine.coupleAnnounced }}</p>
+                        <p class='newVehicleDetailDescription'>Alimentation : {{ newVehicle.Engine.powerSupply }}</p>
+                        <p class='newVehicleDetailDescription'>Démarreur : {{ newVehicle.Engine.starter }}</p>
+                        <p class='newVehicleDetailDescription'>Consomation : {{ newVehicle.Engine.consumption }}</p>
+                        <p class='newVehicleDetailDescription'>Emissions de CO2 : {{ newVehicle.Engine.co2Emissions }}</p>
+                    </div>
+                </div>
+                <div class='newVehicleDetailSlide'>
+                    <div class="newVehicleDetailTitleContainer">
+                        <h2 class='newVehicleDetailTitleDescription'>Transmission</h2>
+                    </div>
+                    <div class="newVehicleDetailDescriptionContainer">
+                        <p class='newVehicleDetailDescription'>Transmission primaire : {{ newVehicle.Transmission.primaryTransmission }}</p>
+                        <p class='newVehicleDetailDescription'>Transmission secondaire : {{ newVehicle.Transmission.secondaryTransmission }}</p>
+                        <p class='newVehicleDetailDescription'>Embrayage : {{ newVehicle.Transmission.clutch }}</p>
+                        <p class='newVehicleDetailDescription'>Commande : {{ newVehicle.Transmission.command }}</p>
+                        <p class='newVehicleDetailDescription'>Boite de vitesse : {{ newVehicle.Transmission.gearbox }}</p>
+                    </div>
+                </div>
+                <div class='newVehicleDetailSlide'>
+                    <div class="newVehicleDetailTitleContainer">
+                        <h2 class='newVehicleDetailTitleDescription'>Dimensions</h2>
+                    </div>
+                    <div class="newVehicleDetailDescriptionContainer">
+                        <p class='newVehicleDetailDescription'>l x L x h : {{ newVehicle.Dimension.length }} x {{ newVehicle.Dimension.width }} x {{ newVehicle.Dimension.height }} mm</p>
+                        <p class='newVehicleDetailDescription'>Hauteur de selle : {{ newVehicle.Dimension.saddleHeight }} mm</p>
+                        <p class='newVehicleDetailDescription'>Garde au sol : {{ newVehicle.Dimension.groundClearance }} mm</p>
+                        <p class='newVehicleDetailDescription'>Essence : {{ newVehicle.Dimension.gas }} L</p>
+                        <p class='newVehicleDetailDescription'>Huile : {{ newVehicle.Dimension.oil }} L</p>
+                        <p class='newVehicleDetailDescription'>Poids : {{ newVehicle.Dimension.weight }} Kg</p>
+                    </div>
+                </div>
+                <div class='newVehicleDetailSlide'>
+                    <div class="newVehicleDetailTitleContainer">
+                        <h2 class='newVehicleDetailTitleDescription'>Partie cycle</h2>
+                    </div>
+                    <div class="newVehicleDetailDescriptionContainer">
+                        <p class='newVehicleDetailDescription'> Angle de chasse : {{ newVehicle.CyclePart.casterAngle }}°</p>
+                        <p class='newVehicleDetailDescription'> Chasse : {{ newVehicle.CyclePart.caster }} mm</p>
+                        <p class='newVehicleDetailDescription'> Empattement : {{ newVehicle.CyclePart.wheelbase }} mm</p>
+                        <p class='newVehicleDetailDescription'> Jantes : {{ newVehicle.CyclePart.rim }}</p>
+                        <p class='newVehicleDetailDescription'> Cadre : {{ newVehicle.CyclePart.frame }}</p>
+                        <p class='newVehicleDetailDescription'> Suspension avant : {{ newVehicle.CyclePart.frontSuspension }}</p>
+                        <p class='newVehicleDetailDescription'> Suspension arrière : {{ newVehicle.CyclePart.rearSuspension }}</p>
+                        <p class='newVehicleDetailDescription'> Frein avant : {{ newVehicle.CyclePart.frontBrake }}</p>
+                        <p class='newVehicleDetailDescription'> Frein arrière : {{ newVehicle.CyclePart.rearBrake }}</p>
+                        <p class='newVehicleDetailDescription'> Pneu avant : {{ newVehicle.CyclePart.frontWheel }}</p>
+                        <p class='newVehicleDetailDescription'> Pneu arrière : {{ newVehicle.CyclePart.rearWheel }}</p>
+                    </div>
+                </div>
+                <div class='newVehicleDetailTryButtonContainer'>
+                    <button class='newVehicleDetailTryButton {% if newVehicle.Information.availableForTrial == 0 %}inactive{% endif %}'
+                            onclick="handleClick(event, {{ newVehicle.Information.availableForTrial }})">
+                        <a class='newVehicleDetailTryButtonDescription' href='{{ path('contact_form')}}'>Demander un essai</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    <div>
+</div>
+    {# <div class='newVehicleDetailReturnButtonContainer'>
+        <button class='newVehicleDetailReturnButton'>
+            <a class='newVehicleDetailReturnButtonDescription' href="{{ path('NewVehicle') }}">Retour à la liste</a>
+        </button>
+    <div> #}
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.newVehicleDetailSlide');
+
+    function showSlide(index) {
+        slides[currentSlide].classList.remove('newVehicleDetailSlideActive');
+        currentSlide = index;
+        slides[currentSlide].classList.add('newVehicleDetailSlideActive');
+    }
+
+    slides[currentSlide].classList.add('newVehicleDetailSlideActive');
+
+    function handleClick(event, dispoEssai) {
+        if (dispoEssai === 0) {// Empêche tout comportement par défaut du bouton (comme un redirection)
+            alert("Ce véhicule n'est pas disponible à l'essai pour le moment.");
+        } else {
+            // Code pour gérer la demande d'essai si dispoEssai === 1 (si nécessaire)
+            console.log("Ce véhicule est disponible à l'essai.");
+        }
+    }
+</script>
+{% endblock %}

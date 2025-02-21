@@ -1,0 +1,45 @@
+{% extends "layout.html.twig" %}
+
+{% block main %}
+<h1 class='usedVehicleDetailTitlePage'>{{ usedVehicle.model }}</h1>
+<div class="usedVehicleDetailGlobalContainer">
+    <div class='usedVehicleDetailCard'>
+        <div class="usedVehicleDetailImageContainer">
+            <img class='usedVehicleDetailImage' src="{{ usedVehicle.imageUsedVehicle }}" alt="image du véhicule" width="600" height="400">
+        </div>
+        <div class="usedVehicleDetailInfosContainer">
+            <div class="usedVehicleDetailTitleContainer">
+                <h2 class='usedVehicleDetailTitledescription'>Informations</h2>
+            </div>
+            <div class="usedVehicleDetailDescriptionContainer">
+                <p class='usedVehicleDetailDescription'>Marque : {{ usedVehicle.brand }}</p>
+                <p class='usedVehicleDetailDescription'>Modèle : {{ usedVehicle.model }}</p>
+                <p class='usedVehicleDetailDescription'>Catégorie : {{ usedVehicle.category }}</p>
+                <p class='usedVehicleDetailDescription'>Cylindrée : {{ usedVehicle.cylinders }}</p>
+                <p class='usedVehicleDetailDescription'>Couleur : {{ usedVehicle.color }}</p>
+                <p class='usedVehicleDetailDescription'>Garantie : {{ usedVehicle.warrantyTime }}</p>
+                <p class='usedVehicleDetailDescription'>Description : {{ usedVehicle.description }}</p>
+                <p class='usedVehicleDetailDescription'>Année : {{ usedVehicle.year }}</p>
+                <p class='usedVehicleDetailDescription'>Kilométrage : {{ usedVehicle.kilometers }} km</p>
+                <p class='usedVehicleDetailDescription'>Taxe énergétique : {{ usedVehicle.energyTax }}</p>
+                <p class='usedVehicleDetailDescription'>Puissance fiscale : {{ usedVehicle.taxPower }}</p>
+                <div class="usedVehicleDetailButtonTryContainer">
+                    <button class="usedVehicleDetailButtonTry">
+                        <p class='usedVehicleDetailButtonTryDescription'>Disponible à l'essai : {{ usedVehicle.availableForTrial }}</p>
+                    </button>
+                </div>
+            </div>
+            <div class='usedVehicleDetailPriceContainer'>
+                <p class="usedVehicleDetailPrice">{{ usedVehicle.price }} €</p>
+            </div>
+        </div>
+    </div>
+    <div class="usedVehicleDetailBackButtonContainer">
+        <a class='usedVehicleDetailBackButton' href="{{ path('UsedVehicles') }}">
+            <p class='usedVehicleDetailBackButtonDescription'>Retour à la liste des véhicules</p>
+        </a>
+    </div>
+</div>
+{% endblock %}
+            
+            

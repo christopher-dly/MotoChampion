@@ -1,0 +1,69 @@
+.newVehicleDetailTitlePage {
+    font-size: 50px;
+    font-family: 'league gothic';
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.newVehicleDetailCard {
+    display: flex;
+    flex-direction: row;
+    border: solid 2px black;
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.newVehicleDetailNavbarButton {
+    border: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 15px;
+    color: black;
+    background-color: white;
+    margin-right: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.newVehicleDetailTryButtonContainer {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+}
+
+.newVehicleDetailTryButton {
+    border: solid 2px black;
+    text-transform: uppercase;
+    font-family: 'league gothic';
+    font-size: 20px;
+    color: white;
+    background-color: #166CED;
+    margin-right: 10px;
+    padding: 10px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.newVehicleDetailTryButtonDescription {
+    text-decoration: none;
+    color: white;
+}
+
+.newVehicleDetailTitleDescription {
+    text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .newVehicleDetailCard {
+        flex-direction: column;
+        align-items: center;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 50px;
+    }
+}
+
+
+

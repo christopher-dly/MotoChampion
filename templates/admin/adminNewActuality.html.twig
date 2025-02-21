@@ -1,0 +1,31 @@
+{% extends "layout.html.twig" %}
+
+{% block main %}
+<h1 class='adminNewActualityTitlePage'>Enregistrer une nouvelle actualité</h1>
+
+<div class='adminNewActualityGlobalContainer'>
+	{{ form_start(ActualityForm) }}
+	<div class='adminNewActualityInputContainer'>
+		<p class='adminNewActualityInputContainer'>Nom :</p>
+		{{ form_widget(ActualityForm.name, {'attr': {'class': 'adminNewActualityInput'}})}}
+		{{ form_errors(ActualityForm.name)}}
+	</div>
+	<div class='adminNewActualityInputContainer'>
+		<p class='adminNewActualityInputContainer'>Titre :</p>
+		{{ form_widget(ActualityForm.title, {'attr': {'class': 'adminNewActualityInput'}})}}
+		{{ form_errors(ActualityForm.title)}}
+	</div>
+	<div class='adminNewActualityInputContainer'>
+		<p class='adminNewActualityInputContainer'>Contenu :</p>
+		{{ form_widget(ActualityForm.content, {'attr': {'class': 'adminNewActualityInput'}})}}
+		{{ form_errors(ActualityForm.content)}}
+	</div>
+	{{ form_widget(ActualityForm.submit, {attr: {class: 'adminNewActualitySubmitButton'}}) }}
+	{{ form_end(ActualityForm) }}
+	<div class='adminNewActualityReturnButtonContainer'>
+	</div>
+</div>
+<button class='btnAdminNewNewVehicleAdminHomeReturn'>
+  <a class="adminReturnButton" href={{ path('AdminHome')}}>Retour à l'accueil</a>
+</button>
+{% endblock %}

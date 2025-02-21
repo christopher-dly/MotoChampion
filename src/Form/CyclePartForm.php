@@ -15,27 +15,21 @@ class CyclePartForm extends AbstractType
     public function buildForm (FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('casterAngle', NumberType::class, [
+            ->add('casterAngle', TextType::class, [
+                'attr' => ['pattern' => '[0-9]+([.,][0-9]+)?'],
                 'required' => false,
-                'constraints' => [
-                    new Assert\Positive(['message' => 'L\'angle de braquage doit être un nombre positif.']),
-                    new Assert\Type(['type' => 'numeric', 'message' => 'L\'angle de braquage doit être un nombre.']),
-                ]
-            ])
-            ->add('caster', NumberType::class, [
+                'label' => 'Prix',
+                ])
+            ->add('caster', TextType::class, [
+                'attr' => ['pattern' => '[0-9]+([.,][0-9]+)?'],
                 'required' => false,
-                'constraints' => [
-                    new Assert\Positive(['message' => 'Le castor doit être un nombre positif.']),
-                    new Assert\Type(['type' => 'numeric', 'message' => 'Le castor doit être un nombre.']),
-                ]
-            ])
-            ->add('wheelbase', NumberType::class, [
+                'label' => 'Prix',
+                ])
+            ->add('wheelbase', TextType::class, [
+                'attr' => ['pattern' => '[0-9]+([.,][0-9]+)?'],
                 'required' => false,
-                'constraints' => [
-                    new Assert\Positive(['message' => 'L\'empattement doit être un nombre positif.']),
-                    new Assert\Type(['type' => 'numeric', 'message' => 'L\'empattement doit être un nombre.']),
-                ]
-            ])
+                'label' => 'Prix',
+                ])
             ->add('rim', TextType::class, [
                 'required' => false,
                 'constraints' => [

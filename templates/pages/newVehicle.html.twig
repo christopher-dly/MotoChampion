@@ -1,5 +1,117 @@
 {% extends "layout.html.twig" %}
 
 {% block main %}
-<h2>Nouveau véhicule</h2>
+<h1 class='newVehicleTitlePage'>Véhicules neufs</h1>
+
+<div class="newVehicleGlobalContainer">
+    <div class='newVehicleContainer'>
+        <div class='newVehicleTitleCategoryContainer'>
+            <h2 class='newVehicleTitleCategory'>Trail</h2>
+        </div>
+        <div class='newVehicleCardContainer'>
+        {% for newVehicleTrail in newVehicleTrails %}
+            {% for newVehicle in newVehicleTrail.newVehicles %}
+            <a class='newVehicleCard' href='{{ path('DetailNewVehicle', {id: newVehicle.id}) }}'>
+                <div class='newVehicleTitleContainer'>
+                    <p class='newVehicleTitle'>{{ newVehicle.name}}</p>
+                </div>
+                <div class='NewVehicleImageContainer'>
+                    <img class='NewVehicleImage' src='{{ newVehicle.image }}' alt='image du véhicule' width='350' height'215'></img>
+                </div>
+                <div class='newVehiclePriceContainer'>
+                    <p class='newVehiclePrice'>{{ newVehicle.Information.price }} €</p>
+                </div>
+            </a>
+            {% endfor %}
+        {% endfor %}
+        </div>
+    </div>
+    <div class='newVehicleContainer'>
+        <div class='newVehicleTitleCategoryContainer'>
+            <h2 class='newVehicleTitleCategory'>Sport / GT</h2>
+        </div>
+        <div class='newVehicleCardContainer'>
+        {% for newVehicleSport in newVehicleSports %}
+            {% for newVehicle in newVehicleSport.newVehicles %}
+            <a class='newVehicleCard' href='{{ path('DetailNewVehicle', {id: newVehicle.id}) }}'>
+                <div class='newVehicleTitleContainer'>
+                    <p class='newVehicleTitle'>{{ newVehicle.name}}</p>
+                </div>
+                <div class='NewVehicleImageContainer'>
+                    <img class='NewVehicleImage' src='{{ newVehicle.image }}' alt='image du véhicule' width='350' height'215'></img>
+                </div>
+                <div class='newVehiclePriceContainer'>
+                    <p class='newVehiclePrice'>{{ newVehicle.Information.price }} €</p>
+                </div>
+            </a>
+            {% endfor %}
+        {% endfor %}
+        </div>
+    </div>
+    <div class='newVehicleContainer'>
+        <div class='newVehicleTitleCategoryContainer'>
+            <h2 class='newVehicleTitleCategory'>Roadster</h2>
+        </div>
+        <div class='newVehicleCardContainer'>
+        {% for newVehicleRoadster in newVehicleRoadsters %}
+            {% for newVehicle in newVehicleRoadster.newVehicles %}
+            <a class='newVehicleCard' href='{{ path('DetailNewVehicle', {id: newVehicle.id}) }}'>
+                <div class='newVehicleTitleContainer'>
+                    <p class='newVehicleTitle'>{{ newVehicle.name}}</p>
+                </div>
+                <div class='NewVehicleImageContainer'>
+                    <img class='NewVehicleImage' src='{{ newVehicle.image }}' alt='image du véhicule' width='350' height'215'></img>
+                </div>
+                <div class='newVehiclePriceContainer'>
+                    <p class='newVehiclePrice'>{{ newVehicle.Information.price }} €</p>
+                </div>
+            </a>
+            {% endfor %}
+        {% endfor %}
+        </div>
+    </div>
+    <div class='newVehicleContainer'>
+        <div class='newVehicleTitleCategoryContainer'>
+            <h2 class='newVehicleTitleCategory'>Scooter</h2>
+        </div>
+        <div class='newVehicleCardContainer'>
+        {% for newVehicleScooter in newVehicleScooters %}
+            {% for newVehicle in newVehicleScooter.newVehicles %}
+            <a class='newVehicleCard' href='{{ path('DetailNewVehicle', {id: newVehicle.id}) }}'>
+                <div class='newVehicleTitleContainer'>
+                    <p class='newVehicleTitle'>{{ newVehicle.name}}</p>
+                </div>
+                <div class='NewVehicleImageContainer'>
+                    <img class='NewVehicleImage' src='{{ newVehicle.image }}' alt='image du véhicule' width='350' height'215'></img>
+                </div>
+                <div class='newVehiclePriceContainer'>
+                    <p class='newVehiclePrice'>{{ newVehicle.Information.price }} €</p>
+                </div>
+            </a>
+            {% endfor %}
+        {% endfor %}
+        </div>
+    </div>
+    <div class='newVehicleContainer'>
+        <div class='newVehicleTitleCategoryContainer'>
+            <h2 class='newVehicleTitleCategory'>Moto 125</h2>
+        </div>
+        <div class='newVehicleCardContainer'>
+        {% for newVehicleMoto125 in newVehicleMoto125s %}
+            {% for newVehicle in newVehicleMoto125.newVehicles %}
+            <a class='newVehicleCard' href='{{ path('DetailNewVehicle', {id: newVehicle.id}) }}'>
+                <div class='newVehicleTitleContainer'>
+                    <p class='newVehicleTitle'>{{ newVehicle.name}}</p>
+                </div>
+                <div class='NewVehicleImageContainer'>
+                    <img class='NewVehicleImage' src='{{ newVehicle.image }}' alt='image du véhicule' width='350' height'215'></img>
+                </div>
+                <div class='newVehiclePriceContainer'>
+                    <p class='newVehiclePrice'>{{ newVehicle.Information.price }} €</p>
+                </div>
+            </a>
+            {% endfor %}
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

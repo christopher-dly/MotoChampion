@@ -1,0 +1,23 @@
+{% extends "layout.html.twig" %}
+
+{% block main %}
+<h1 class='contactTitlePage'>Contact</h1>
+
+<div class='contactGlobalContainer'>
+    <form class='contactForm' method="POST">
+    <div class='contactFormNameContainer'>
+        <p class='contactFormName'>Votre nom</p>
+        <input class='contactFormNameInput' type="text" name="name" placeholder="Entrer votre nom" required>
+    </div>
+    <div class='contactFormEmailContainer'>
+        <p class='contactFormEmail'>Votre email</p>
+        <input class='contactFormEmailInput' type="email" name="email" placeholder="Entrer votre email" required>
+    </div>
+    <div class='contactFormMessageContainer'>
+        <p class='contactFormMessage'>Votre message</p>
+        <textarea class='contactFormMessageInput' name="message" placeholder="Entrer votre message" required></textarea>
+    </div>
+        <button class='contactFormSubmitButton'>Envoyer</button>
+    </form>
+</div>
+{% endblock %}

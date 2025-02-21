@@ -1,46 +1,53 @@
 {% extends "layout.html.twig" %}
 
 {% block main %}
-<button><a class="navbar-link" href={{ path('AdminNewUsedVehicle')}}>Nouveaux véhicules occasion</a></button>
-    <h1>Véhicule d'occasion :</h1>
-    <div class="containerUsedVehicle">
-        {% for usedVehicle in usedVehicles %}
-                <a href='{{ path('DetailAdminUsedVehicle', {id: usedVehicle.id}) }}' class="usedVehicleCard">
-                    <div class='titleUsedVehicleCard'>
-                        {{ usedVehicle.model }}
-                    </div>
-                    <div class='imageUsedVehicleCard'>
-                        <img src="{{ usedVehicle.imageUsedVehicle }}" alt="image du vehicule" width="300" height="200">
-                    </div>
-                    <div class='infosUsedVehicleCard'>
-                        <p class='brandUsedVehicleCard'>{{ usedVehicle.brand }}</p>
-                        <p class='kilometersUsedVehicleCard'>{{ usedVehicle.kilometers }} km</p>
-                        <p class='yearUsedVehicleCard'>{{ usedVehicle.year }}</p>
-                    </div>
-                    <div>
-                        <p class='priceUsedVehicleCard'>{{ usedVehicle.price }} €</p>
-                    </div>
-                    <div class='actionsUsedVehicleCard'>
-                        <form method="POST" action="{{ path('delete_used_vehicle', {id: usedVehicle.id}) }}">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ usedVehicle.id) }}">
-                            <button type="submit" class="btnDeleteUsedVehicle">
-                                <p>Supprimer l'annonce</p>
-                            </button>
-                        </form>
-                    </div>
-                </a>
-        {% else %}
-            <p>Aucune moto enregistrée.</p>
-        {% endfor %}
-    </div>
+<button class='btnAdminUsedVehicle'>
+    <a class="navbar-link" href={{ path('AdminNewUsedVehicle')}}>Nouveaux véhicules occasion</a>
+</button>
 
-    <script>
-        document.querySelectorAll('.btnDeleteUsedVehicle').forEach(button => {
-        button.addEventListener('click', function(event) {
-            if (!confirm("Es-tu sûr de vouloir supprimer ce véhicule ?")) {
-                event.preventDefault();
-            }
-        });
+<h1 class='adminUsedVehicleTitlePage'>Véhicule d'occasion :</h1>
+
+<div class="adminUsedVehicleGlobalContainer">
+    {% for usedVehicle in usedVehicles %}
+        <a class="adminUsedVehicleCard" href='{{ path('EditAdminUsedVehicle', {id: usedVehicle.id}) }}'>
+            <div class='adminUsedVehicleTitleContainer'>
+                <p class='adminUsedVehicleTitle'>{{ usedVehicle.model }}</p>
+            </div>
+            <div class='adminUsedVehicleImageContainer'>
+                <img class='adminUsedVehicleImage' src="{{ usedVehicle.imageUsedVehicle }}" alt="image du vehicule" width="300" height="200">
+            </div>
+            <div class='adminUsedVehicleInfosContainer'>
+                <p class='adminUsedVehicleBrand'>{{ usedVehicle.brand }}</p>
+                <p class='adminUsedVehicleKilometers'>{{ usedVehicle.kilometers }} km</p>
+                <p class='adminUsedVehicleYear'>{{ usedVehicle.year }}</p>
+            </div>
+            <div>
+                <p class='adminUsedVehiclePrice'>{{ usedVehicle.price }} €</p>
+            </div>
+            <div class='adminUsedVehicleDeleteContainer'>
+                <form method="POST" action="{{ path('DeleteAdminUsedVehicle', {id: usedVehicle.id}) }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ usedVehicle.id) }}">
+                    <button type="submit" class="btnDeleteUsedVehicle">
+                        <p class='btnDeleteUsedVehicleDescription'>Supprimer l'annonce</p>
+                    </button>
+                </form>
+            </div>
+        </a>
+    {% else %}
+        <p>Aucune moto enregistrée.</p>
+    {% endfor %}
+</div>
+        <button class='btnAdminNewNewVehicleAdminHomeReturn'>
+        <a class="adminReturnButton" href={{ path('AdminHome')}}>Retour à l'accueil</a>
+    </button>
+
+<script>
+    document.querySelectorAll('.btnDeleteUsedVehicle').forEach(button => {
+    button.addEventListener('click', function(event) {
+        if (!confirm("Es-tu sûr de vouloir supprimer ce véhicule ?")) {
+            event.preventDefault();
+        }
     });
-    </script>
+});
+</script>
 {% endblock %}

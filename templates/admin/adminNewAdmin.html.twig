@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+{% block main %}
+<h1 class='adminNewAdminTitlePage'>Inscription</h1>
+
+<div class='adminNewAdminGlobalContainer'>
+{{ form_start(registrationForm) }}
+  <div class='adminNewAdminInputContainer'>
+    <p class='adminNewAdminInputDescription'>Email du nouvelle administrateur :</p>
+    {{ form_widget(registrationForm.email, {'attr': {'class': 'adminNewAdminInput'}}) }}
+    {{ form_errors(registrationForm.email) }}
+  </div>
+  <div class='adminNewAdminInputContainer'>
+    <p class='adminNewAdminInputDescription'>Mot de passe :</p>
+    {{ form_widget(registrationForm.password, {'attr': {'class': 'adminNewAdminInput'}}) }}
+    {{ form_errors(registrationForm.password) }}
+  </div>
+  {{ form_widget(registrationForm.submit, {attr: {class: 'adminNewAdminSubmitButton'}}) }}
+{{ form_end(registrationForm) }}
+</div>
+<button class='btnAdminNewNewVehicleAdminHomeReturn'>
+  <a class="adminReturnButton" href={{ path('AdminHome')}}>Retour à l'accueil</a>
+</button>
+
+{% endblock %}

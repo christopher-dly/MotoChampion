@@ -1,106 +1,124 @@
-.headerHours {
-    display: none;
-}
-
-.splitNav {
-    border-top: 1px solid white;
-    margin-left: 25px;
-    margin-right: 25px;
-}
-/* Navbar */
-.navbar-logo {
+.navbar {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
     background-color: #272727;
-    color: white;
+    position: relative;
 }
 
-/* Burger icon */
+.navbar-logo img {
+    height: 100px;
+    width: 100px;
+}
+
 .navbar-burger {
+    display: none;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-/* Menu links */
+.navbar-burger img {
+    width: 40px;
+}
+
 .navbar-links {
     display: flex;
-    flex-direction: column;
-    position: absolute;
-    right: 0;
-    background-color: #272727;
-    width: 100%;
-    max-height: 0; /* Hauteur initiale 0 */
-    overflow: hidden; /* Cache le contenu hors limites */
-    transition: max-height 0.5s ease; /* Animation fluide */
-    z-index: 100;
-
-}
-
-/* Liens du menu */
-.navbar-links ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-}
-
-.navbar-links li {
-    margin: 10px 0;
-}
-
-.navbar-link {
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
+    align-items: center;
+    position: fixed;
+    top: auto;
+    right: 50px;
+    z-index: 1001;
 }
 
 .navbar-link:hover {
-    color: #166CED;
+    color: #007bff;
 }
 
-.navbar-links.active {
-    max-height: 500px; /* Hauteur maximum à ajuster selon le contenu */
-}
-
-.logos.mobile{
+.navbar-links ul {
+    list-style: none;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
-/* Responsive - Menu burger */
-@media (max-width: 768px) {
-    .navbar-links.active {
-        display: flex; /* Afficher le menu quand il est actif */
-        flex-direction: column;
-    }
-
-    .navbar-burger img {
-        width: 30px; /* Taille de l'icône du burger */
-        height: 30px;
-    }
+.navbar-links li {
+    margin-left: 20px;
 }
 
-@media (min-width: 768px) {
+.navbar-link {
+    font-family: 'league gothic';
+    color: #fff;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+.logos-mobile {
+    display: flex;
+    gap: 10px;
+    margin-left: 200px;
+}
+
+.logo-link img {
+    width: 20px;
+    height: 20px;
+}
+
+.splitNav {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-burger {
+        display: block;
+        z-index: 1001;
+        position: relative;
+        left: 270px;
+    }
+
     .navbar-links {
-        display: flex; /* Toujours afficher les liens sur les grands écrans */
-        flex-direction: row;
-        position: static;
-        width: auto;
-        padding: 0;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        padding-top: 50px;
+        transition: right 0.3s ease-in-out;
+    }
+
+    .navbar-links ul {
+        flex-direction: column;
+        align-items: center;
     }
 
     .navbar-links li {
-        margin: 0 15px;
+        margin: 15px 0;
     }
 
-    .navbar-burger {
-        display: none; /* Cacher le burger sur les grands écrans */
+    .navbar-links.active {
+        right: 0;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out, visibility 0.3s;
+    }
+
+    .overlay.active {
+        visibility: visible;
+        opacity: 1;
+        z-index: 1000;
+    }
+
+    .splitNav{
+        display: block;
     }
 }

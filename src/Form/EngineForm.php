@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Engine;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -36,15 +35,15 @@ class EngineForm extends AbstractType
                     new Assert\Type(['type' => 'numeric', 'message' => 'La cylindrée doit être un nombre.']),
                 ]
             ])
-            ->add('bore_x_stroke', TextType::class, [
+            ->add('boreXstroke', TextType::class, [
                 'required' => false,
                 'label' => 'Alésage x Course',
                 'constraints' => [
                     new Assert\Length([
                         'min' => 2, 
-                        'max' => 255,
+                        'max' => 50,
                         'minMessage' => 'le champs doit contenir au moins 2 caractères',
-                        'maxMessage' => 'le champs doit contenir au maximum 255 caractères',
+                        'maxMessage' => 'le champs doit contenir au maximum 50 caractères',
                     ]),
                 ]
             ])
@@ -54,9 +53,9 @@ class EngineForm extends AbstractType
                 'constraints' => [
                     new Assert\Length([
                         'min' => 2, 
-                        'max' => 255,
+                        'max' => 50,
                         'minMessage' => 'le champs doit contenir au moins 2 caractères',
-                        'maxMessage' => 'le champs doit contenir au maximum 255 caractères',
+                        'maxMessage' => 'le champs doit contenir au maximum 50 caractères',
                     ]),
                 ]
             ]) 
@@ -66,9 +65,9 @@ class EngineForm extends AbstractType
                 'constraints' => [
                     new Assert\Length([
                         'min' => 2, 
-                        'max' => 255,
+                        'max' => 150,
                         'minMessage' => 'le champs doit contenir au moins 2 caractères',
-                        'maxMessage' => 'le champs doit contenir au maximum 255 caractères',
+                        'maxMessage' => 'le champs doit contenir au maximum 150 caractères',
                     ]),
                 ]
             ])
@@ -78,9 +77,9 @@ class EngineForm extends AbstractType
                 'constraints' => [
                     new Assert\Length([
                         'min' => 2, 
-                        'max' => 255,
+                        'max' => 150,
                         'minMessage' => 'le champs doit contenir au moins 2 caractères',
-                        'maxMessage' => 'le champs doit contenir au maximum 255 caractères',
+                        'maxMessage' => 'le champs doit contenir au maximum 150 caractères',
                     ]),
                 ]
             ])
@@ -90,9 +89,9 @@ class EngineForm extends AbstractType
                 'constraints' => [
                     new Assert\Length([
                         'min' => 2, 
-                        'max' => 255,
+                        'max' => 100,
                         'minMessage' => 'le champs doit contenir au moins 2 caractères',
-                        'maxMessage' => 'le champs doit contenir au maximum 255 caractères',
+                        'maxMessage' => 'le champs doit contenir au maximum 100 caractères',
                     ]),
                 ]
             ])
@@ -102,9 +101,9 @@ class EngineForm extends AbstractType
                 'constraints' => [
                     new Assert\Length([
                         'min' => 2, 
-                        'max' => 255,
+                        'max' => 100,
                         'minMessage' => 'le champs doit contenir au moins 2 caractères',
-                        'maxMessage' => 'le champs doit contenir au maximum 255 caractères',
+                        'maxMessage' => 'le champs doit contenir au maximum 100 caractères',
                     ]),
                 ]
             ])
@@ -114,9 +113,9 @@ class EngineForm extends AbstractType
                 'constraints' => [
                     new Assert\Length([
                         'min' => 2, 
-                        'max' => 255,
+                        'max' => 100,
                         'minMessage' => 'le champs doit contenir au moins 2 caractères',
-                        'maxMessage' => 'le champs doit contenir au maximum 255 caractères',
+                        'maxMessage' => 'le champs doit contenir au maximum 100 caractères',
                     ]),
                 ]
             ])
@@ -126,9 +125,9 @@ class EngineForm extends AbstractType
                 'constraints' => [
                     new Assert\Length([
                         'min' => 2, 
-                        'max' => 255,
+                        'max' => 100,
                         'minMessage' => 'le champs doit contenir au moins 2 caractères',
-                        'maxMessage' => 'le champs doit contenir au maximum 255 caractères',
+                        'maxMessage' => 'le champs doit contenir au maximum 100 caractères',
                     ]),
                 ]
                 ]);

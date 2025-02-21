@@ -1,0 +1,22 @@
+{# Dans le ficher: 'authentification/login.twig' #}
+{% extends "layout.html.twig" %}
+
+{% block main %}
+  <h1 class='loginAdminTitlePage'>Connexion</h1>
+
+<form class='loginAdminHome' method="post" action="{{ path('LoginAdmin') }}">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <label class='loginAdminLabel' for="email">Email :</label>
+    <input class='loginAdminInput' type="email" name="email" id="email" value="{{ last_email }}" required>
+
+    <label class='loginAdminLabel' for="password">Mot de passe :</label>
+    <input class='loginAdminInput' type="password" name="password" id="password" required>
+
+    <button class='loginAdminButton' type="submit">Se connecter</button>
+</form>
+
+
+{% endblock %}

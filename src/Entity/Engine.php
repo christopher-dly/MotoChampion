@@ -26,7 +26,7 @@ class Engine
 
     #[ORM\Column(type: 'string', length: 50, nullable: true)]
     #[Assert\Length(max: 50, maxMessage: "Le champ pour 'course x alésage' ne peut pas dépasser 50 caractères.")]
-    private ?string $bore_x_stroke = null;
+    private ?string $boreXstroke = null;
 
     #[ORM\Column(type: 'string', length: 50, nullable: true)]
     #[Assert\Length(max: 50, maxMessage: "Le champ pour 'ratio volumétrique' ne peut pas dépasser 50 caractères.")]
@@ -99,12 +99,12 @@ class Engine
 
     public function getBoreXstroke(): ?string
     {
-        return $this->bore_x_stroke;
+        return $this->boreXstroke;
     }
 
-    public function setBoreXstroke(?string $bore_x_stroke): self
+    public function setBoreXstroke(?string $boreXstroke): self
     {
-        $this->bore_x_stroke = $bore_x_stroke;
+        $this->boreXstroke = $boreXstroke;
 
         return $this;
     }

@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\PositiveOrZero;
 
 class InformationForm extends AbstractType
 {
@@ -25,9 +26,9 @@ class InformationForm extends AbstractType
                     ]),
                     new Assert\Length([
                         'min' => 2,
-                        'max' => 255,
+                        'max' => 50,
                         'minMessage' => 'Le champ "Marque" doit contenir au moins 2 caractères.',
-                        'maxMessage' => 'Le champ "Marque" doit contenir au maximum 255 caractères.',
+                        'maxMessage' => 'Le champ "Marque" doit contenir au maximum 50 caractères.',
                     ]),
                 ],
                 'label' => 'Marque',
@@ -39,9 +40,9 @@ class InformationForm extends AbstractType
                     ]),
                     new Assert\Length([
                         'min' => 2,
-                        'max' => 255,
+                        'max' => 50,
                         'minMessage' => 'Le champ "Modèle" doit contenir au moins 2 caractères.',
-                        'maxMessage' => 'Le champ "Modèle" doit contenir au maximum 255 caractères.',
+                        'maxMessage' => 'Le champ "Modèle" doit contenir au maximum 50 caractères.',
                     ]),
                 ],
                 'label' => 'Modèle',
@@ -84,16 +85,18 @@ class InformationForm extends AbstractType
                     ]),
                 ],
                 'label' => 'Prix',
-            ])
-            ->add('warrantyTime', TextType::class, [
+                ])
+            ->add('warrantyTime', NumberType::class, [
                 'constraints' => [
+                    new PositiveOrZero([
+                        'message' => 'Le champ "Durée de garantie" doit être positif ou nul.',
+                    ]),
                     new Assert\NotBlank([
                         'message' => 'Le champ "Durée de garantie" ne peut pas être vide.',
                     ]),
-
                 ],
                 'label' => 'Durée de garantie',
-            ])
+                ])
             ->add('description', TextType::class, [
                 'constraints' => [
                     new Assert\NotBlank([

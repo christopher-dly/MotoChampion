@@ -1,0 +1,99 @@
+.adminEditNewVehicleSubmitButton,
+.adminEditNewVehicleReturnButton {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.adminEditNewVehicleSubmitButton {
+    background-color: #007bff;
+    color: white;
+}
+
+.adminEditNewVehicleSubmitButton:hover {
+    background-color: #0056b3; 
+}
+
+.adminEditNewVehicleReturnButton {
+    background-color: #dc3545;
+    color: white;
+    margin-top: 10px;
+}
+
+.adminEditNewVehicleReturnButton:hover {
+    background-color: #c82333;
+}
+
+.adminEditNewVehicleReturnButtonDescription {
+    color: white;
+    text-decoration: none;
+}
+
+.adminEditNewVehicleReturnButton a {
+    display: block;
+    text-align: center;
+    color: inherit;
+}
+
+.adminEditNewVehicleInputContainer {
+    margin-bottom: 15px;
+}
+
+.adminEditNewVehicleInputDescription {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.adminEditNewVehicleInput {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.adminEditNewVehicleInput:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.adminEditNewVehicleFormSection {
+    margin-bottom: 30px;
+}
+
+.SectionFormDescription {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+.adminEditNewVehiculeImageContainer {
+    margin-right: 30px;
+    text-align: center;
+}
+
+.adminEditNewVehicleImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.adminEditNewVehicleGlobalContainer {
+    justify-content: space-between;
+    padding: 30px;
+}
+
+.adminEditNewVehicleTitlePage {
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-family: 'league gothic';
+}

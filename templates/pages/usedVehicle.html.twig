@@ -1,0 +1,32 @@
+{% extends "layout.html.twig" %}
+
+{% block main %}
+<h1 class='UsedVehicleTitlePage'>Véhicules d'occasions</h1>
+
+<div class="usedVehicleGlobalContainer">
+    {% for usedVehicle in usedVehicles %}
+    <a class="usedVehicleCard" href='{{ path('DetailUsedVehicle', {id: usedVehicle.id}) }}'>
+        <div class='usedVehicleTitleContainer'>
+            <p class='usedVehicleTitle'>{{ usedVehicle.model }}</p>
+        </div>
+        <div class='usedVehicleImageContainer'>
+            <img class='usedVehicleImage' src="{{ usedVehicle.imageUsedVehicle }}" alt="image du vehicule" width="350" height="215">
+        </div>
+        <div class='usedVehicleBrandContainer'>
+            <p class='usedVehicleBrand'>{{ usedVehicle.brand }}</p>
+        </div>
+        <div class='usedVehicleInfosContainer'>
+            <div class='usedVehicleKilometersContainer'>
+                <p class='usedVehicleKilometers'>{{ usedVehicle.kilometers }} km</p>
+            </div>
+            <div class='usedVehicleYearContainer'>
+                <p class='usedVehicleYear'>{{ usedVehicle.year }}</p>
+            </div>
+        </div>
+        <div class='usedVehiclePriceContainer'>
+            <p class='usedVehiclePrice'>{{ usedVehicle.price }} €</p>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

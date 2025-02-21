@@ -1,63 +1,119 @@
-.containerUsedVehicle {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-.usedVehicleCard {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-    background: #f9f9f9;
-    width: 320px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    position: relative;
-}
-
-.usedVehicleCard:hover {
-    transform: translateY(-5px);
-}
-
-.titleUsedVehicleCard {
-    background-color: #007bff;
-    color: white;
+.adminUsedVehicleTitlePage{
     text-align: center;
-    font-size: 1.2em;
+    font-family: 'league gothic';
+    font-size: 50px;
+    text-transform: uppercase;
+}
+
+.adminUsedVehicleGlobalContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.adminUsedVehicleCard {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.adminUsedVehicleCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.adminUsedVehicleTitleContainer {
+    background-color: #f8f8f8;
+    padding: 10px;
+    text-align: center;
+}
+
+.adminUsedVehicleTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.adminUsedVehicleImageContainer {
+    display: flex;
+    justify-content: center;
     padding: 10px;
 }
 
-.imageUsedVehicleCard img {
-    width: 100%;
+.adminUsedVehicleImage {
+    border-radius: 8px;
+    max-width: 100%;
     height: auto;
 }
 
-.infosUsedVehicleCard {
-    background-color: #272727;
-    color: white;
+.adminUsedVehicleInfosContainer {
     padding: 10px;
     text-align: center;
 }
 
-.priceUsedVehicleCard {
+.adminUsedVehicleBrand, .adminUsedVehicleKilometers, .adminUsedVehicleYear {
+    font-size: 1rem;
+    color: #555;
+    margin: 5px 0;
+}
+
+.adminUsedVehiclePrice {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #007bff;
+    text-align: center;
+    padding: 10px;
+    background-color: #f8f8f8;
+    margin: 10px 0;
+}
+
+.adminUsedVehicleDeleteContainer {
+    padding: 10px;
+    text-align: center;
+}
+
+.btnDeleteUsedVehicle {
+    background-color: #e74c3c;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btnDeleteUsedVehicle:hover {
+    background-color: #c0392b;
+}
+
+.btnDeleteUsedVehicleDescription {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.btnAdminUsedVehicle{
+    display: inline-block;
+    padding: 10px 20px;
     background-color: #007bff;
     color: white;
-    font-weight: bold;
-    padding: 10px;
-    text-align: center;
+    text-decoration: none;
     border-radius: 5px;
-    position: absolute;
-    right: -10px;
-    top: 50%;
-    transform: translateY(-50%);
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.actionsUsedVehicleCard {
-    display: flex;
+    transition: background 0.3s ease;
     justify-content: center;
-    gap: 10px;
-    padding: 10px;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
+.btnAdminUsedVehicle:hover{
+    background-color: #0056b3;
+}

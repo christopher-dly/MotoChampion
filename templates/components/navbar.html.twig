@@ -1,41 +1,50 @@
-<div class="headerHours">
-    <p>Tél : 01.42.59.67.55 - Ouverture : Mardi => Vendredi : 9h -12h45 // 14h00 – 18h30 - Samedi => 9h – 12h45 // 14h00 – 17h15</p>
-</div>
-<nav>
-    <div class="navbar">
-        <div class="navbar-logo">
-            <div class="logo">
-                <img src="{{ asset('img/logo/moto-champion.png') }}" alt="logoMotoChampion" height="100" width="100">
-            </div>
-            <div id="burger" class="navbar-burger">
-                <img src="{{ asset('img/logo/burger.svg') }}" alt="Menu">
-            </div>
-        </div>
-        <div id="menu" class="navbar-links">
-            <ul>
-                <li><a class="navbar-link" href={{ path('Actuality') }}>Actualités</a></li>
-                <hr class='splitNav'>
-                <li><a class="navbar-link" href={{ path('NewVehicule')}}>Véhicule neuf</a></li>
-                <hr class='splitNav'>
-                <li><a class="navbar-link" href={{ path('UsedVehicle')}}>Véhicule d'occasion</a></li>
-                <hr class='splitNav'>
-                <li><a class="navbar-link" href={{ path('WorkShop')}}>Atelier</a></li>
-                <hr class='splitNav'>
-                <li><a class="navbar-link" href={{ path('Historical')}}>Historique</a></li>
-                <hr class='splitNav'>
-                <li><a class="navbar-link" href={{ path('Accessories')}}>Accessoires</a></li>
-                <hr class='splitNav'>
-                <li><a class="navbar-link" href={{ path('Contact')}}>Contact</a></li>
-                <hr class='splitNav'>
-                <li>
-                    <div class="logos-mobile">
-                        <a class="logo-link logo-mail"><img src="{{ asset('img/logo/mail.png') }}" alt="Mail"></a>
-                        <a class="logo-link logo-instagram" href="https://www.instagram.com/motochampionparis/"><img src="{{ asset('img/logo/insta.png') }}" alt="Instagram"></a>
-                        <a class="logo-link logo-facebook" href='https://www.facebook.com/concessionnaire.moto.champion/'><img src="{{ asset('img/logo/facebook.png') }}" alt="Facebook"></a>
-                        <a class="logo-link logo-tiktok" href='https://www.tiktok.com/@motochampionparis?lang=fr'><img src="{{ asset('img/logo/tiktok.png') }}" alt="TikTok"></a>
-                    </div>
-                </li>
-            </ul>
-        </div>
+<nav class="navbar">
+    <div class="navbar-logo">
+        <a href={{ path('Home') }}><img src="{{ asset('img/logo/moto-champion.png') }}" alt="logoMotoChampion" height="100" width="100"></a>
     </div>
+    <div id="burger" class="navbar-burger">
+        <img src="{{ asset('img/logo/burger.svg') }}" alt="Menu">
+    </div>
+    <div id="menu" class="navbar-links">
+        <ul>
+            <li><a class="navbar-link" href={{ path('Actuality') }}>ACTUALITES</a></li>
+            <hr class='splitNav'>
+            <li><a class="navbar-link" href={{ path('NewVehicle')}}>VEHICULES NEUFS</a></li>
+            <hr class='splitNav'>
+            <li><a class="navbar-link" href={{ path('UsedVehicle')}}>VEHICULES D'OCCASIONS</a></li>
+            <hr class='splitNav'>
+            <li><a class="navbar-link" href={{ path('WorkShop')}}>ATELIER</a></li>
+            <hr class='splitNav'>
+            <li><a class="navbar-link" href={{ path('Historical')}}>HISTORIQUE</a></li>
+            <hr class='splitNav'>
+            <li><a class="navbar-link" href={{ path('Accessories')}}>ACCESSOIRES</a></li>
+            <hr class='splitNav'>
+            <li><a class="navbar-link" href={{ path('contact_form')}}>CONTACT</a></li>
+            <hr class='splitNav'>
+            <li><a class="navbar-link logo-link logo-instagram" href="https://www.instagram.com/motochampionparis/"><img src="{{ asset('img/logo/insta.png') }}" alt="Instagram"></a></li>
+            <li><a class="navbar-link logo-link logo-facebook" href='https://www.facebook.com/concessionnaire.moto.champion/'><img src="{{ asset('img/logo/facebook.png') }}" alt="Facebook"></a></li>
+            <li><a class="navbar-link logo-link logo-tiktok" href='https://www.tiktok.com/@motochampionparis?lang=fr'><img src="{{ asset('img/logo/tiktok.png') }}" alt="TikTok"></a></li>
+        </ul>
+    </div>
+    <div id="overlay" class="overlay"></div>
 </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -10,6 +10,6 @@ class WorkshopController extends AbstractController
     #[Route('/Atelier', name: 'WorkShop')]
     public function index()
     {
-        return $this->render('pages/workshop.html.twig');
+        return $this->render('pages/construction.html.twig');
     }
 }

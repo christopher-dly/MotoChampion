@@ -1,0 +1,83 @@
+
+.homeTitlePage {
+    font-size: 50px;
+    font-family: 'league gothic';
+    text-align: center;
+    margin-top: 30px;
+    color: #333;
+}
+
+.homeTitleSection {
+    font-size: 35px;
+    color: #007bff;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'league gothic';
+}
+
+/* Container de sections */
+.homeSectionContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+/* Textes */
+.homeText {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Mise en page mobile-responsive */
+@media (max-width: 768px) {
+    .homeTitlePage {
+        font-size: 2rem;
+    }
+
+    .homeTitleSection {
+        font-size: 1.5rem;
+    }
+
+    .homeSectionContainer {
+        padding: 15px;
+    }
+
+    button {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .homeText {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .homeTitlePage {
+        font-size: 1.5rem;
+        margin-top: 20px;
+    }
+
+    .homeTitleSection {
+        font-size: 1.25rem;
+    }
+
+    .homeSectionContainer {
+        padding: 10px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .homeText {
+        font-size: 0.9rem;
+    }
+}

@@ -1,5 +1,25 @@
 {% extends "layout.html.twig" %}
 
 {% block main %}
-<h1>Actualités !</h1>
+<h1 class='actualityTitlePage'>Actualités</h1>
+
+<div class='actualityContainer'>
+    {% for actuality in actualities %}
+        <div class='actualityCard'>
+            <div class='actualityNameContainer'>
+                <p class='actualityName'>{{ actuality.name }}</p>
+            </div>
+            <div class='actualityTitleContainer'>
+                <p class='actualityTitle'>{{ actuality.title }}</p>
+            </div>
+            <div class='actualityContentContainer'>
+                <p class='actualityContent'>{{ actuality.content }}</p>
+            </div>
+            <div class='actualityDateContainer'>
+                <p class='actualityDate'>{{ actuality.date|date('d/m/Y') }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}
+

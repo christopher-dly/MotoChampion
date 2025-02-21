@@ -5,7 +5,7 @@ namespace App\Form;
 use App\Entity\Dimension;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -50,26 +50,19 @@ class DimensionForm extends AbstractType
                     new Assert\Type(['type' => 'numeric', 'message' => 'La valeur doit être un nombre.']),
                 ]
             ])
-            ->add('gas', NumberType::class, [
-                'required' => false,    
-                'constraints' => [
-                    new Assert\Positive(['message' => 'La nombre doit être positif.']),
-                    new Assert\Type(['type' => 'numeric', 'message' => 'La valeur doit être un nombre.']),
-                ]
-            ])
-            ->add('oil', NumberType::class, [
-                'required' => false,    
-                'constraints' => [
-                    new Assert\Positive(['message' => 'La nombre doit être positif.']),
-                    new Assert\Type(['type' => 'numeric', 'message' => 'La valeur doit être un nombre.']),
-                ]
-            ])
+            ->add('gas', TextType::class, [
+                'attr' => ['pattern' => '[0-9]+([.,][0-9]+)?'],
+                'required' => false,
+                'label' => 'Prix',
+                ])
+            ->add('oil', TextType::class, [
+                'attr' => ['pattern' => '[0-9]+([.,][0-9]+)?'],
+                'required' => false,
+                'label' => 'Prix',
+                ])
             ->add('weight', NumberType::class, [
                 'required' => false,    
-                'constraints' => [
-                    new Assert\Positive(['message' => 'La nombre doit être positif.']),
-                    new Assert\Type(['type' => 'numeric', 'message' => 'La valeur doit être un nombre.']),
-                ]
+                'attr' => ['pattern' => '[0-9]+([.,][0-9]+)?'],
                 ]);
     }
     public function configureOptions(OptionsResolver $resolver)

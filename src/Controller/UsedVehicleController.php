@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\UsedVehicle;
+use App\Form\EditUsedVehicleForm;
 use App\form\NewUsedVehicleForm;
 use App\Repository\UsedVehicleRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,9 +17,12 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class UsedVehicleController extends AbstractController
 {
     #[Route('/VehiculeOccasion', name: 'UsedVehicle')]
-    public function index()
+    public function index(UsedVehicleRepository $usedVehicleRepository)
     {
-        return $this->render('pages/usedVehicule.html.twig');
+        $usedVehicles = $usedVehicleRepository->findAll();
+        return $this->render('pages/usedVehicle.html.twig', [
+            'usedVehicles' => $usedVehicles
+        ]);
     }
 
     #[Route('/AdminVehiculeOccasion', name: 'AdminUsedVehicle', methods: ['GET'])]
@@ -30,7 +34,7 @@ class UsedVehicleController extends AbstractController
         ]);
     }
 
-    #[Route('/AdminVehiculeOccasion/delete/{id}', name: 'delete_used_vehicle', methods: ['POST'])]
+    #[Route('/AdminVehiculeOccasion/delete/{id}', name: 'DeleteAdminUsedVehicle', methods: ['POST'])]
     public function deleteUsedVehicle(Request $request, UsedVehicle $usedVehicle, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$usedVehicle->getId(), $request->request->get('_token'))) {
@@ -51,6 +55,15 @@ class UsedVehicleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            foreach ($form->getData() as $key => $value) {
+                if (is_string($value)) {
+                    $setter = 'set' . ucfirst($key);
+                    if (method_exists($usedVehicle, $setter)) {
+                        $usedVehicle->$setter(ucfirst(trim($value)));
+                    }
+                }
+            }
 
             $image = $form->get('imageUsedVehicle')->getData();
 
@@ -77,7 +90,7 @@ class UsedVehicleController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Véhicule ajouté avec succès !');
-            return $this->redirectToRoute('Home');
+            return $this->redirectToRoute('AdminUsedVehicle');
         }
 
         return $this->render('admin/adminNewUsedVehicle.html.twig', [
@@ -85,11 +98,31 @@ class UsedVehicleController extends AbstractController
         ]);
     }
 
-    #[Route('/AdminUsedVehicle/{id}', name: 'DetailAdminUsedVehicle')]
-    public function detailAdminUsedVehicle(UsedVehicle $usedVehicle)
+    #[Route('/AdminVehiculeDoccasion/{id}', name: 'EditAdminUsedVehicle')]
+    public function detailAdminUsedVehicle(Request $request, UsedVehicle $usedVehicle, EntityManagerInterface $entityManager)
+    {   
+        $form = $this->createForm(EditUsedVehicleForm::class, $usedVehicle);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+    
+            $this->addFlash('success', 'Véhicule modifié avec succès !');
+    
+            return $this->redirectToRoute('AdminUsedVehicle');
+        }
+    
+        return $this->render('admin/adminUsedVehicleEdit.html.twig', [
+            'usedVehicle' => $usedVehicle,
+            'EditUsedVehicleForm' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/VehiculeOccasion/{id}', name:'DetailUsedVehicle')]
+    public function detailUsedVehicle(UsedVehicle $usedVehicle)
     {
-        return $this->render('admin/adminUsedVehicleDetail.html.twig', [
-            'usedVehicle' => $usedVehicle
+        return $this->render('pages/usedVehicleDetail.html.twig', [
+        'usedVehicle' => $usedVehicle
         ]);
     }
 }

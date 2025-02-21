@@ -10,6 +10,6 @@ class HistoricalController extends AbstractController
     #[Route('/Historique', name: 'Historical')]
     public function index()
     {
-        return $this->render('pages/historical.html.twig');
+        return $this->render('pages/construction.html.twig');
     }
 }

@@ -1,0 +1,80 @@
+.contactTitlePage {
+    text-align: center;
+    font-family: 'league gothic';
+    font-size: 50px;
+    text-transform: uppercase;
+}
+
+.contactGlobalContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contactFormName {
+    font-family: 'roboto';
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.contactFormNameInput {
+    font-family: 'roboto';
+    margin-bottom: 10px;
+    width: 1000px;
+    height: 30px;
+}
+
+.contactFormEmail {
+    font-family: 'roboto';
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.contactFormEmailInput {
+    font-family: 'roboto';
+    margin-bottom: 10px;
+    width: 1000px;
+    height: 30px; 
+}
+
+.contactFormMessage {
+    font-family: 'roboto';
+    font-size: 20px;
+}
+
+.contactFormMessageInput {
+    font-family: 'roboto';
+    width: 1000px;
+    height: 300px;
+    margin-bottom: 10px;
+}
+
+.contactFormSubmitButton {
+    font-family: 'league gothic';
+    font-size: 20px;
+    width: 1000px;
+    height: 50px;
+    margin-bottom: 20px;
+    color: white;
+    background-color: #166CED;
+}
+
+@media (max-width: 768px) {
+    .contactFormNameInput {
+        width: 350px;
+        height: 20px;
+    }
+    .contactFormEmailInput {
+        width: 350px;
+        height: 20px;
+    }
+    .contactFormMessageInput {
+        width: 350px;
+        height: 200px;
+    }
+    .contactFormSubmitButton {
+        width: 350px;
+        height: 30px;
+    }
+}

@@ -1,8 +1,43 @@
 {% extends "layout.html.twig" %}
 
 {% block main %}
-<h4 class='h4'>Accueil admin</h4>
-<button><a class="navbar-link" href={{ path('AdminActuality')}}>Nouvelle actualité</a></button>
-<button><a class="navbar-link" href={{ path('AdminNewNewVehicle')}}>Nouveaux véhicules neuf</a></button>
-<button><a class="navbar-link" href={{ path('AdminUsedVehicle')}}>véhicules occasion</a></button>
+<h1 class='adminHomeTitlePage'>ACCUEIL ADMINISTRATEUR</h1>
+
+<div class='adminHomeGlobalContainer'>
+    <div class='adminHome-AdminNewActualityContainer'>
+        <h2 class='adminHome-AdminNewActualityTitle'>Nouvelle actualité</h2>
+            <p class='adminHome-AdminNewActualityText'>Ajouter une nouvelle actualité pour le site</p>
+            <button  class='adminHomeButton'>
+                <a class="adminHome-navLink" href={{ path('AdminNewActuality')}}>Nouvelle actualité</a>
+            </button>
+    </div>
+    <div class='adminHome-AdminNewVehicleContainer'>
+        <h2 class='adminHome-AdminNewVehicleTitle'>Vehicule neuf</h2>
+            <p class='adminHome-AdminNewVehicleText'>Ajouter un nouveau véhicule neuf pour le site</p>
+            <button  class='adminHomeButton'>
+                <a class="adminHome-navLink" href={{ path('AdminNewVehicle')}}>véhicules neuf</a>
+            </button>
+    </div>
+    <div class='adminHome-AdminUsedVehicleContainer'>
+        <h2 class='adminHome-AdminUsedVehicleTitle'>Véhicules d'occasion</h2>
+            <p class='adminHome-AdminUsedVehicleText'>Ajouter un véhicule utilisé pour le site</p>
+            <button  class='adminHomeButton'>
+                <a class="adminHome-navLink" href={{ path('AdminUsedVehicle')}}>véhicules d'occasion</a>
+            </button>
+    </div>
+    <div class='adminHome-AdminNewContainer'>
+        <h2 class='adminHome-AdminNewTitle'>Nouvelle admin</h2>
+            <p class='adminHome-AdminNewText'>Ajouter un nouvel administrateur pour le site</p>
+            <button  class='adminHomeButton'>
+                <a class="adminHome-navLink" href={{ path('AdminNew')}}>nouvelle admin</a>
+            </button>
+    </div>
+    <div class='adminHome-AdminContactContainer'>
+        <h2 class='adminHome-AdminContactTitle'>Contact</h2>
+            <p class='adminHome-AdminContactText'>Voir les messages de contact reçus</p>
+            <button  class='adminHomeButton'>
+                <a class="adminHome-navLink" href={{ path('AdminContact')}}>Contact</a>
+            </button>
+    </div>
+</div>
 {% endblock %}

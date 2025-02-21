@@ -1,0 +1,177 @@
+{% extends "layout.html.twig" %}
+
+{% block main %}
+
+<button class='btnAdminNewNewVehicle'>
+    <a class="navbar-link" href={{ path('AdminNewNewVehicle')}}>Nouveaux véhicules neuf</a>
+</button>
+
+<h1 class='adminNewVehicleTitlePage'>Vehicule neuf</h1>
+
+<div class='adminNewVehicleGlobalContainer'>
+    <div class='adminNewVehicleContainer'>
+        <div class='adminNewVehicleTitleCatégorieContainer'>
+            <h2 class='adminNewVehicleTitleCatégorie'>Trail</h2>
+        </div>
+        <div class='adminNewVehicleCardContainer'>
+        {% for newVehicleTrail in newVehicleTrails %}
+            {% for newVehicle in newVehicleTrail.newVehicles %}
+            <a class='adminNewVehicleCard' href='{{ path('EditAdminNewVehicle', {id: newVehicle.id}) }}'>
+                <div class='adminNewVehicleTitleContainer'>
+                    <p class='adminNewVehicleTitle'>{{ newVehicle.name }}</p>
+                </div>
+                <div class='adminNewVehicleImageContainer'>
+                    <img class='adminNewVehicleImage' src="{{ newVehicle.image }}" alt="image du vehicule" width="300" height="200">
+                </div>
+                <div class='adminNewVehiclePriceContainer'>
+                    <p class='adminNewVehiclePrice'>{{ newVehicle.Information.price }} €</p>
+                </div>
+                <div class='adminNewVehicleDeleteContainer'>
+                    <form method="POST" action="{{ path('DeleteAdminNewVehicle', {id: newVehicle.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ newVehicle.id) }}">
+                        <button type="submit" class="btnDeleteNewVehicle">
+                            <p class='btnDeleteNewVehicleDescription'>Supprimer l'annonce</p>
+                        </button>
+                    </form>
+                </div>
+            </a>
+            {% endfor %}
+        {% endfor %}
+        </div>
+    </div>
+    <div class='adminNewVehicleContainer'>
+        <div class='adminNewVehicleTitleCatégorieContainer'>
+            <h2 class='adminNewVehicleTitleCatégorie'>Sport / GT</h2>
+        </div>
+        <div class='adminNewVehicleCardContainer'>
+        {% for newVehicleSport in newVehicleSports %}
+            {% for newVehicle in newVehicleSport.newVehicles %}
+            <a class='adminNewVehicleCard' href='{{ path('EditAdminNewVehicle', {id: newVehicle.id}) }}'>
+                <div class='adminNewVehicleTitleContainer'>
+                    <p class='adminNewVehicleTitle'>{{ newVehicle.name }}</p>
+                </div>
+                <div class='adminNewVehicleImageContainer'>
+                    <img class='adminNewVehicleImage' src="{{ newVehicle.image }}" alt="image du vehicule" width="300" height="200">
+                </div>
+                <div class='adminNewVehiclePriceContainer'>
+                    <p class='adminNewVehiclePrice'>{{ newVehicle.Information.price }} €</p>
+                </div>
+                <div class='adminNewVehicleDeleteContainer'>
+                    <form method="POST" action="{{ path('DeleteAdminNewVehicle', {id: newVehicle.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ newVehicle.id) }}">
+                        <button type="submit" class="btnDeleteNewVehicle">
+                            <p class='btnDeleteNewVehicleDescription'>Supprimer l'annonce</p>
+                        </button>
+                    </form>
+                </div>
+            </a>
+            {% endfor %}
+        {% endfor %}
+        </div>
+    </div>
+    <div class='adminNewVehicleContainer'>
+        <div class='adminNewVehicleTitleCatégorieContainer'>
+            <h2 class='adminNewVehicleTitleCatégorie'>Roadster</h2>
+        </div>
+        <div class='adminNewVehicleCardContainer'>
+        {% for newVehicleRoadster in newVehicleRoadsters %}
+            {% for newVehicle in newVehicleRoadster.newVehicles %}
+            <a class='adminNewVehicleCard' href='{{ path('EditAdminNewVehicle', {id: newVehicle.id}) }}'>
+                <div class='adminNewVehicleTitleContainer'>
+                    <p class='adminNewVehicleTitle'>{{ newVehicle.name }}</p>
+                </div>
+                <div class='adminNewVehicleImageContainer'>
+                    <img class='adminNewVehicleImage' src="{{ newVehicle.image }}" alt="image du vehicule" width="300" height="200">
+                </div>
+                <div class='adminNewVehiclePriceContainer'>
+                    <p class='adminNewVehiclePrice'>{{ newVehicle.Information.price }} €</p>
+                </div>
+                <div class='adminNewVehicleDeleteContainer'>
+                    <form method="POST" action="{{ path('DeleteAdminNewVehicle', {id: newVehicle.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ newVehicle.id) }}">
+                        <button type="submit" class="btnDeleteNewVehicle">
+                            <p class='btnDeleteNewVehicleDescription'>Supprimer l'annonce</p>
+                        </button>
+                    </form>
+                </div>
+            </a>
+            {% endfor %}
+        {% endfor %}
+        </div>
+    </div>
+    <div class='adminNewVehicleContainer'>
+        <div class='adminNewVehicleTitleCatégorieContainer'>
+            <h2 class='adminNewVehicleTitleCatégorie'>Scooter</h2>
+        </div>
+        <div class='adminNewVehicleCardContainer'>
+        {% for newVehicleScooter in newVehicleScooters %}
+            {% for newVehicle in newVehicleScooter.newVehicles %}
+            <a class='adminNewVehicleCard' href='{{ path('EditAdminNewVehicle', {id: newVehicle.id}) }}'>
+                <div class='adminNewVehicleTitleContainer'>
+                    <p class='adminNewVehicleTitle'>{{ newVehicle.name }}</p>
+                </div>
+                <div class='adminNewVehicleImageContainer'>
+                    <img class='adminNewVehicleImage' src="{{ newVehicle.image }}" alt="image du vehicule" width="300" height="200">
+                </div>
+                <div class='adminNewVehiclePriceContainer'>
+                    <p class='adminNewVehiclePrice'>{{ newVehicle.Information.price }} €</p>
+                </div>
+                <div class='adminNewVehicleDeleteContainer'>
+                    <form method="POST" action="{{ path('DeleteAdminNewVehicle', {id: newVehicle.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ newVehicle.id) }}">
+                        <button type="submit" class="btnDeleteNewVehicle">
+                            <p class='btnDeleteNewVehicleDescription'>Supprimer l'annonce</p>
+                        </button>
+                    </form>
+                </div>
+            </a>
+            {% endfor %}
+        {% endfor %}
+        </div>
+    </div>
+    <div class='adminNewVehicleContainer'>
+        <div class='adminNewVehicleTitleCatégorieContainer'>
+            <h2 class='adminNewVehicleTitleCatégorie'>Moto 125</h2>
+        </div>
+        <div class='adminNewVehicleCardContainer'>
+        {% for newVehicleMoto125 in newVehicleMoto125s %}
+            {% for newVehicle in newVehicleMoto125.newVehicles %}
+            <a class='adminNewVehicleCard' href='{{ path('EditAdminNewVehicle', {id: newVehicle.id}) }}'>
+                <div class='adminNewVehicleTitleContainer'>
+                    <p class='adminNewVehicleTitle'>{{ newVehicle.name }}</p>
+                </div>
+                <div class='adminNewVehicleImageContainer'>
+                    <img class='AdminNewVehicleImage' src="{{ newVehicle.image }}" alt="image du vehicule" width="300" height="200">
+                </div>
+                <div class='adminNewVehiclePriceContainer'>
+                    <p class='adminNewVehiclePrice'>{{ newVehicle.Information.price }} €</p>
+                </div>
+                <div class='adminNewVehicleDeleteContainer'>
+                    <form method="POST" action="{{ path('DeleteAdminNewVehicle', {id: newVehicle.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ newVehicle.id) }}">
+                        <button type="submit" class="btnDeleteNewVehicle">
+                            <p class='btnDeleteNewVehicleDescription'>Supprimer l'annonce</p>
+                        </button>
+                    </form>
+                </div>
+            </a>
+            {% endfor %}
+        {% endfor %}
+        </div>
+    </div>
+    <button class='btnAdminNewNewVehicleAdminHomeReturn'>
+        <a class="adminReturnButton" href={{ path('AdminHome')}}>Retour à l'accueil</a>
+    </button>
+</div>
+
+<script>
+    document.querySelectorAll('.btnDeleteNewVehicle').forEach(button => {
+    button.addEventListener('click', function(event) {
+        if (!confirm("Es-tu sûr de vouloir supprimer ce véhicule ?")) {
+            event.preventDefault();
+        }
+    });
+});
+</script>
+
+{% endblock %}

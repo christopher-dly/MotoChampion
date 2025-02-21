@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block main %}
+<h1 class='adminContactTitlePage'>Contact</h1>
+
+{% if messages is not empty %}
+<div class="adminContactGlobalContainer">
+    <table class="adminContactTable">
+        <thead class="adminContactTableHead">
+            <tr class="adminContactTableHeadRow">
+                <th class="adminContactTableHeadCol">Nom</th>
+                <th class="adminContactTableHeadCol">Email</th>
+                <th class="adminContactTableHeadCol">Message</th>
+            </tr>
+        </thead>
+        <tbody class="adminContactTableBody">
+            {% for message in messages %}
+                <tr class="adminContactTableRow">
+                    <td class="adminContactTableCol">{{ message.name }}</td>
+                    <td class="adminContactTableCol">{{ message.email }}</td>
+                    <td class="adminContactTableCol">{{ message.message }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<button class='btnAdminNewNewVehicleAdminHomeReturn'>
+    <a class="adminReturnButton" href={{ path('AdminHome')}}>Retour à l'accueil</a>
+</button>
+{% else %}
+    <p>Aucun message trouvé.</p>
+{% endif %}
+{% endblock %}

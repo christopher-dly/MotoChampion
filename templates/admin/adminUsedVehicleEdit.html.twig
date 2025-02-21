@@ -1,0 +1,87 @@
+{% extends "layout.html.twig" %}
+
+{% block main %}
+<h1 class='adminEditUsedVehicleTitlePage'>Véhicule d'occasion : {{ usedVehicle.model }}</h1>
+
+<div class="adminEditUsedVehicleGlobalContainer">
+    <div class="adminEditUsedVehicleImageContainer">
+        <img class='adminEditUsedVehicleImage' src="{{ usedVehicle.imageUsedVehicle }}" alt="image du vehicule" width="600" height="400">
+    </div>
+    <div class="adminEditUsedVehicleFormContainer">
+    {{ form_start(EditUsedVehicleForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
+        <div class='adminEditUsedVehicleInputContainer'>
+            <p class='adminEditUsedVehicleInputDescription'>Marque</p>
+            {{ form_widget(EditUsedVehicleForm.brand, {'attr': {'class': 'adminEditUsedVehicleInput'}})}}
+            {{ form_errors(EditUsedVehicleForm.brand)}}
+        </div>
+        <div class='adminEditUsedVehicleInputContainer'>
+            <p class='adminEditUsedVehicleInputDescription'>Modèle :</p>
+            {{ form_widget(EditUsedVehicleForm.model, {'attr': {'class': 'adminEditUsedVehicleInput'}})}}
+            {{ form_errors(EditUsedVehicleForm.model)}}
+        </div>
+        <div class='adminEditUsedVehicleInputContainer'>
+            <p class='adminEditUsedVehicleInputDescription'>Catégorie :</p>
+            {{ form_widget(EditUsedVehicleForm.category, {'attr': {'class': 'adminEditUsedVehicleInput'}})}}
+            {{ form_errors(EditUsedVehicleForm.category)}}
+        </div>
+        <div class='adminEditUsedVehicleInputContainer'>
+            <p class='adminEditUsedVehicleInputDescription'>Cylindrées :</p>
+            {{ form_widget(EditUsedVehicleForm.cylinders, {'attr': {'class': 'adminEditUsedVehicleInput'}})}}
+            {{ form_errors(EditUsedVehicleForm.cylinders)}}
+        </div>
+        <div class='adminEditUsedVehicleInputContainer'>
+            <p class='adminEditUsedVehicleInputDescription'>Prix :</p>
+            {{ form_widget(EditUsedVehicleForm.price, {'attr': {'class': 'adminEditUsedVehicleInput'}})}}
+            {{ form_errors(EditUsedVehicleForm.price)}}
+        </div>
+        <div class='adminEditUsedVehicleInputContainer'>
+            <p class='adminEditUsedVehicleInputDescription'>Temps de garantie :</p>
+            {{ form_widget(EditUsedVehicleForm.warrantyTime, {'attr': {'class': 'adminEditUsedVehicleInput'}})}}
+            {{ form_errors(EditUsedVehicleForm.warrantyTime)}}
+        </div>
+        <div class='adminEditUsedVehicleInputContainer'>
+            <p class='adminEditUsedVehicleInputDescription'>Description :</p>
+            {{ form_widget(EditUsedVehicleForm.description, {'attr': {'class': 'adminEditUsedVehicleInput'}})}}
+            {{ form_errors(EditUsedVehicleForm.description)}}
+        </div>
+        <div class='adminEditUsedVehicleInputContainer'>
+            <p class='adminEditUsedVehicleInputDescription'>Disponible à l'éssaie :</p>
+            {{ form_widget(EditUsedVehicleForm.availableForTrial, {'attr': {'class': 'adminEditUsedVehicleInput'}})}}
+            {{ form_errors(EditUsedVehicleForm.availableForTrial)}}
+        </div>
+        <div class='adminEditUsedVehicleInputContainer'>
+            <p class='adminEditUsedVehicleInputDescription'>Couleur :</p>
+            {{ form_widget(EditUsedVehicleForm.color, {'attr': {'class': 'adminEditUsedVehicleInput'}})}}
+            {{ form_errors(EditUsedVehicleForm.color)}}
+        </div>
+        <div class='adminEditUsedVehicleInputContainer'>
+            <p class='adminEditUsedVehicleInputDescription'>Année d'immatriculation :</p>
+            {{ form_widget(EditUsedVehicleForm.year, {'attr': {'class': 'adminEditUsedVehicleInput'}})}}
+            {{ form_errors(EditUsedVehicleForm.year)}}
+        </div>
+        <div class='adminEditUsedVehicleInputContainer'>
+            <p class='adminEditUsedVehicleInputDescription'>Kilométrage :</p>
+            {{ form_widget(EditUsedVehicleForm.kilometers, {'attr': {'class': 'adminEditUsedVehicleInput'}})}}
+            {{ form_errors(EditUsedVehicleForm.kilometers)}}
+        </div>
+        <div class='adminEditUsedVehicleInputContainer'>
+            <p class='adminEditUsedVehicleInputDescription'>Crit'air :</p>
+            {{ form_widget(EditUsedVehicleForm.energyTax, {'attr': {'class': 'adminEditUsedVehicleInput'}})}}
+            {{ form_errors(EditUsedVehicleForm.energyTax)}}
+        </div>
+        <div class='adminEditUsedVehicleInputContainer'>
+            <p class='adminEditUsedVehicleInputDescription'>Puissance fiscale :</p>
+            {{ form_widget(EditUsedVehicleForm.taxPower, {'attr': {'class': 'adminEditUsedVehicleInput'}})}}
+            {{ form_errors(EditUsedVehicleForm.taxPower)}}
+        </div>
+        {{ form_widget(EditUsedVehicleForm.submit, {attr: {class: 'adminEditUsedVehicleSubmitButton'}}) }}
+        {{ form_end(EditUsedVehicleForm) }}
+    </div>
+    <div class='adminEditUsedVehicleReturnButtonContainer'>
+        <button class='adminEditUsedVehicleReturnButton'>
+            <a class='adminEditUsedVehicleReturnButtonDescription' href="{{ path('AdminUsedVehicle') }}">Retour à la liste</a>
+        </button>
+    </div>
+</div>
+{% endblock %}
+            

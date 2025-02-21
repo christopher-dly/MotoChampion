@@ -22,9 +22,9 @@ class NewVehicleForm extends AbstractType
                     new Assert\NotBlank(),
                     new Assert\Length([
                         'min' => 2, 
-                        'max' => 100,
+                        'max' => 50,
                         'minMessage' => 'le champs doit contenir au moins 2 caractères',
-                        'maxMessage' => 'le champs doit contenir au maximum 100 caractères',
+                        'maxMessage' => 'le champs doit contenir au maximum 50 caractères',
                     ]),
                 ]
             ])

@@ -12,12 +12,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class ActualityController extends AbstractController
 {
     #[Route('/Actualité', name: 'Actuality')]
-    public function index()
+    public function index(ActualityRepository $actualityRepository)
     {
-        return $this->render('pages/actuality.html.twig');
+        $actualities = $actualityRepository->findAll();
+        return $this->render('pages/actuality.html.twig', [
+            'actualities' => $actualities,
+        ]);
     }
 
-    #[Route('/AdminActualité', name: 'AdminActuality', methods: ['GET', 'POST'])]
+    #[Route('/AdminNouvelleActualité', name: 'AdminNewActuality', methods: ['GET', 'POST'])]
     public function admin(Request $req, ActualityRepository $actualityRepository)
     {
         $actuality = new Actuality();
@@ -26,18 +29,13 @@ class ActualityController extends AbstractController
 
         $form->handleRequest($req);
 
-        
         if ($form->isSubmitted() && $form->isValid()) {
-            $name = $form->get('name');
-            $title = $form->get('title');
-            $content = $form->get('content');
-            $image = $form->get('image');
             
             $actualityRepository->saveNewActuality($actuality);
-            return $this->redirectToRoute('Home');
+            return $this->redirectToRoute('AdminHome');
         }
 
-        return $this->render('admin/adminActuality.html.twig', [
+        return $this->render('admin/adminNewActuality.html.twig', [
             'ActualityForm' => $form->createView(),
           ]);
     }
