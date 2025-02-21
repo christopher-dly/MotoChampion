@@ -27,11 +27,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: "Le mot de passe est obligatoire.")]
-    // #[Assert\Length(min: 8, max: 32, minMessage: "Le mot de passe doit contenir au moins 8 caractères.", maxMessage: "Le mot de passe ne peut pas dépasser 32 caractères.")]
-    // #[Assert\Regex(
-    //     pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,32}$/',
-    //     message: "Le mot de passe doit contenir entre 8 et 32 caractères, incluant au moins une majuscule, une minuscule, un chiffre et un caractère spécial."
-    // )]
+    #[Assert\Length(min: 8, max: 32, minMessage: "Le mot de passe doit contenir au moins 8 caractères.", maxMessage: "Le mot de passe ne peut pas dépasser 32 caractères.")]
+    #[Assert\Regex(
+        pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,32}$/',
+        message: "Le mot de passe doit contenir entre 8 et 32 caractères, incluant au moins une majuscule, une minuscule, un chiffre et un caractère spécial."
+    )]
     private ?string $password = null;
 
     public function getId(): ?int
