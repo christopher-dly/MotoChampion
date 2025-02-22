@@ -12,8 +12,13 @@
   </div>
   <div class='adminNewAdminInputContainer'>
     <p class='adminNewAdminInputDescription'>Mot de passe :</p>
-    {{ form_widget(registrationForm.password, {'attr': {'class': 'adminNewAdminInput'}}) }}
-    {{ form_errors(registrationForm.password) }}
+    {{ form_widget(registrationForm.password.first, {'attr': {'class': 'adminNewAdminInput'}}) }}
+    {{ form_errors(registrationForm.password.first) }}
+  </div>
+  <div class='adminNewAdminInputContainer'>
+    <p class='adminNewAdminInputDescription'>Condirmation du mot de passe :</p>
+    {{ form_widget(registrationForm.password.second, {'attr': {'class': 'adminNewAdminInput'}}) }}
+    {{ form_errors(registrationForm.password.second) }}
   </div>
   {{ form_widget(registrationForm.submit, {attr: {class: 'adminNewAdminSubmitButton'}}) }}
 {{ form_end(registrationForm) }}

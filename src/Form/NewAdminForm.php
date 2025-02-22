@@ -18,16 +18,16 @@ class NewAdminForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
           ->add('email', EmailType::class, [
-            'attr'=>['placeholder'=>'Entrez votre e-mail'],
             // 'constraints' => [
             //   new Assert\NotBlank(),
             // ],
           ])
-          ->add('password', PasswordType::class, [
-            'attr'=>['placeholder'=>'Entrez votre mot de passe'],
+          ->add('password', RepeatedType::class, [
             // 'constraints' => [
             //   new Assert\NotBlank(),
             // ],
+            'first_options'  => array('label' => 'mot de passe'),
+            'second_options' => array('label' => 'confirmation de mot de passe'),
           ])
           ->add('submit', SubmitType::class)
         ;
