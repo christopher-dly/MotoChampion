@@ -109,16 +109,19 @@
         </button>
     <div> #}
 <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.newVehicleDetailSlide');
+let currentSlide = 0;
+const slides = document.querySelectorAll('.newVehicleDetailSlide');
+const buttons = document.querySelectorAll('.newVehicleDetailNavbarButton');
 
-    function showSlide(index) {
-        slides[currentSlide].classList.remove('newVehicleDetailSlideActive');
-        currentSlide = index;
-        slides[currentSlide].classList.add('newVehicleDetailSlideActive');
-    }
-
+function showSlide(index) {
+    slides[currentSlide].classList.remove('newVehicleDetailSlideActive');
+    buttons[currentSlide].classList.remove('active');
+    currentSlide = index;
     slides[currentSlide].classList.add('newVehicleDetailSlideActive');
+    buttons[currentSlide].classList.add('active'); 
+}
+
+buttons[currentSlide].classList.add('active');
 
     function handleClick(event, dispoEssai) {
         if (dispoEssai === 0) {// Empêche tout comportement par défaut du bouton (comme un redirection)

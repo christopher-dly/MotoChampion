@@ -1,11 +1,11 @@
-.newVehicleDetailTitlePage {
+.usedVehicleDetailTitlePage {
     font-size: 50px;
     font-family: 'league gothic';
     text-align: center;
     text-transform: uppercase;
 }
 
-.newVehicleDetailCard {
+.usedVehicleDetailCard {
     display: flex;
     flex-direction: row;
     border: solid 2px black;
@@ -15,7 +15,7 @@
     position: relative;
 }
 
-.newVehicleDetailNavbarButton {
+.usedVehicleDetailNavbarButton {
     border: none;
     text-transform: uppercase;
     font-weight: bold;
@@ -27,13 +27,13 @@
     cursor: pointer;
 }
 
-.newVehicleDetailTryButtonContainer {
+.usedVehicleDetailButtonTryContainer {
     position: absolute;
     right: 0;
     bottom: 10px;
 }
 
-.newVehicleDetailTryButton {
+.usedVehicleDetailButtonTry {
     border: solid 2px black;
     text-transform: uppercase;
     font-family: 'league gothic';
@@ -46,22 +46,22 @@
     padding: 10px;
 }
 
-.newVehicleDetailNavbarButton.active {
+.usedVehicleDetailNavbarButton.active {
     background-color: #166CED;
     color: white;
 }
 
-.newVehicleDetailTryButtonDescription {
+.usedVehicleDetailButtonTryDescription {
     text-decoration: none;
     color: white;
 }
 
-.newVehicleDetailTitleDescription {
+.usedVehicleDetailTitleDescription {
     text-transform: uppercase;
 }
 
 @media (max-width: 768px) {
-    .newVehicleDetailCard {
+    .usedVehicleDetailCard {
         flex-direction: column;
         align-items: center;
         margin-left: 0;
@@ -69,21 +69,23 @@
         margin-bottom: 50px;
     }
 
-    .newVehicleDetailTryButtonContainer {
+    .usedVehicleDetailButtonTryContainer {
         position: static;
         right: 0;
         bottom: 10px;
         margin: 5px;
     }
 
-    .newVehicleDetailSlide {
+    .usedVehicleDetailTitleContainer {
         text-align: center;
     }
 
-    .newVehicleDetailDescriptionContainer {
+    .usedVehicleDetailDescriptionContainer {
         text-align: initial;
     }
+
+    .usedVehicleDetailImage {
+        width: 100%;
+        height: auto;
+    }
 }
-
-
-

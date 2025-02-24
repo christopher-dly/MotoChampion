@@ -25,6 +25,10 @@
     margin-bottom: -5px;
 }
 
+.legalText {
+    color: white;
+    text-decoration: none;
+}
 
 .legal {
     margin-top: 20px;
