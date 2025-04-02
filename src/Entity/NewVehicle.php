@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\NewVehicleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: NewVehicleRepository::class)]
@@ -18,10 +20,6 @@ class NewVehicle
     #[Assert\NotBlank(message: "Le nom du véhicule est obligatoire.")]
     #[Assert\Length(max: 50, maxMessage: "Le nom ne doit pas dépasser 50 caractères.")]
     private ?string $name = null;
-    
-    #[ORM\Column(type: 'string', nullable: true)]
-    #[Assert\Length(max: 255, maxMessage: "Le chemin de l'image ne doit pas dépasser 255 caractères.")]
-    private ?string $image = null;
 
     #[ORM\ManyToOne(
         targetEntity: CyclePart::class,
@@ -62,6 +60,18 @@ class NewVehicle
     )]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?Transmission $transmission = null;
+
+    #[ORM\OneToMany(
+        targetEntity: NewVehicleImage::class,
+        mappedBy: "newVehicle",
+        cascade: ["persist", "remove"]
+    )]
+    private Collection $newVehicleImages;
+
+    public function __construct()
+    {
+        $this->newVehicleImages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -140,14 +150,30 @@ class NewVehicle
         return $this;
     }
 
-    public function getImage()
+    public function getNewVehicleImages(): Collection
     {
-        return $this->image;
+        return $this->newVehicleImages;
     }
 
-    public function setImage($image)
+    public function addNewVehicleImage(NewVehicleImage $newVehicleImage): self
     {
-        $this->image = $image;
+        if (!$this->newVehicleImages->contains($newVehicleImage)) {
+            $this->newVehicleImages[] = $newVehicleImage;
+            $newVehicleImage->setNewVehicle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNewVehicleImage(NewVehicleImage $newVehicleImage): self
+    {
+        if ($this->newVehicleImages->contains($newVehicleImage)) {
+            $this->newVehicleImages->removeElement($newVehicleImage);
+
+            if ($newVehicleImage->getNewVehicle() === $this) {
+                $newVehicleImage->setNewVehicle(null);
+            }
+        }
 
         return $this;
     }

@@ -18,11 +18,7 @@ class Transmission
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Assert\Length(max: 255, maxMessage: "Le champ pour 'transmission primaire' ne peut pas dépasser 255 caractères.")]
-    private ?string $primaryTransmission = null;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Assert\Length(max: 255, maxMessage: "Le champ pour 'transmission secondaire' ne peut pas dépasser 255 caractères.")]
-    private ?string $secondaryTransmission = null;
+    private ?string $finalTransmission = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Assert\Length(max: 255, maxMessage: "Le champ pour 'embrayage' ne peut pas dépasser 255 caractères.")]
@@ -53,26 +49,14 @@ class Transmission
         return $this->id;
     }
 
-    public function getPrimaryTransmission(): ?string
+    public function getFinalTransmission(): ?string
     {
-        return $this->primaryTransmission;
+        return $this->finalTransmission;
     }
 
-    public function setPrimaryTransmission(?string $primaryTransmission): self
+    public function setFinalTransmission(?string $finalTransmission): self
     {
-        $this->primaryTransmission = $primaryTransmission;
-
-        return $this;
-    }
-
-    public function getSecondaryTransmission(): ?string
-    {
-        return $this->secondaryTransmission;
-    }
-
-    public function setSecondaryTransmission(?string $secondaryTransmission): self
-    {
-        $this->secondaryTransmission = $secondaryTransmission;
+        $this->finalTransmission = $finalTransmission;
 
         return $this;
     }

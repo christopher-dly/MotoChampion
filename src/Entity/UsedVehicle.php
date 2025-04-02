@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UsedVehicleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UsedVehicleRepository::class)]
@@ -13,9 +15,6 @@ class UsedVehicle
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
-
-    #[ORM\Column(type: 'string', length: 100)]
-    private ?string $imageUsedVehicle = null;
 
     #[ORM\Column(type: 'string', length: 50)]
     #[Assert\NotBlank(message: "La marque est obligatoire.")]
@@ -79,7 +78,25 @@ class UsedVehicle
     #[Assert\GreaterThanOrEqual(0, message: "Le taux de puissance ne peut pas être négatif.")]
     private ?int $taxPower = null;
 
-    // Getters and setters...
+    #[ORM\Column(type: 'string', length: 100)]
+    #[Assert\NotBlank(message: "La puissance est obligatoire.")]
+    #[Assert\Length(max: 100, maxMessage: "La puissance ne doit pas dépasser 100 caractères.")]
+    private ?string $power = null;
+
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $statue = true;
+
+    #[ORM\OneToMany(
+        targetEntity: UsedVehicleImage::class,
+        mappedBy: "usedVehicle",
+        cascade: ["persist", "remove"]
+    )]
+    private Collection $usedVehicleImages;
+
+    public function __construct()
+    {
+        $this->usedVehicleImages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -242,14 +259,54 @@ class UsedVehicle
         return $this;
     }
 
-    public function getImageUsedVehicle(): ?string
+    public function getPower(): ?string
     {
-        return $this->imageUsedVehicle;
+        return $this->power;
     }
 
-    public function setImageUsedVehicle(string $imageUsedVehicle): self
+    public function setPower(string $power): self
     {
-        $this->imageUsedVehicle = $imageUsedVehicle;
+        $this->power = $power;
+
+        return $this;
+    }
+
+    public function isStatue(): ?bool
+    {
+        return $this->statue;
+    }
+
+    public function setStatue(bool $statue): self
+    {
+        $this->statue = $statue;
+
+        return $this;
+    }
+
+    public function getUsedVehicleImages(): Collection
+    {
+        return $this->usedVehicleImages;
+    }
+
+    public function addUsedVehicleImage(UsedVehicleImage $usedVehicleImage): self
+    {
+        if (!$this->usedVehicleImages->contains($usedVehicleImage)) {
+            $this->usedVehicleImages[] = $usedVehicleImage;
+            $usedVehicleImage->setUsedVehicle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsedVehicleImage(UsedVehicleImage $usedVehicleImage): self
+    {
+        if ($this->usedVehicleImages->contains($usedVehicleImage)) {
+            $this->usedVehicleImages->removeElement($usedVehicleImage);
+
+            if ($usedVehicleImage->getUsedVehicle() === $this) {
+                $usedVehicleImage->setUsedVehicle(null);
+            }
+        }
 
         return $this;
     }

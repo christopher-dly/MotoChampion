@@ -45,10 +45,6 @@ class Information
     #[Assert\GreaterThanOrEqual(0, message: "Le temps de garantie ne peut pas être négatif.")]
     private ?int $warrantyTime = 5;
 
-    #[ORM\Column(type: 'text')]
-    #[Assert\NotBlank(message: "La description est obligatoire.")]
-    private ?string $description = null;
-
     #[ORM\Column(type: 'boolean')]
     private ?bool $availableForTrial = false;
 
@@ -144,18 +140,6 @@ class Information
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
     public function getAvailableForTrial(): ?bool
     {
         return $this->availableForTrial;
@@ -204,10 +188,5 @@ class Information
         }
 
         return $this;
-    }
-
-    public function __toString(): string
-    {
-        return $this->brand . ' ' . $this->model;
     }
 }

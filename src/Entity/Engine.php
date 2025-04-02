@@ -24,14 +24,6 @@ class Engine
     #[Assert\Positive(message: "Le nombre de cylindres doit être un entier positif.")]
     private ?int $cylinders = null;
 
-    #[ORM\Column(type: 'string', length: 50, nullable: true)]
-    #[Assert\Length(max: 50, maxMessage: "Le champ pour 'course x alésage' ne peut pas dépasser 50 caractères.")]
-    private ?string $boreXstroke = null;
-
-    #[ORM\Column(type: 'string', length: 50, nullable: true)]
-    #[Assert\Length(max: 50, maxMessage: "Le champ pour 'ratio volumétrique' ne peut pas dépasser 50 caractères.")]
-    private ?string $volumetricRatio = null;
-
     #[ORM\Column(type: 'string', length: 150, nullable: true)]
     #[Assert\Length(max: 150, maxMessage: "Le champ pour 'puissance annoncée' ne peut pas dépasser 150 caractères.")]
     private ?string $announcedPower = null;
@@ -43,10 +35,6 @@ class Engine
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
     #[Assert\Length(max: 100, maxMessage: "Le champ pour 'alimentation' ne peut pas dépasser 100 caractères.")]
     private ?string $powerSupply = null;
-
-    #[ORM\Column(type: 'string', length: 100, nullable: true)]
-    #[Assert\Length(max: 100, maxMessage: "Le champ pour 'démarreur' ne peut pas dépasser 100 caractères.")]
-    private ?string $starter = null;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
     #[Assert\Length(max: 100, maxMessage: "Le champ pour 'consommation' ne peut pas dépasser 100 caractères.")]
@@ -97,30 +85,6 @@ class Engine
         return $this;
     }
 
-    public function getBoreXstroke(): ?string
-    {
-        return $this->boreXstroke;
-    }
-
-    public function setBoreXstroke(?string $boreXstroke): self
-    {
-        $this->boreXstroke = $boreXstroke;
-
-        return $this;
-    }
-
-    public function getVolumetricRatio(): ?string
-    {
-        return $this->volumetricRatio;
-    }
-
-    public function setVolumetricRatio(?string $volumetricRatio): self
-    {
-        $this->volumetricRatio = $volumetricRatio;
-
-        return $this;
-    }
-
     public function getAnnouncedPower(): ?string
     {
         return $this->announcedPower;
@@ -153,18 +117,6 @@ class Engine
     public function setPowerSupply(?string $powerSupply): self
     {
         $this->powerSupply = $powerSupply;
-
-        return $this;
-    }
-
-    public function getStarter(): ?string
-    {
-        return $this->starter;
-    }
-
-    public function setStarter(?string $starter): self
-    {
-        $this->starter = $starter;
 
         return $this;
     }

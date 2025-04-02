@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ActualityRepository;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ActualityRepository::class)]
@@ -12,21 +12,19 @@ class Actuality
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id = null;
+    private ?int $id;
 
-    #[ORM\Column(type: 'string', length: 100)]
-    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
-    #[Assert\Length(max: 100, maxMessage: "Le nom ne peut pas dépasser 100 caractères.")]
-    private ?string $name = null;
-
-    #[ORM\Column(type: 'string', length: 100)]
-    #[Assert\NotBlank(message: "Le titre est obligatoire.")]
-    #[Assert\Length(max: 100, maxMessage: "Le titre ne peut pas dépasser 100 caractères.")]
-    private ?string $title = null;
+    #[ORM\Column(type: 'string', length: 150)]
+    #[Assert\NotBlank(message: 'Le titre est obligatoire')]
+    #[Assert\Length(max: 150, maxMessage: 'Le titre ne peut pas dépasser les 150 caractères')]
+    private ?string $title;
 
     #[ORM\Column(type: 'text')]
     #[Assert\NotBlank(message: "Le contenu est obligatoire.")]
     private ?string $content = null;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $image = null;
 
     #[ORM\Column(type: 'datetime_immutable')]
     private ?\DateTimeImmutable $date = null;
@@ -39,17 +37,6 @@ class Actuality
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-        return $this;
     }
 
     public function getTitle(): ?string
@@ -74,6 +61,18 @@ class Actuality
         return $this;
     }
 
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
     public function getDate(): ?\DateTimeImmutable
     {
         return $this->date;
@@ -83,16 +82,5 @@ class Actuality
     {
         $this->date = $date;
         return $this;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'title' => $this->title,
-            'content' => $this->content,
-            'date' => $this->date?->format('Y-m-d H:i:s'),
-        ];
     }
 }

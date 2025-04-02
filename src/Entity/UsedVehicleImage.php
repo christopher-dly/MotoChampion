@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\VehicleImageRepository;
 
 #[ORM\Entity(repositoryClass: VehicleImageRepository::class)]
-class VehicleImage
+class UsedVehicleImage
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -15,16 +15,14 @@ class VehicleImage
 
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $image = null;
-    
-    // #[ORM\ManyToOne(
-    //     targetEntity: NewVehicle::class,
-    //     inversedBy: "vehicleImages",
-    //     cascade: ["persist", "remove"]
-    // )]
-    // #[ORM\JoinColumn(nullable: false)]
-    // private ?NewVehicle $newVehicle = null;
 
-    // Getters et Setters
+    #[ORM\ManyToOne(
+        targetEntity: UsedVehicle::class,
+        inversedBy: "usedVehicleImages",
+        cascade: ["persist", "remove"]
+    )]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?UsedVehicle $usedVehicle = null;
 
     public function getId(): ?int
     {
@@ -42,14 +40,14 @@ class VehicleImage
         return $this;
     }
 
-    // public function getNewVehicle(): ?NewVehicle
-    // {
-    //     return $this->newVehicle;
-    // }
+    public function getUsedVehicle(): ?UsedVehicle
+    {
+        return $this->usedVehicle;
+    }
 
-    // public function setNewVehicle(?NewVehicle $newVehicle): self
-    // {
-    //     $this->newVehicle = $newVehicle;
-    //     return $this;
-    // }
+    public function setUsedVehicle(?UsedVehicle $usedVehicle): self
+    {
+        $this->usedVehicle = $usedVehicle;
+        return $this;
+    }
 }

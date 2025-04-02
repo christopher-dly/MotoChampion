@@ -1,124 +1,137 @@
 <?php
 
-// namespace App\Entity;
+namespace App\Entity;
 
-// use Doctrine\ORM\Mapping as ORM;
-// use App\Repository\MessageRepository;
-// use Symfony\Component\Validator\Constraints as Assert;
+use App\Repository\MessageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
-// #[ORM\Entity(repositoryClass: MessageRepository::class)]
-// class Message
-// {
-//     #[ORM\Id]
-//     #[ORM\GeneratedValue]
-//     #[ORM\Column(type: 'integer')]
-//     private ?int $id = null;
+#[ORM\Entity(repositoryClass: MessageRepository::class)]
+class Message
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $id = null;
 
-//     #[ORM\Column(type:'string', length:100)]
-//     #[Assert\NotBlank(message: "L'email est obligatoire.")]
-//     #[Assert\Length(max: 100, maxMessage: "L'email ne peut pas dépasser 100 caractères.")]
-//     #[Assert\Email(message: "L'email '{{ value }}' n'est pas valide.")]
-//     private ?string $email = null;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $sender = null;
+    
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $object = null;
 
-//     #[ORM\Column(type:'string', length:50)]
-//     #[Assert\NotBlank(message: "Le nom de l'expéditeur est obligatoire.")]
-//     #[Assert\Length(max: 50, maxMessage: "Le nom de l'expéditeur ne peut pas dépasser 50 caractères.")]
-//     private ?string $messageSender = null;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $message = null;
 
-//     #[ORM\Column(type:'string', length:20)]
-//     #[Assert\NotBlank(message: "Le numéro de l'expéditeur est obligatoire.")]
-//     #[Assert\Length(max: 20, maxMessage: "Le numéro de l'expéditeur ne peut pas dépasser 20 caractères.")]
-//     #[Assert\Regex(
-//         pattern: "/^\+?[0-9\s\-]{7,20}$/",
-//         message: "Le numéro de téléphone doit être valide."
-//     )]
-//     private ?string $phoneNumber = null;
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $phone = null;
 
-//     #[ORM\Column(type:'string', length:255)]
-//     #[Assert\NotBlank(message: "L'objet du message est obligatoire.")]
-//     #[Assert\Length(max: 255, maxMessage: "L'objet du message ne peut pas dépasser 255 caractères.")]
-//     private ?string $subject = null;
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $date = null;
 
-//     #[ORM\Column(type:'text')]
-//     #[Assert\NotBlank(message: "Le message est obligatoire.")]
-//     private ?string $message = null;
+    #[ORM\OneToMany(
+        targetEntity: MessageImage::class,
+        mappedBy: "message",
+        cascade: ["persist", "remove"]
+    )]
+    private Collection $messageImages;
 
-//     #[ORM\Column(type: 'datetime_immutable')]
-//     private ?\DateTimeImmutable $date = null;
+    public function __construct()
+    {
+        $this->messageImages = new ArrayCollection();
+    }
 
-//     public function __construct()
-//     {
-//         $this->date = new \DateTimeImmutable();
-//     }
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
-//     public function getId(): ?int
-//     {
-//         return $this->id;
-//     }
+    public function getSender(): ?string
+    {
+        return $this->sender;
+    }
 
-//     public function getEmail(): ?string
-//     {
-//         return $this->email;
-//     }
+    public function setSender(?string $sender): self
+    {
+        $this->sender = $sender;
 
-//     public function setEmail(string $email): self
-//     {
-//         $this->email = $email;
-//         return $this;
-//     }
+        return $this;
+    }
 
-//     public function getMessageSender(): ?string
-//     {
-//         return $this->messageSender;
-//     }
+    public function getObject(): ?string
+    {
+        return $this->object;
+    }
 
-//     public function setMessageSender(string $messageSender): self
-//     {
-//         $this->messageSender = $messageSender;
-//         return $this;
-//     }
+    public function setObject(?string $object): self
+    {
+        $this->object = $object;
 
-//     public function getPhoneNumber(): ?string
-//     {
-//         return $this->phoneNumber;
-//     }
+        return $this;
+    }
 
-//     public function setPhoneNumber(string $phoneNumber): self
-//     {
-//         $this->phoneNumber = $phoneNumber;
-//         return $this;
-//     }
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
 
-//     public function getMessage(): ?string
-//     {
-//         return $this->message;
-//     }
+    public function setMessage(?string $message): self
+    {
+        $this->message = $message;
 
-//     public function setMessage(string $message): self
-//     {
-//         $this->message = $message;
-//         return $this;
-//     }
+        return $this;
+    }
 
-//     public function getDate(): ?\DateTimeImmutable
-//     {
-//         return $this->date;
-//     }
+    public function getPhone(): ?int
+    {
+        return $this->phone;
+    }
 
-//     public function setDate(\DateTimeImmutable $date): self
-//     {
-//         $this->date = $date;
-//         return $this;
-//     }
+    public function setPhone(?int $phone): self
+    {
+        $this->phone = $phone;
 
-//     public function getSubject(): ?string
-//     {
-//         return $this->subject;
-//     }
+        return $this;
+    }
 
-//     public function setSubject(string $subject): self
-//     {
-//         $this->subject = $subject;
-//         return $this;
-//     }
-// }
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(?\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getMessageImages(): Collection
+    {
+        return $this->messageImages;
+    }
+
+    public function addMessageImage(MessageImage $messageImage): self
+    {
+        if (!$this->messageImages->contains($messageImage)) {
+            $this->messageImages[] = $messageImage;
+            $messageImage->setMessage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessageImage(MessageImage $messageImage): self
+    {
+        if ($this->messageImages->contains($messageImage)) {
+            $this->messageImages->removeElement($messageImage);
+
+            if ($messageImage->getMessage() === $this) {
+                $messageImage->setMessage(null);
+            }
+        }
+
+        return $this;
+    }
+}
