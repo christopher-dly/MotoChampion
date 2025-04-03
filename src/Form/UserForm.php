@@ -2,8 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Transmission;
-use App\Entity\UsedVehicle;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

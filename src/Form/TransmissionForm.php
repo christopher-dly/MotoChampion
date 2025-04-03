@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TransmissionForm extends AbstractType
+class UsedVehicleImageFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
