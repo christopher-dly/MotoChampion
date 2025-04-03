@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Transmission;
 use App\Entity\UsedVehicle;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,8 +30,9 @@ class UsedVehicleForm extends AbstractType
             ->add('energyTax', TextType::class)
             ->add('taxPower', TextType::class)
             ->add('power', TextType::class)
-            ->add('statue', TextType::class);
-
+            ->add('statue', TextType::class)
+            ->add('UsedVehicleImageForm', UsedVehicleImageFormType::class)
+            ->add('submit', SubmitType::class);
     }
     
     public function configureOptions(OptionsResolver $resolver)
